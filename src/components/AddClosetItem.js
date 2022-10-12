@@ -1,5 +1,6 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import sampleImg from "../resources/items/images/bape_croptop.jpeg"
+import { WithContext as ReactTags } from 'react-tag-input';
 
 export const AddClosetItem = () => {
     const [size, setSize] = useState('')
@@ -7,6 +8,48 @@ export const AddClosetItem = () => {
     const [material, setMaterial] = useState('')
     const [source, setSource] = useState('')
     const [brand, setBrand] = useState('')
+
+    // Tag code
+    // Tag documentation found here: https://www.npmjs.com/package/react-tag-input
+    const [tags, setTags] = React.useState([])
+
+    const possibleTags = ['spring', 'summer', 'fall', 'winter']
+    const suggestions = possibleTags.map(possibleTag => {
+    return {
+        id: possibleTag,
+        text: possibleTag
+    };
+    });
+
+    const KeyCodes = {
+        comma: 188,
+        enter: 13
+    };
+    
+    const delimiters = [KeyCodes.comma, KeyCodes.enter];
+
+    const handleDelete = i => {
+        setTags(tags.filter((tag, index) => index !== i));
+    };
+    
+    const handleAddition = tag => {
+        setTags([...tags, tag]);
+    };
+    
+    const handleDrag = (tag, currPos, newPos) => {
+        const newTags = tags.slice();
+    
+        newTags.splice(currPos, 1);
+        newTags.splice(newPos, 0, tag);
+    
+        // re-render
+        setTags(newTags);
+    };
+    
+    const handleTagClick = index => {
+        console.log('The tag at index ' + index + ' was clicked');
+    };
+
 
     return(
         <>
@@ -17,8 +60,10 @@ export const AddClosetItem = () => {
                     <input
                         type='file'
                         id='photo'
+                        capture='environment'
+                        accept='image/*'
                     ></input>
-                    <div><img src={sampleImg} alt='User image' width='100rem' /></div>
+                    <div><img src={sampleImg} alt='' width='100rem' /></div>
                     <div>2. Add info about the item.</div>
                     <div><label htmlFor='size'>Size: </label></div>
                     <div><input
@@ -55,26 +100,20 @@ export const AddClosetItem = () => {
                         value={brand}
                         onChange = {(e) => setBrand(e.target.value)}
                     ></input></div>
-                    {/* <input htmlFor='color'>Color: </input>
-                    <label
-                        type='text'
-                        id='color'
-                    ></label>
-                    <input htmlFor='material'>Material: </input>
-                    <label
-                        type='text'
-                        id='material'
-                    ></label>
-                    <input htmlFor='source'>Source: </input>
-                    <label
-                        type='text'
-                        id='source'
-                    ></label>
-                    <input htmlFor='brand'>Brand: </input>
-                    <label
-                        type='text'
-                        id='brand'
-                    ></label> */}
+
+                    <div>3. Add tags:</div>
+                    <ReactTags
+                    tags={tags}
+                    suggestions={suggestions}
+                    delimiters={delimiters}
+                    handleDelete={handleDelete}
+                    handleAddition={handleAddition}
+                    handleDrag={handleDrag}
+                    handleTagClick={handleTagClick}
+                    inputFieldPosition="top"
+                    autocomplete
+                    allowDeleteFromEmptyInput={false}
+                    />
                 </div>
             </form>
         </>
