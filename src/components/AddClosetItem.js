@@ -1,12 +1,15 @@
-// TODO: Input for type of item
-// TODO: Fix uploaded pic display
+// TODO: replace console log with axios request when endpoint is ready (uncomment code)
+// TODO: Add required to pic input (uncomment code)
+// TODO: Remove tiny pic preview?
+// TODO: Add inputs for item subtype
 // TODO: Update navigation to closet when that has routing
-// TODO: replace console log with axios request when endpoint is ready
+// TODO: Come up with final list for tag suggestion
 
 import React, { useState } from "react"
-import sampleImg from "../resources/items/images/bape_croptop.jpeg"
 import { WithContext as ReactTags } from 'react-tag-input';
 import { useNavigate } from "react-router";
+import axios from "axios";
+
 
 export const AddClosetItem = () => {
     const [type, setType] = useState('')
@@ -16,8 +19,21 @@ export const AddClosetItem = () => {
     const [source, setSource] = useState('')
     const [brand, setBrand] = useState('')
 
+    const [error, setError] = useState(false)
     const [submitted,setSubmitted] = useState(false)
     const navigate = useNavigate()
+
+    const handleChange = (inputType, event) => {
+        if (inputType === 'type') {
+            setType(event.target.value)
+        }
+        if (inputType === 'color') {
+            setColor(event.target.value)
+        }
+        if (inputType === 'source') {
+            setSource(event.target.value)
+        }
+    }
 
     // Tag code
     // Tag documentation found here: https://www.npmjs.com/package/react-tag-input
@@ -63,19 +79,51 @@ export const AddClosetItem = () => {
 
     // Submit button action
     const handleSubmit = (event) => {
+        console.log(type)
         console.log(size)
         console.log(color)
         console.log(material)
         console.log(source)
         console.log(brand)
 
+        setType('')
         setSize('')
         setColor('')
         setMaterial('')
         setSource('')
         setBrand('')
         setSubmitted(true)
+
+        // event.preventDefault()
+        // axios
+        //     .post('https://stylehub.herokuapp.com/mycloset/',
+        //     {
+        //         // item_choices: type,
+        //         // item_image:,
+        //         size: size,
+        //         color: color,
+        //         material: material,
+        //         source: source,
+        //         brand: brand,
+        //         // tag:,
+        //     },
+        //     {
+        //         headers: {
+        //             Authorization: `Token ${token}`,
+        //         },
+        //     })
+        //     .then((res) => {
+        //         setType('')
+        //         setSize('')
+        //         setColor('')
+        //         setMaterial('')
+        //         setSource('')
+        //         setBrand('')
+        //         setSubmitted(true)
+        //     })
+        //     .catch((err) => setError(err.response.data.error))
     }
+
 
     if (submitted === true) {
         navigate('../user/1')
@@ -88,12 +136,13 @@ export const AddClosetItem = () => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <div><label htmlFor='type'>1. What type of item is it? </label></div>
-                    <div><input
-                        type='text'
-                        id='type'
-                        value={type}
-                        onChange = {(e) => setType(e.target.value)}
-                    ></input></div>
+                    <div><select name='types' id='type' onChange = {(e) => handleChange('type', e)} required>
+                        <option value=''>--Please choose a type--</option>
+                        <option value='top'>top</option>
+                        <option value='bottom'>bottom</option>
+                        <option value='outer'>outer</option>
+                        <option value='shoes'>shoes</option>
+                    </select></div>
 
                     <label htmlFor='photo'>2. Upload a photo: </label>
                     <input
@@ -102,6 +151,7 @@ export const AddClosetItem = () => {
                         capture='environment'
                         accept='image/*'
                         onChange= {(e) => document.getElementById("preview").src = window.URL.createObjectURL(e.target.files[0])}
+                        // required
                     ></input>
                     <div><img id='preview' alt='' width='100rem' /></div>
 
@@ -112,15 +162,21 @@ export const AddClosetItem = () => {
                         id='size'
                         value={size}
                         onChange = {(e) => setSize(e.target.value)}
+                        required
                     ></input></div>
 
                     <div><label htmlFor='color'>Color: </label></div>
-                    <div><input
+                    <div><select name='colors' id='color' onChange = {(e) => handleChange('color', e)} required>
+                        <option value=''>--Please choose a color--</option>
+                        <option value='red'>red</option>
+                    </select></div>
+                    {/* <div><input
                         type='text'
                         id='color'
                         value={color}
                         onChange = {(e) => setColor(e.target.value)}
-                    ></input></div>
+                        required
+                    ></input></div> */}
 
                     <div><label htmlFor='material'>Material: </label></div>
                     <div><input
@@ -128,22 +184,29 @@ export const AddClosetItem = () => {
                         id='material'
                         value={material}
                         onChange = {(e) => setMaterial(e.target.value)}
+                        required
                     ></input></div>
 
                     <div><label htmlFor='source'>Source: </label></div>
-                    <div><input
+                    <div><select name='sources' id='source' onChange = {(e) => handleChange('source', e)} required>
+                        <option value=''>--Please choose a source--</option>
+                        <option value='thrift'>thrift</option>
+                    </select></div>
+                    {/* <div><input
                         type='text'
                         id='source'
                         value={source}
                         onChange = {(e) => setSource(e.target.value)}
-                    ></input></div>
-                    
+                        required
+                    ></input></div> */}
+
                     <div><label htmlFor='brand'>Brand: </label></div>
                     <div><input
                         type='text'
                         id='brand'
                         value={brand}
                         onChange = {(e) => setBrand(e.target.value)}
+                        required
                     ></input></div>
 
                     <div>4. Add tags:</div>
