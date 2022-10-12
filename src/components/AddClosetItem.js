@@ -1,5 +1,8 @@
 export const AddClosetItem = () => {
+
     return(
-        <p>Add Closet Item</p>
+
+        <h1>Add Closet Item</h1>
+
     )
 }
