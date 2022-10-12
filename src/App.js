@@ -1,12 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import { TopNavbar } from './components/TopNavbar';
+import { BottomNavbar } from './components/BottomNavbar';
+import { Routes, Route, Switch } from 'react-router';
 import { AddClosetItem } from './components/AddClosetItem'
+import { Profile } from './components/Profile';
+import { ViewOutfits } from './components/ViewOutfits';
+
 
 function App() {
   return (
-    <>
-      <AddClosetItem />
-    </>
+    <div className="App">
+      <TopNavbar />
+        <Routes>
+          <Route path="add-item" element={<AddClosetItem />} />
+          <Route path="user/1" element={<Profile />} />
+          <Route path="user/1/outfits" element={<ViewOutfits />} />
+        </Routes>
+      <BottomNavbar />
+    </div>
   );
 }
 
