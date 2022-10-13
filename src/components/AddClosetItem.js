@@ -1,14 +1,19 @@
 // TODO: replace console log with axios request when endpoint is ready (uncomment code)
 // TODO: Add required to pic input (uncomment code)
+// TODO: Get input info/formatting required for axios request
+// TODO: Pull input options from backend when endpoints are ready
 // TODO: Remove tiny pic preview?
 // TODO: Add inputs for item subtype
 // TODO: Update navigation to closet when that has routing
 // TODO: Come up with final list for tag suggestion
+// TODO: Add CSS
 
 import React, { useState } from "react"
 import { WithContext as ReactTags } from 'react-tag-input';
 import { useNavigate } from "react-router";
 import axios from "axios";
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 
 
 export const AddClosetItem = () => {
@@ -18,6 +23,7 @@ export const AddClosetItem = () => {
     const [material, setMaterial] = useState('')
     const [source, setSource] = useState('')
     const [brand, setBrand] = useState('')
+    const [tagList, setTagList] = useState([])
 
     const [error, setError] = useState(false)
     const [submitted,setSubmitted] = useState(false)
@@ -79,12 +85,18 @@ export const AddClosetItem = () => {
 
     // Submit button action
     const handleSubmit = (event) => {
+        for (const tag of tags) {
+            setTagList(tagList.push(tag.text))
+        }
+
         console.log(type)
         console.log(size)
         console.log(color)
         console.log(material)
         console.log(source)
         console.log(brand)
+        console.log(tags)
+        console.log(tagList)
 
         setType('')
         setSize('')
@@ -137,14 +149,14 @@ export const AddClosetItem = () => {
                 <div>
                     <div><label htmlFor='type'>1. What type of item is it? </label></div>
                     <div><select name='types' id='type' onChange = {(e) => handleChange('type', e)} required>
-                        <option value=''>--Please choose a type--</option>
+                        <option value=''>--Select a type--</option>
                         <option value='top'>top</option>
                         <option value='bottom'>bottom</option>
                         <option value='outer'>outer</option>
                         <option value='shoes'>shoes</option>
                     </select></div>
 
-                    <label htmlFor='photo'>2. Upload a photo: </label>
+                    <div><label htmlFor='photo'>2. Upload a photo:</label></div>
                     <input
                         type='file'
                         id='photo'
@@ -167,7 +179,7 @@ export const AddClosetItem = () => {
 
                     <div><label htmlFor='color'>Color: </label></div>
                     <div><select name='colors' id='color' onChange = {(e) => handleChange('color', e)} required>
-                        <option value=''>--Please choose a color--</option>
+                        <option value=''>--Select a color--</option>
                         <option value='red'>red</option>
                     </select></div>
                     {/* <div><input
@@ -189,7 +201,7 @@ export const AddClosetItem = () => {
 
                     <div><label htmlFor='source'>Source: </label></div>
                     <div><select name='sources' id='source' onChange = {(e) => handleChange('source', e)} required>
-                        <option value=''>--Please choose a source--</option>
+                        <option value=''>--Select a source--</option>
                         <option value='thrift'>thrift</option>
                     </select></div>
                     {/* <div><input
@@ -223,7 +235,10 @@ export const AddClosetItem = () => {
                     allowDeleteFromEmptyInput={false}
                     />
                     <div>
-                        <input type='submit' value='Save' />
+                        <Button variant='contained' component='label'>
+                            Save
+                            <input hidden type='submit' value='Save' />
+                        </Button>
                     </div>
                 </div>
             </form>
