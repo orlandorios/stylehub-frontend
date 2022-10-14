@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+.item-photo {
+  max-width: 15rem;
+}
+
+.item {
+  max-width: 300px;
+  border: 2rem;
+  padding: 1rem;
+
+}
+
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  text-align: center;
+}
+
+.type-choices {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  text-align: center;
+}
