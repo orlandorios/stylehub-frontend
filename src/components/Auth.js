@@ -9,11 +9,25 @@ const [username, setUsername] = useState('')
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('');
 
-console.log(isRegister);
+const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(username, email, password)
+}
+
+const resetState = () => {
+    setIsRegister(!isRegister);
+    setUsername('')
+    setEmail('')
+    setPassword('')
+}
+
+// console.log(isRegister);
 
     return (  
         <div>
-            <form>
+            <form
+            onSubmit={handleSubmit}
+            >
                 <Box
                 display="flex"
                 flexDirection={"column"}
@@ -34,29 +48,42 @@ console.log(isRegister);
                 />
                 
                 <TextField
+                onChange={(e) => setUsername(e.target.value)}
+                id="username"
+                value={username}
                 type={"text"}
                 variant="outlined"
                 style={{ color: "red" }}
                 placeholder="username"
                 margin="normal"
+                required
                 />
 
             {isRegister && 
                 <TextField
+                onChange={(e) => setEmail(e.target.value)}
+                id="email"
+                value={email}
                 type={"email"}
                 variant="outlined"
                 placeholder="email"
                 margin="normal"
+                required
                 />
             }
                 <TextField
+                onChange={(e) => setPassword(e.target.value)}
+                id="password"
+                value={password}
                 type={"password"}
                 variant="outlined"
                 placeholder="password" 
                 margin="normal"
+                required
                 />
 
                 <Button
+                type="submit"
                 variant="contained"
                 style={{ backgroundColor: "#9cc4d9" }}
                 sx={{ marginTop: 3, }}
@@ -71,7 +98,7 @@ console.log(isRegister);
                 </Typography>
 
                 <Button
-                onClick={() => setIsRegister(!isRegister)}
+                onClick={resetState}
                 sx={{ marginTop: 0, }}
                 >
                     {isRegister ? "Sign In" : "Sign Up"}
