@@ -1,6 +1,6 @@
-export const items = [
+export const practice = [
 {
-    title : 'green_platform',
+    title : 'green_platforms',
     type : 'heels',
     color : 'green',
     size : '8',
@@ -8,10 +8,10 @@ export const items = [
     source : 'Simmi Shoes',
     brand: 'Simmi',
     tag : 'hard to walk in', 
-    image : 'src/resources/items/images/green_platforms.jpeg'
+    image : './resources/items/images/green_platforms.jpeg'
 },
 {
-    title : 'brown_heel',
+    title : 'brown_heels',
     type : 'heels',
     color : 'brown',
     size : '8',

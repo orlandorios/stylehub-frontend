@@ -1,13 +1,13 @@
 import { useState } from 'react'
-import { items } from '../resources/items/item_info'
+import chunkyBoots from '../resources/items/images/chunky_boots.jpeg'
 
-export const ShowItems = () => {
+export const ShowItems = ({items}) => {
     return (
         <div>
             <h2> All Items</h2>
             <div className='item-list'>
                 {items.map((item) => (
-                    <div className='item'>
+                    <div key={item.title} className='item-list'>
                         <Item
                         item={item}
                         title={item.title}
@@ -18,7 +18,7 @@ export const ShowItems = () => {
                         source={item.source}
                         brand={item.brand}
                         tag={item.tag}
-                        image={item.image}
+                        image={chunkyBoots}
                         />
                     </div>
                 ))}
@@ -34,10 +34,9 @@ const handleClick = () => {
 
 return (
     <div className='item-container'>
-        <div className='item'>
-            <img className='item-photo' src = {image} alt={"Image for " + title}></img>
-            <h3>{title}</h3>
-            <div className='expand-info' onClick={() => handleClick()}>
+        <div className='item' onClick={() => handleClick()}>
+            <img className='item-photo' src ={image} alt={"Image for " + title}></img>
+            <div className='expand-info'>
                 <div className='item-fields'>
                 { expanded ? ( type ? <p>type: {type}</p> : '') : ''}
                 { expanded ? ( color ? <p>color: {color}</p> : '') : ''}
