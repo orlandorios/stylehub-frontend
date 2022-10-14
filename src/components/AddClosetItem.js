@@ -1,12 +1,15 @@
 // TODO: replace console log with axios request when endpoint is ready (uncomment code)
-// TODO: Add required to pic input (uncomment code)
+// TODO: Add required to pic input (uncomment code) (Why doesn't it let me upload files on my computer?)
 // TODO: Get input info/formatting required for axios request
 // TODO: Pull input options from backend when endpoints are ready
-// TODO: Remove tiny pic preview?
+// TODO (?): Remove tiny pic preview? (may be gone now)
 // TODO: Add inputs for item subtype
 // TODO: Update navigation to closet when that has routing
 // TODO: Come up with final list for tag suggestion
+// TODO (?): Replace phone image with file image if on computer?
 // TODO: Add CSS
+// TODO (?): Display option to to upload file in addition to camera?
+// TODO (?): Store different size images?
 
 import React, { useState } from "react"
 import { WithContext as ReactTags } from 'react-tag-input';
@@ -14,6 +17,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import { PhotoCamera } from "@mui/icons-material";
 
 
 export const AddClosetItem = () => {
@@ -157,14 +161,19 @@ export const AddClosetItem = () => {
                     </select></div>
 
                     <div><label htmlFor='photo'>2. Upload a photo:</label></div>
-                    <input
-                        type='file'
-                        id='photo'
-                        capture='environment'
-                        accept='image/*'
-                        onChange= {(e) => document.getElementById("preview").src = window.URL.createObjectURL(e.target.files[0])}
-                        // required
-                    ></input>
+                    <IconButton color="primary" aria-label="upload picture" component="label">
+                        <input
+                            hidden
+                            type='file'
+                            id='photo'
+                            capture='environment'
+                            accept='image/*'
+                            onChange= {(e) => document.getElementById("preview").src = window.URL.createObjectURL(e.target.files[0])}
+                            // required
+                            >
+                        </input>
+                        <PhotoCamera />
+                    </IconButton>
                     <div><img id='preview' alt='' width='100rem' /></div>
 
                     <div>3. Add info about the item.</div>
