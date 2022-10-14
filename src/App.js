@@ -14,8 +14,8 @@ function App() {
   return (
     <div className="App">
       <TopNavbar />
-      <Closet/>
         <Routes>
+          <Route path="/" element={<Closet/>} />
           <Route path="add-item" element={<AddClosetItem />} />
           <Route path="user/1" element={<Profile />} />
           <Route path="user/1/outfits" element={<ViewOutfits />} />

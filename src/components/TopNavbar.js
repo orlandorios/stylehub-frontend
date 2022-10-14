@@ -21,7 +21,7 @@ export const TopNavbar = () => {
 
         <Toolbar>
 
-    {/* <Link to="/"> */}
+    <Link to="/">
         <IconButton>
             <Box
                 component="img"
@@ -30,7 +30,7 @@ export const TopNavbar = () => {
                 src={navLogo}
             />
         </IconButton>
-    {/* </Link> */}
+    </Link>
             
             <Typography
                 align='center'
