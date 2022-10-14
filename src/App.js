@@ -7,12 +7,15 @@ import { Routes, Route, Switch } from 'react-router';
 import { AddClosetItem } from './components/AddClosetItem'
 import { Profile } from './components/Profile';
 import { ViewOutfits } from './components/ViewOutfits';
+import { Auth } from './components/Auth';
 import { Closet } from './components/Closet';
 
 
 function App() {
   return (
+  
     <div className="App">
+
       <TopNavbar />
         <Routes>
           <Route path="/" element={<Closet/>} />
