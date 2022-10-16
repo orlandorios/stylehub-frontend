@@ -1,6 +1,9 @@
+//TODO: Replace faulty image src with error image
+
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { SaveButton } from "./SaveButton";
+import { DisplayOutfit } from './DisplayOutfit';
 
 export const CurrentOutfit = ({ currOutfit }) => {
     return(
@@ -8,9 +11,7 @@ export const CurrentOutfit = ({ currOutfit }) => {
             <h1>Current Outfit</h1>
             <p>You haven't starting building an outfit yet. <a href='/'>Go to your closet to start adding items to your outfit.</a></p>
             <div> Outfit image goes here 
-                {currOutfit.closet_item.map((item) => (
-                    <div className={item.id}>{item.item_image ? <img src={item.item_image} alt='' width='100rem' /> : ''}</div>
-                ))}
+                <DisplayOutfit outfit={currOutfit} />
             </div>
             <IconButton color="primary" aria-label="clear outfit">
                 <DeleteIcon />
