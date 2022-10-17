@@ -40,14 +40,12 @@ export const DisplayOutfit = ({ outfit, location }) => {
             <div className='upperBody'>
                 <div className='tops'>
                     {tops.map((top) => (
-                        <>
-                            <div key={top.id} className='outfitItem'>
-                                {top.item_image ? <img src={top.item_image} alt='' width={size} /> : ''}
-                                {location==='editOutfit' && <IconButton className='outfitItemBtn' color="primary" aria-label="remove item">
-                                    <DeleteIcon />
-                                </IconButton>}
-                            </div>
-                        </>
+                        <div key={top.id} className='outfitItem'>
+                            {top.item_image ? <img src={top.item_image} alt='' width={size} /> : ''}
+                            {location==='editOutfit' && <IconButton className='outfitItemBtn' color="primary" aria-label="remove item">
+                                <DeleteIcon />
+                            </IconButton>}
+                        </div>
                     ))}
                 </div>
                 <div className='outers'>
