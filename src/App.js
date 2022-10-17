@@ -28,10 +28,11 @@ function App() {
       })
       .then((res) => {
         for (const outfit of res.data) {
-          if (outfit.draft === true)
+          if (outfit.draft === true) {
             setCurrOutfit(outfit)
             console.log(currOutfit)
             break;
+          }
         }
         
       })

@@ -1,6 +1,9 @@
-//TODO: Replace faulty image src with error image
+// TODO: Replace faulty image src with error image
+// TODO: Conditional display of delete button for edit outfits
+// TODO: Delete button functionality
 
-import { DownhillSkiing } from "@mui/icons-material";
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const DisplayOutfit = ({ outfit, location }) => {
     // location determines how outfit displays depending on page it is used in. Options: 'myOutfits', 'editOutfit', 'viewOutfit'
@@ -34,15 +37,24 @@ export const DisplayOutfit = ({ outfit, location }) => {
 
     return (
         <>
-            <div className='tops'>
-                {tops.map((top) => (
-                    <div key={top.id}>{top.item_image ? <img src={top.item_image} alt='' width={size} /> : ''}</div>
-                ))}
-            </div>
-            <div className='outers'>
-                {outers.map((outer) => (
-                    <div key={outer.id}>{outer.item_image ? <img src={outer.item_image} alt='' width={size} /> : ''}</div>
-                ))}
+            <div className='upperBody'>
+                <div className='tops'>
+                    {tops.map((top) => (
+                        <>
+                            <div key={top.id} className='outfitItem'>
+                                {top.item_image ? <img src={top.item_image} alt='' width={size} /> : ''}
+                                {location==='editOutfit' && <IconButton className='outfitItemBtn' color="primary" aria-label="remove item">
+                                    <DeleteIcon />
+                                </IconButton>}
+                            </div>
+                        </>
+                    ))}
+                </div>
+                <div className='outers'>
+                    {outers.map((outer) => (
+                        <div key={outer.id}>{outer.item_image ? <img src={outer.item_image} alt='' width={size} /> : ''}</div>
+                    ))}
+                </div>
             </div>
             <div className='bottoms'>
                 {bottoms.map((bottom) => (
