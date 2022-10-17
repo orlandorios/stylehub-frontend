@@ -1,4 +1,4 @@
-export const practice = [
+const practice = [
 {
     title : 'green_platforms',
     type : 'heels',
@@ -417,9 +417,5 @@ export const practice = [
     tag: '',
     image: 'src/resources/items/images/gator_purse'
 }
-
-
-
-
-
 ]
+export default practice

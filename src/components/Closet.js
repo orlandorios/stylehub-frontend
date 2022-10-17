@@ -1,6 +1,6 @@
 import { ShowItems } from './ShowItems'
-import useState from 'react'
-import { practice } from '../resources/items/item_info'
+import { useState } from 'react'
+import practice from '../resources/items/item_info'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,13 +10,14 @@ import Select from '@mui/material/Select';
 
 
 export const Closet = () => {
-//const [items, setItems] = useState(practice)
-//const [type, setType] = useState(null)
+const [items, setItems] = useState(practice)
+console.log(items)
+const [type, setType] = useState('')
 
 const handleChange = (event) => {
-    //setType(event.target.value)
-    //setItems((items.filter((item)=>item.type===type)))
-    console.log(event.target.value)
+    setType(event.target.value)
+    setItems((items.filter((item)=>item.type===type)))
+    console.log(event)
 }
 
 return (
@@ -28,7 +29,7 @@ return (
             id="tops"
             value="tops"
             label="tops"
-            onChange={handleChange}
+            onChange={(e)=>{handleChange(e)}}
             autoWidth
             >
                 <MenuItem value='button-down'>button-down</MenuItem>
