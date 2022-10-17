@@ -10,14 +10,15 @@
 // TODO: Add CSS
 // TODO (?): Display option to to upload file in addition to camera?
 // TODO (?): Store different size images?
+// TODO: Add padding at bottom for mobile display
 
 import React, { useState } from "react"
 import { WithContext as ReactTags } from 'react-tag-input';
 import { useNavigate } from "react-router";
 import axios from "axios";
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { PhotoCamera } from "@mui/icons-material";
+import { SaveButton } from "./SaveButton";
 
 
 export const AddClosetItem = () => {
@@ -244,10 +245,7 @@ export const AddClosetItem = () => {
                     allowDeleteFromEmptyInput={false}
                     />
                     <div>
-                        <Button variant='contained' component='label'>
-                            Save
-                            <input hidden type='submit' value='Save' />
-                        </Button>
+                        <SaveButton />
                     </div>
                 </div>
             </form>

@@ -41,6 +41,7 @@ export const BottomNavbar = () => {
             </Fab>
 
             <StyledFab
+                component={Link} to="/current-outfit"
                 position="absolute"
                 align="center"
                 style={{ color: "white", backgroundColor: "#9cc4d9",}}

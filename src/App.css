@@ -61,3 +61,20 @@
   flex-direction: row;
   text-align: center;
 }
+
+.upperBody {
+  display: flex;
+  justify-content: center;
+}
+
+.outfitItem {
+  display: inline-block;
+  position: relative;
+  height: 60px;
+}
+
+.outfitItemBtn {
+  position: absolute;
+  right: 30%;
+  bottom: 10%;
+}
