@@ -1,28 +1,93 @@
 import { ShowItems } from './ShowItems'
 import useState from 'react'
 import { practice } from '../resources/items/item_info'
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControl from '@mui/material/FormGroup'
-import FormControlLabel from '@mui/material/FormControlLabel'
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+
+
 
 export const Closet = () => {
+//const [items, setItems] = useState(practice)
+//const [type, setType] = useState(null)
 
+const handleChange = (event) => {
+    //setType(event.target.value)
+    //setItems((items.filter((item)=>item.type===type)))
+    console.log(event.target.value)
+}
 
 return (
-    <div className='closet-container'>
-        <div className='type-choices'>
-        <FormControl>
-        <RadioGroup row name="row-radio-buttons-group">
-            <FormControlLabel value="tops" control={<Radio />} label="tops" />
-            <FormControlLabel value="bottom" control={<Radio />} label="bottoms" /> 
-            <FormControlLabel value="outerwear" control={<Radio />} label="outerwear" />
-            <FormControlLabel value="shoes" control={<Radio />} label="shoes" />
-        </RadioGroup>
+    <div className="select-bar">
+        <FormControl sx={{ m: 4, minWidth: 150 }}>
+            <InputLabel id="tops-select">Tops</InputLabel>
+            <Select
+            labelId="tops-select"
+            id="tops"
+            value="tops"
+            label="tops"
+            onChange={handleChange}
+            autoWidth
+            >
+                <MenuItem value='button-down'>button-down</MenuItem>
+                <MenuItem value='shirt'>shirt</MenuItem>
+                <MenuItem value='dress'>dress</MenuItem>
+                <MenuItem value='t-shirt'>t-shirt</MenuItem>
+                <MenuItem value='sweater'>sweater</MenuItem>
+            </Select>
         </FormControl>
-        </div>
+    <FormControl sx={{ m: 4, minWidth: 150 }}>
+        <InputLabel id="bottoms-select">Bottoms</InputLabel>
+        <Select
+        labelId="bottoms-select"
+        id="bottoms"
+        value="bottoms"
+        label="bottoms"
+        onChange={handleChange}
+        >
+            <MenuItem value='pants'>pants</MenuItem>
+            <MenuItem value='shorts'>shorts</MenuItem>
+            <MenuItem value='skirt'>skirt</MenuItem>
+        </Select>
+    </FormControl>
+    <FormControl sx={{ m: 4, minWidth: 150 }}>
+        <InputLabel id="outerwear-select">Outerwear</InputLabel>
+        <Select
+        labelId="outerwear-select"
+        id="outerwear"
+        value="outerwear"
+        label="outerwear"
+        onChange={handleChange}
+        >
+            <MenuItem value='coat'>coat</MenuItem>
+            <MenuItem value='jacket'>jacket</MenuItem>
+            <MenuItem value='vest'>vest</MenuItem>
+            <MenuItem value='cardigan'>cardigan</MenuItem>
+        </Select>
+    </FormControl>
+    <FormControl sx={{ m: 4, minWidth: 150 }}>
+        <InputLabel id="shoes-select">Shoes</InputLabel>
+        <Select
+        labelId="shoes-select"
+        id="shoes"
+        value="shoes"
+        label="shoes"
+        onChange={handleChange}
+        >
+            <MenuItem value='boots'>boots</MenuItem>
+            <MenuItem value='flats'>flats</MenuItem>
+            <MenuItem value='heels'>heels</MenuItem>
+            <MenuItem value='sandals'>sandals</MenuItem>
+            <MenuItem value='sneakers'>sneakers</MenuItem>
+        </Select>
+    </FormControl>
 
-        <ShowItems items={practice}/>
+    <div className="items-container">
+    <ShowItems items={practice}/>
+    </div>      
     </div>
+
 )
 }
