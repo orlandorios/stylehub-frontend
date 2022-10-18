@@ -23,14 +23,14 @@ export const DisplayOutfit = ({ outfit, location }) => {
     const bottomTypes = ['pants', 'shorts', 'skirt'];
     const shoeTypes = ['boots', 'flats', 'heels', 'sandals', 'slippers', 'sneakers'];
 
-    for (const item of outfit.closet_item) {
-        if (topTypes.includes(item.item_choice)) {
+    for (const item of outfit.closet_item) { 
+        if (item.category==='top') {
             tops.push(item)
-        } else if (outerTypes.includes(item.item_choice)) {
+        } else if (item.category==='outer') {
             outers.push(item)
-        } else if (bottomTypes.includes(item.item_choice)) {
+        } else if (item.category==='bottom') {
             bottoms.push(item)
-        } else if (shoeTypes.includes(item.item_choice)) {
+        } else if (item.category==='shoes') {
             shoes.push(item)
         }        
     }
