@@ -1,7 +1,8 @@
-export const practice = [
+const practice = [
 {
     title : 'green_platforms',
-    type : 'heels',
+    type : 'shoes',
+    category: 'heels',
     color : 'green',
     size : '8',
     material : 'silk',
@@ -12,7 +13,8 @@ export const practice = [
 },
 {
     title : 'brown_heels',
-    type : 'heels',
+    type : 'shoes',
+    category: 'heels',
     color : 'brown',
     size : '8',
     material : 'plastic',
@@ -23,7 +25,8 @@ export const practice = [
 },
 {
     title: 'green_nikes',
-    type : 'sneakers',
+    type : 'shoes',
+    category: 'sneakers',
     color : 'green',
     size : '8.5',
     material : 'leather',
@@ -34,7 +37,8 @@ export const practice = [
 },
 {
     title: 'neon_clogs',
-    type: 'slippers',
+    type: 'shoes',
+    category: 'slippers',
     color: 'green',
     size: '7',
     material : 'foam',
@@ -45,7 +49,8 @@ export const practice = [
 },
 {
     title: 'pink_heels',
-    type: 'heels',
+    type: 'shoes',
+    category: 'heels',
     color: 'pink',
     size: '8',
     material: 'leather',
@@ -56,7 +61,8 @@ export const practice = [
 },
 {
     title: 'white_platforms',
-    type: 'heels',
+    type: 'shoes',
+    category: 'heels',
     color: 'white',
     size: '8',
     material: 'leather',
@@ -67,7 +73,8 @@ export const practice = [
 },
 {
     title: 'wavy_crocs',
-    type: 'slippers',
+    type: 'shoes',
+    category: 'slippers',
     color: 'green',
     size: '8',
     material: 'foam',
@@ -78,7 +85,8 @@ export const practice = [
 },
 {
     title: 'chunky_boots',
-    type: 'boots',
+    type: 'shoes',
+    category: 'boots',
     color: 'black',
     size: '8',
     material: 'leather',
@@ -89,7 +97,8 @@ export const practice = [
 },
 {
     title: 'forest_green_NB',
-    type: 'sneakers',
+    type: 'shoes',
+    category: 'sneakers',
     color: 'green',
     size: '8',
     material: 'suede',
@@ -100,7 +109,8 @@ export const practice = [
 },
 {
     title: 'blue_jordans',
-    type: 'sneakers',
+    type: 'shoes',
+    category: 'sneakers',
     color: 'blue',
     size: '8.5',
     material: 'leather',
@@ -111,7 +121,8 @@ export const practice = [
 },
 {
     title: 'light_jeans',
-    type: 'pants',
+    type: 'bottoms',
+    category: 'pants',
     color: 'blue',
     size: '6',
     material: 'denim',
@@ -122,7 +133,8 @@ export const practice = [
 },
 {
     title: 'navy_cargos',
-    type: 'pants',
+    type: 'bottoms',
+    category: 'pants',
     color: 'blue',
     size: '6',
     material: 'cotton',
@@ -133,7 +145,8 @@ export const practice = [
 }, 
 {
     title: 'edgy_miniskirt',
-    type: 'skirt',
+    type: 'bottoms',
+    category: 'skirt',
     color: 'black',
     size: 'S',
     material: 'denim',
@@ -144,7 +157,8 @@ export const practice = [
 },
 {
     title: 'velvet_flare_pants',
-    type: 'pants',
+    type: 'bottoms',
+    category: 'pants',
     color: 'green',
     size: 'S',
     material: 'velvet',
@@ -155,7 +169,8 @@ export const practice = [
 }, 
 {
     title: 'black_jeans',
-    type: 'pants',
+    type: 'bottoms',
+    category: 'pants',
     color: 'black',
     size: 'M',
     material: 'denim',
@@ -166,7 +181,8 @@ export const practice = [
 },
 {
     title: 'corduroy_jacket',
-    type: 'jacket',
+    type: 'outerwear',
+    category: 'jacket',
     color: 'blue',
     size: 'L',
     material: 'corduroy',
@@ -177,7 +193,8 @@ export const practice = [
 },
 {
     title: 'levis_jacket',
-    type: 'jacket',
+    type: 'outerwear',
+    category: 'jacket',
     color: 'blue',
     size: 'L',
     material: 'denim',
@@ -188,7 +205,8 @@ export const practice = [
 },
 {
     title: 'blue_windbreaker',
-    type: 'jacket',
+    type: 'outerwear',
+    category: 'jacket',
     color: 'blue',
     size: 'L',
     material: 'swishy',
@@ -199,7 +217,8 @@ export const practice = [
 },
 {
     title: 'stranger_holiday_sweater',
-    type: 'sweater',
+    type: 'tops',
+    category: 'sweater',
     color: 'blue',
     size: 'M',
     material: 'knit',
@@ -210,7 +229,8 @@ export const practice = [
 },
 {
     title: 'bape_croptop',
-    type: 't-shirt',
+    type: 'tops',
+    category: 't-shirt',
     color: 'white',
     size: 'S',
     material: 'cotton',
@@ -221,7 +241,8 @@ export const practice = [
 },
 {
     title: 'criss_cross_crop',
-    type: 'shirt',
+    type: 'tops',
+    category: 'shirt',
     color: 'white',
     size: 'S',
     material: 'knit',
@@ -232,7 +253,8 @@ export const practice = [
 }, 
 {
     title: 'off_shoulder_crop',
-    type: 'shirt',
+    type: 'tops',
+    category: 'shirt',
     color: 'black',
     size: 'S',
     material: 'knit',
@@ -243,7 +265,8 @@ export const practice = [
 },
 {
     title: 'ribbed_tank',
-    type: 'shirt',
+    type: 'tops',
+    category: 'shirt',
     color: 'black',
     size: 'S',
     material: 'stretch',
@@ -254,7 +277,8 @@ export const practice = [
 },
 {
     title: 'chocolate_swirl_skirt',
-    type: 'skirt',
+    type: 'bottoms',
+    category: 'skirt',
     color: 'brown',
     size: 'M',
     material: 'polyester',
@@ -265,7 +289,8 @@ export const practice = [
 },
 {
     title: 'blessing_tee',
-    type: 't-shirt',
+    type: 'tops',
+    category: 't-shirt',
     color: 'black',
     size: 'S',
     material: 'cotton',
@@ -276,7 +301,8 @@ export const practice = [
 }, 
 {
     title: 'high_life_tee',
-    type: 't-shirt',
+    type: 'tops',
+    category: 't-shirt',
     color: 'green',
     size: 'M',
     material: 'cotton',
@@ -287,7 +313,8 @@ export const practice = [
 },
 {
     title: 'camo_graphic_tee',
-    type: 't-shirt',
+    type: 'tops',
+    category: 't-shirt',
     color: 'brown',
     size: 'M',
     material: 'cotton',
@@ -298,7 +325,8 @@ export const practice = [
 },
 {
     title: 'bye_felicia_tee',
-    type: 't-shirt',
+    type: 'tops',
+    category: 't-shirt',
     color: 'black',
     size: 'L',
     material: 'cotton',
@@ -309,7 +337,8 @@ export const practice = [
 },
 {
     title: 'pink_halter_dress',
-    type: 'dress',
+    type: 'tops',
+    category: 'dress',
     color: 'pink',
     size: 'S',
     material: 'beachtowel',
@@ -320,7 +349,8 @@ export const practice = [
 },
 {
     title: 'green_maxi_dress',
-    type: 'dress',
+    type: 'tops',
+    category: 'dress',
     color: 'green',
     size: 'M',
     material: 'stretchy',
@@ -331,7 +361,8 @@ export const practice = [
 },
 {
     title: 'floral_shirt_dress',
-    type: 'dress',
+    type: 'tops',
+    category: 'dress',
     color: 'yellow',
     size: 'S',
     material: 'polyester',
@@ -342,7 +373,8 @@ export const practice = [
 },
 {
     title: 'schoolgirl_skirt',
-    type: 'skirt',
+    type: 'bottoms',
+    category: 'skirt',
     color: 'blue',
     size: 'M',
     material: 'polyester',
@@ -417,9 +449,5 @@ export const practice = [
     tag: '',
     image: 'src/resources/items/images/gator_purse'
 }
-
-
-
-
-
 ]
+export default practice
