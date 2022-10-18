@@ -30,7 +30,6 @@ function App() {
         for (const outfit of res.data) {
           if (outfit.draft === true) {
             setCurrOutfit(outfit)
-            console.log(currOutfit)
             break;
           }
         }

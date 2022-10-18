@@ -91,9 +91,11 @@ export const AddClosetItem = () => {
 
     // Submit button action
     const handleSubmit = (event) => {
+        let tagsToPost = []
         for (const tag of tags) {
-            setTagList(tagList.push(tag.id))
+            tagsToPost.push(tag.id)
         }
+        // setTagList(tagsToPost)
 
         console.log(type)
         console.log(imgFile)
@@ -113,7 +115,7 @@ export const AddClosetItem = () => {
         form.append("color", color);
         form.append("source", source);
         form.append("item_image", imgFile);
-        form.append("tag", tagList);
+        form.append("tag", JSON.stringify(tagsToPost));
         form.append("material", material);
         form.append("brand", brand);
 
@@ -121,10 +123,12 @@ export const AddClosetItem = () => {
             method: 'POST',
             url: 'https://stylehub.herokuapp.com/mycloset/',
             headers: {
+                // 'Content-Type': `multipart/form-data; boundary=${form.boundary}`,
                 'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001',
                 Authorization: 'Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1'
             },
-            data: '[form]'
+            // data: '[form]'
+            data: form
         };
 
         event.preventDefault()
