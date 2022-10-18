@@ -1,4 +1,5 @@
-// TODO: Delete button functionality (also individual items)
+// TODO: Delete button functionality for individual items
+// TODO: Handle page display when there are no items in outfit
 // TODO: Save button functionality
 // TODO: Name input field
 // TODO: Tags input field
@@ -12,7 +13,7 @@ import Box from '@mui/material/Box';
 import axios from 'axios';
 
 
-export const CurrentOutfit = ({ currOutfit, loading, setLoading }) => {
+export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }) => {
 
     // Clicking save will move outfit out of draft (changing current outfit to empty) and navigate user to View Outfit page
     const handleSubmit = () => {
@@ -29,7 +30,7 @@ export const CurrentOutfit = ({ currOutfit, loading, setLoading }) => {
                 },
             })
             .then((res) => {
-                console.log(`Response: ${res}`)
+                setCurrOutfit({})
             })
             .catch((err) => console.error(err))
     }
