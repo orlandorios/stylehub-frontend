@@ -16,6 +16,7 @@ import axios from 'axios';
 
 function App() {
   const [currOutfit, setCurrOutfit] = useState({})
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false)
 
   useEffect(() => {
@@ -30,14 +31,14 @@ function App() {
         for (const outfit of res.data) {
           if (outfit.draft === true) {
             setCurrOutfit(outfit)
-            console.log(currOutfit)
+            setLoading(false)
             break;
           }
         }
         
       })
       .catch((err) => setError(err.response.data.error))
-  }, [])
+}, [])
 
   return (
   
@@ -46,7 +47,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Closet/>} />
           <Route path="add-item" element={<AddClosetItem />} />
-          <Route path="current-outfit" element={<CurrentOutfit currOutfit={currOutfit} />} />
+          <Route path="current-outfit" element={<CurrentOutfit currOutfit={currOutfit} loading={loading} setLoading={setLoading} />} />
           <Route path="user/1" element={<Profile />} />
           <Route path="user/1/outfits" element={<ViewOutfits />} />
         </Routes>
