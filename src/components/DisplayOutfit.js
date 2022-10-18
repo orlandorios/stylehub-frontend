@@ -26,7 +26,7 @@ export const DisplayOutfit = ({ outfit, location }) => {
     for (const item of outfit.closet_item) { 
         if (item.category==='top') {
             tops.push(item)
-        } else if (item.category==='outer') {
+        } else if (item.category==='outerwear') {
             outers.push(item)
         } else if (item.category==='bottom') {
             bottoms.push(item)
