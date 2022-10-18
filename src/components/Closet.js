@@ -1,18 +1,25 @@
 import { ShowItems } from './ShowItems'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import practice from '../resources/items/item_info'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import axios from 'axios'
 
 
 
 export const Closet = () => {
-const [items, setItems] = useState(practice)
+const [items, setItems] = useState([])
 console.log(items)
 const [type, setType] = useState('')
+
+useEffect(() => {
+    axios
+    .get('https://stylehub.herokuapp.com/mycloset/')
+    .then((res) => setItems(res.data.results))
+}, [])
 
 const handleChange = (event) => {
     setType(event.target.value)
@@ -86,7 +93,7 @@ return (
     </FormControl>
 
     <div className="items-container">
-    <ShowItems items={practice}/>
+    <ShowItems items={items}/>
     </div>      
     </div>
 
