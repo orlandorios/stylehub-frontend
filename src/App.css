@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding-bottom: 5rem;
 }
 
 .App-logo {
@@ -70,11 +71,13 @@
 .outfitItem {
   display: inline-block;
   position: relative;
-  height: 60px;
+  height: 100%;
 }
 
 .outfitItemBtn {
+  width: 0;
+  height: 0;
   position: absolute;
-  right: 30%;
-  bottom: 10%;
+  right: 15%;
+  bottom: 5%;
 }
