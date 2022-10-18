@@ -48,7 +48,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Closet/>} />
           <Route path="add-item" element={<AddClosetItem />} />
-          <Route path="current-outfit" element={<CurrentOutfit currOutfit={currOutfit} loading={loading} setLoading={setLoading} />} />
+          <Route path="current-outfit" element={<CurrentOutfit currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} loading={loading} setLoading={setLoading} />} />
           <Route path="user/1" element={<Profile />} />
           <Route path="outfits" element={<ViewOutfits />} />
           <Route path="outfit/:id" element={<ViewOutfit />} />
