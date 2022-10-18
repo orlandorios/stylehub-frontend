@@ -42,26 +42,41 @@ export const DisplayOutfit = ({ outfit, location }) => {
                     {tops.map((top) => (
                         <div key={top.id} className='outfitItem'>
                             {top.item_image ? <img src={top.item_image} alt='' width={size} /> : ''}
-                            {location==='editOutfit' && <IconButton className='outfitItemBtn' color="primary" aria-label="remove item">
-                                <DeleteIcon />
+                            {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item">
+                                <DeleteIcon style={{color:'#F06292'}} />
                             </IconButton>}
                         </div>
                     ))}
                 </div>
                 <div className='outers'>
                     {outers.map((outer) => (
-                        <div key={outer.id}>{outer.item_image ? <img src={outer.item_image} alt='' width={size} /> : ''}</div>
+                        <div key={outer.id} className='outfitItem'>
+                            {outer.item_image ? <img src={outer.item_image} alt='' width={size} /> : ''}
+                            {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item">
+                                <DeleteIcon style={{color:'#F06292'}} />
+                            </IconButton>}
+                        </div>
                     ))}
                 </div>
             </div>
             <div className='bottoms'>
                 {bottoms.map((bottom) => (
-                    <div key={bottom.id}>{bottom.item_image ? <img src={bottom.item_image} alt='' width={size} /> : ''}</div>
+                    <div key={bottom.id} className='outfitItem'>
+                        {bottom.item_image ? <img src={bottom.item_image} alt='' width={size} /> : ''}
+                        {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item">
+                                <DeleteIcon style={{color:'#F06292'}} />
+                            </IconButton>}
+                    </div>
                 ))}
             </div>
             <div className='shoes'>
                 {shoes.map((shoe) => (
-                    <div key={shoe.id}>{shoe.item_image ? <img src={shoe.item_image} alt='' width={size} /> : ''}</div>
+                    <div key={shoe.id} className='outfitItem'>
+                        {shoe.item_image ? <img src={shoe.item_image} alt='' width={size} /> : ''}
+                        {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item">
+                                <DeleteIcon style={{color:'#F06292'}} />
+                            </IconButton>}
+                    </div>
                 ))}
             </div>
         </>
