@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import FormHelperText from '@mui/material/FormHelperText';
 import Select from '@mui/material/Select';
 import practice from '../resources/items/item_info';
 // import axios from 'axios'
@@ -12,8 +13,8 @@ import practice from '../resources/items/item_info';
 
 export const Closet = () => {
     const [filteredList, setFilteredList] = useState([]);
-    const [selectedType, setSelectedType] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("");
+    const [selectedCat, setSelectedCat] = useState("");
+    const [selectedSubCat, setSelectedSubCat] = useState("");
     const [selectedColor, setSelectedColor] = useState("");
 // useEffect(() => {
 //     axios
@@ -21,85 +22,86 @@ export const Closet = () => {
 //     .then((res) => setItems(res.data.results))
 // }, [])
 
-const filterByType = (filteredData) => {
-    if (!selectedType) {
-      return filteredData;
+const filterByCategory = (filteredData) => {
+    if (!selectedCat) {
+    return filteredData;
     }
 
     const filteredItems = filteredData.filter(
-      (item) => item.type.indexOf(selectedType) !== -1
+    (item) => item.category === selectedCat
     );
     return filteredItems;
-  };
+};
 
-  const filterByColor = (filteredData) => {
+const filterByColor = (filteredData) => {
     if (!selectedColor) {
-      return filteredData;
+    return filteredData;
     }
     const filteredItems = filteredData.filter(
-      (item) => item.color === selectedColor
+    (item) => item.color === selectedColor
     );
     return filteredItems;
-  };
+};
 
-  const filterByCategory = (filteredData) => {
-    if (!selectedCategory) {
-      return filteredData;
+const filterBySubCategory = (filteredData) => {
+    if (!selectedSubCat) {
+    return filteredData;
     }
     const filteredItems = filteredData.filter(
-      (item) => item.category === selectedCategory
+    (item) => item.subcategory === selectedSubCat
     );
     return filteredItems;
-  };
+};
 
-  const handleTypeChange = (event) => {
-    setSelectedType(event.target.value);
-  };
-  const handleColorChange = (event) => {
+const handleCatChange = (event) => {
+    setSelectedCat(event.target.value);
+};
+const handleColorChange = (event) => {
     setSelectedColor(event.target.value);
-  };
-  const handleCategoryChange = (event) => {
-    setSelectedCategory(event.target.value);
-  };
+};
+const handleSubCatChange = (event) => {
+    setSelectedSubCat(event.target.value);
+};
 
-  useEffect(() => {
-    var filteredData = filterByType(practice);
+useEffect(() => {
+    var filteredData = filterByCategory(practice);
+    filteredData = filterBySubCategory(filteredData);
     filteredData = filterByColor(filteredData);
-    filteredData = filterByCategory(filteredData);
     setFilteredList(filteredData);
     console.log(filteredList)
-  }, [selectedType, selectedColor]);
+}, [selectedCat, selectedColor]);
 
 
 return (
     <div className="select-bar">
         <FormControl sx={{ m: 4, minWidth: 150 }}>
-            <InputLabel id="type-select-label">Type</InputLabel>
+            <InputLabel id="category-select-label">Category</InputLabel>
             <Select
-            labelId="type-select-label"
-            id="type-select"
-            value={selectedType}
-            label="Type"
-            onChange={handleTypeChange}
+            labelId="category-select-label"
+            id="category-select"
+            value={selectedCat}
+            label="Category"
+            onChange={handleCatChange}
             autoWidth
             >
-                <MenuItem value='All types'>All types</MenuItem>
+                <MenuItem value='All types'>All Categories</MenuItem>
                 <MenuItem value='tops'>tops</MenuItem>
                 <MenuItem value='bottoms'>bottoms</MenuItem>
                 <MenuItem value='outerwear'>outerwear</MenuItem>
                 <MenuItem value='shoes'>shoes</MenuItem>
             </Select>
+            <FormHelperText>Required</FormHelperText>
         </FormControl>
     <FormControl sx={{ m: 4, minWidth: 150 }}>
-        <InputLabel id="category-select-label">Category</InputLabel>
+        <InputLabel id="subcategory-select-label">Subcategory</InputLabel>
         <Select
-        labelId="category-select-label"
-        id="category-select"
-        value={selectedCategory}
-        label="Category"
-        onChange={handleCategoryChange}
+        labelId="subcategory-select-label"
+        id="subcategory-select"
+        value={selectedSubCat}
+        label="Subcategory"
+        onChange={handleSubCatChange}
         >
-            <MenuItem value=''>All Categories</MenuItem>
+            <MenuItem value='All Subcategories'>All Subcategories</MenuItem>
             <MenuItem value='Tops' disabled>Tops</MenuItem>
             <MenuItem value='buton-down'>button-down</MenuItem>
             <MenuItem value='dress'>dress</MenuItem>
@@ -122,6 +124,7 @@ return (
             <MenuItem value='slippers'>slippers</MenuItem>
             <MenuItem value='sneakers'>sneakers</MenuItem>
         </Select>
+        <FormHelperText>Required</FormHelperText>
     </FormControl>
     <FormControl sx={{ m: 4, minWidth: 150 }}>
         <InputLabel id="color-select-label">Color</InputLabel>
@@ -132,7 +135,7 @@ return (
         label="Color"
         onChange={handleColorChange}
         >
-            <MenuItem value=''>All Colors</MenuItem>
+            <MenuItem value='All Colors'>All Colors</MenuItem>
             <MenuItem value='green'>green</MenuItem>
             <MenuItem value='turquoise'>turquoise</MenuItem>
             <MenuItem value='blue'>blue</MenuItem>
@@ -147,6 +150,7 @@ return (
             <MenuItem value='brown'>brown</MenuItem>
             <MenuItem value='multi'>multi</MenuItem>
         </Select>
+        <FormHelperText>Required</FormHelperText>
     </FormControl>
 
     <div className="items-container">

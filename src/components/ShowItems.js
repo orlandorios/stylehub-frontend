@@ -4,14 +4,14 @@ import chunkyBoots from '../resources/items/images/chunky_boots.jpeg'
 export const ShowItems = ({items}) => {
     return (
         <div>
-            <h2> All Items</h2>
             <div className='item-list'>
                 {items.map((item) => (
                     <div key={item.title} className='item-list'>
                         <Item
                         item={item}
                         title={item.title}
-                        type={item.type}
+                        category={item.category}
+                        subcategory={item.subcategory}
                         color={item.color}
                         size={item.size}
                         material={item.material}
@@ -26,7 +26,7 @@ export const ShowItems = ({items}) => {
         </div>
     )}
 
-const Item = ({item, title, type, color, size, material, source, brand, tag, image}) => {
+const Item = ({item, title, category, subcategory, color, size, material, source, brand, tag, image}) => {
 const [expanded, setExpanded] = useState(false)
 const handleClick = () => {
     setExpanded(!expanded)
@@ -38,7 +38,8 @@ return (
             <img className='item-photo' src ={image} alt={"Image for " + title}></img>
             <div className='expand-info'>
                 <div className='item-fields'>
-                { expanded ? ( type ? <p>type: {type}</p> : '') : ''}
+                { expanded ? ( category ? <p>category: {category}</p> : '') : ''}
+                { expanded ? ( subcategory ? <p>subcategory: {subcategory}</p> : '') : ''}
                 { expanded ? ( color ? <p>color: {color}</p> : '') : ''}
                 { expanded ? ( size ? <p>size: {size}</p> : '') : ''}
                 { expanded ? ( material ? <p>material: {material}</p> : '') : ''}
