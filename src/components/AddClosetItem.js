@@ -1,16 +1,14 @@
 // TODO: replace console log with axios request when endpoint is ready (uncomment code)
-// TODO: Add required to pic input (uncomment code) (Why doesn't it let me upload files on my computer?)
-// TODO: Get input info/formatting required for axios request
+// TODO: Add required to pic input (uncomment code)
 // TODO: Pull input options from backend when endpoints are ready
 // TODO (?): Remove tiny pic preview? (may be gone now)
 // TODO: Add inputs for item subtype
 // TODO: Update navigation to closet when that has routing
 // TODO: Come up with final list for tag suggestion
-// TODO (?): Replace phone image with file image if on computer?
+// TODO (?): Replace camera image with file image if on computer?
 // TODO: Add CSS
 // TODO (?): Display option to to upload file in addition to camera?
 // TODO (?): Store different size images?
-// TODO: Add padding at bottom for mobile display
 
 import React, { useEffect, useState } from "react"
 import { WithContext as ReactTags } from 'react-tag-input';
@@ -95,7 +93,6 @@ export const AddClosetItem = () => {
         for (const tag of tags) {
             tagsToPost.push(tag.id)
         }
-        // setTagList(tagsToPost)
 
         console.log(type)
         console.log(imgFile)
@@ -123,11 +120,9 @@ export const AddClosetItem = () => {
             method: 'POST',
             url: 'https://stylehub.herokuapp.com/mycloset/',
             headers: {
-                // 'Content-Type': `multipart/form-data; boundary=${form.boundary}`,
                 'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001',
                 Authorization: 'Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1'
             },
-            // data: '[form]'
             data: form
         };
 
@@ -137,35 +132,6 @@ export const AddClosetItem = () => {
         }).catch(function (error) {
             console.error(error);
         });
-
-        // event.preventDefault()
-        // axios
-        //     .post('https://stylehub.herokuapp.com/mycloset/',
-        //     {
-        //         // item_choices: type,
-        //         // item_image:,
-        //         size: size,
-        //         color: color,
-        //         material: material,
-        //         source: source,
-        //         brand: brand,
-        //         // tag:,
-        //     },
-        //     {
-        //         headers: {
-        //             Authorization: `Token ${token}`,
-        //         },
-        //     })
-        //     .then((res) => {
-        //         setType('')
-        //         setSize('')
-        //         setColor('')
-        //         setMaterial('')
-        //         setSource('')
-        //         setBrand('')
-        //         setSubmitted(true)
-        //     })
-        //     .catch((err) => setError(err.response.data.error))
     }
 
     useEffect(() => {
@@ -197,8 +163,6 @@ export const AddClosetItem = () => {
                             onChange= {(e) => {
                                 document.getElementById("preview").src = window.URL.createObjectURL(e.target.files[0])
                                 setImgFile(e.target.files[0])
-                                // const formData = new FormData(e.target)
-                                // const formProps = Object.fromEntries(formData)
                             }}
                             // required
                             >
@@ -222,13 +186,6 @@ export const AddClosetItem = () => {
                         <option value=''>--Select a color--</option>
                         <option value='green'>green</option>
                     </select></div>
-                    {/* <div><input
-                        type='text'
-                        id='color'
-                        value={color}
-                        onChange = {(e) => setColor(e.target.value)}
-                        required
-                    ></input></div> */}
 
                     <div><label htmlFor='material'>Material: </label></div>
                     <div><input
@@ -244,13 +201,6 @@ export const AddClosetItem = () => {
                         <option value=''>--Select a source--</option>
                         <option value='brand_store'>brand store</option>
                     </select></div>
-                    {/* <div><input
-                        type='text'
-                        id='source'
-                        value={source}
-                        onChange = {(e) => setSource(e.target.value)}
-                        required
-                    ></input></div> */}
 
                     <div><label htmlFor='brand'>Brand: </label></div>
                     <div><input
