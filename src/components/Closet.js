@@ -1,6 +1,5 @@
 import { ShowItems } from './ShowItems'
 import { useEffect, useState } from 'react'
-import practice from '../resources/items/item_info'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';

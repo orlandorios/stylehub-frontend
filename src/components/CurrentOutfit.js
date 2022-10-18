@@ -10,7 +10,7 @@ export const CurrentOutfit = ({ currOutfit }) => {
     return(
         <>
             <h1>Current Outfit</h1>
-            <p>{currOutfit.length === 0 ? "You haven't starting building an outfit yet." : `You have ${currOutfit.closet_item.length} closet items in your outfit so far.`} <a href='/'>Go to your closet to add items to your outfit.</a></p>
+            
             <div>
                 <DisplayOutfit outfit={currOutfit} location='editOutfit' />
             </div>
