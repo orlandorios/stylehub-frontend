@@ -31,7 +31,7 @@ export const BottomNavbar = () => {
         <Toolbar>
 
             <Fab
-                component={Link} to="/user/1/outfits"
+                component={Link} to="/outfits"
                 style={{ color: "white", backgroundColor: "#9cc4d9" }}
                 sx={{ borderRadius: 20, }}
                 size="small"
