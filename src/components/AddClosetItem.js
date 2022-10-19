@@ -1,9 +1,5 @@
-// TODO: replace console log with axios request when endpoint is ready (uncomment code)
-// TODO: Add required to pic input (uncomment code)
-// TODO: Pull input options from backend when endpoints are ready
-// TODO (?): Remove tiny pic preview? (may be gone now)
-// TODO: Add inputs for item subtype
-// TODO: Update navigation to closet when that has routing
+// TODO: Pull input options from backend when endpoints are ready (or just code them)
+// Decide whether to have one or two pulldowns for category and subcategory
 // TODO: Come up with final list for tag suggestion
 // TODO (?): Replace camera image with file image if on computer?
 // TODO: Add CSS
@@ -20,7 +16,8 @@ import { SaveButton } from "./SaveButton";
 
 
 export const AddClosetItem = () => {
-    const [type, setType] = useState('')
+    const [category, setCategory] = useState('')
+    const [subcategory, setSubcategory] = useState('')
     const [imgFile, setImgFile] = useState('')
     const [size, setSize] = useState('')
     const [color, setColor] = useState('')
@@ -34,8 +31,11 @@ export const AddClosetItem = () => {
     const navigate = useNavigate()
 
     const handleChange = (inputType, event) => {
-        if (inputType === 'type') {
-            setType(event.target.value)
+        if (inputType === 'category') {
+            setCategory(event.target.value)
+        }
+        if (inputType === 'subcategory') {
+            setSubcategory(event.target.value)
         }
         if (inputType === 'color') {
             setColor(event.target.value)
@@ -94,20 +94,11 @@ export const AddClosetItem = () => {
             tagsToPost.push(tag.id)
         }
 
-        console.log(type)
-        console.log(imgFile)
-        console.log(size)
-        console.log(color)
-        console.log(material)
-        console.log(source)
-        console.log(brand)
-        console.log(tags)
-        console.log(tagList)
-
         setSubmitted(true)
 
         const form = new FormData();
-        form.append("item_choice", type);
+        form.append("category", category);
+        form.append("subcategory", subcategory);
         form.append("size", size);
         form.append("color", color);
         form.append("source", source);
@@ -136,7 +127,7 @@ export const AddClosetItem = () => {
 
     useEffect(() => {
         if (submitted === true) {
-            navigate('../user/1')
+            navigate('../')
         }
     },[navigate,submitted])
 
@@ -146,10 +137,16 @@ export const AddClosetItem = () => {
             <h2>Add a Closet Item</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <div><label htmlFor='type'>1. What type of item is it? </label></div>
-                    <div><select name='types' id='type' onChange = {(e) => handleChange('type', e)} required>
-                        <option value=''>--Select a type--</option>
-                        <option value='shirt'>shirt</option>
+                    <div><label htmlFor='category'>1. What category is it? </label></div>
+                    <div><select name='category' id='category' onChange = {(e) => handleChange('category', e)} required>
+                        <option value=''>--Select a category--</option>
+                        <option value='top'>Top</option>
+                    </select></div>
+
+                    <div><label htmlFor='subcategory'>2. What subcategory is it? </label></div>
+                    <div><select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required>
+                        <option value=''>--Select a subcategory--</option>
+                        <option value='shirt'>Shirt</option>
                     </select></div>
 
                     <div><label htmlFor='photo'>2. Upload a photo:</label></div>
@@ -164,7 +161,7 @@ export const AddClosetItem = () => {
                                 document.getElementById("preview").src = window.URL.createObjectURL(e.target.files[0])
                                 setImgFile(e.target.files[0])
                             }}
-                            // required
+                            required
                             >
                         </input>
                         <PhotoCamera type='button' />
@@ -184,7 +181,19 @@ export const AddClosetItem = () => {
                     <div><label htmlFor='color'>Color: </label></div>
                     <div><select name='colors' id='color' onChange = {(e) => handleChange('color', e)} required>
                         <option value=''>--Select a color--</option>
-                        <option value='green'>green</option>
+                        <option value='white'>White</option>
+                        <option value='green'>Green</option>
+                        <option value='yellow'>Yellow</option>
+                        <option value='orange'>Orange</option>
+                        <option value='red'>Red</option>
+                        <option value='pink'>Pink</option>
+                        <option value='purple'>Purple</option>
+                        <option value='turquoise'>Turquoise</option>
+                        <option value='blue'>Blue</option>
+                        <option value='brown'>Brown</option>
+                        <option value='black'>Black</option>
+                        <option value='grey'>Grey</option>
+                        <option value='multi'>Multi</option>
                     </select></div>
 
                     <div><label htmlFor='material'>Material: </label></div>
@@ -199,7 +208,13 @@ export const AddClosetItem = () => {
                     <div><label htmlFor='source'>Source: </label></div>
                     <div><select name='sources' id='source' onChange = {(e) => handleChange('source', e)} required>
                         <option value=''>--Select a source--</option>
-                        <option value='brand_store'>brand store</option>
+                        <option value='brand_store'>Brand Store</option>
+                        <option value='department_store'>Department Store</option>
+                        <option value='discount_store'>Discount Store</option>
+                        <option value='thrift_shop'>Thrift Shop</option>
+                        <option value='resale/consignment_shop'>Resale/Consignment Shop</option>
+                        <option value='friend'>Friend</option>
+                        <option value='other'>Other</option>
                     </select></div>
 
                     <div><label htmlFor='brand'>Brand: </label></div>
