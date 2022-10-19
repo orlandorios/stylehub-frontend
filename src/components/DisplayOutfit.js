@@ -17,12 +17,6 @@ export const DisplayOutfit = ({ outfit, location }) => {
     const bottoms = [];
     const shoes = [];
 
-    // subcategories for each type
-    const topTypes = ['button-down', 'dress', 'shirt', 'sweater', 't-shirt'];
-    const outerTypes = ['cardigan', 'coat', 'jacket', 'vest'];
-    const bottomTypes = ['pants', 'shorts', 'skirt'];
-    const shoeTypes = ['boots', 'flats', 'heels', 'sandals', 'slippers', 'sneakers'];
-
     for (const item of outfit.closet_item) { 
         if (item.category==='top') {
             tops.push(item)

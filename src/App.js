@@ -32,10 +32,10 @@ function App() {
         for (const outfit of res.data) {
           if (outfit.draft === true) {
             setCurrOutfit(outfit)
-            setLoading(false)
             break;
           }
         }
+        setLoading(false)
         
       })
       .catch((err) => setError(err.response.data.error))

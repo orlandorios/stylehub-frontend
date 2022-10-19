@@ -16,22 +16,21 @@ import axios from 'axios';
 export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }) => {
 
     // Clicking save will move outfit out of draft (changing current outfit to empty) and navigate user to View Outfit page
-    // const handleSubmit = () => {
-    //     axios
-    //         .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
-    //         {
-
-    //         },{
-    //             headers: {
-    //                 Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`,
-    //             },
-    //         })
-    //         .then((res) => {
-    //             setCurrOutfit({})
-    //         })
-    //         .catch((err) => console.error(err))
-    // }
-    // }
+    const handleSubmit = () => {
+        axios
+            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+            {
+                draft: false,
+            },{
+                headers: {
+                    Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`,
+                },
+            })
+            .then((res) => {
+                setCurrOutfit({})
+            })
+            .catch((err) => console.error(err))
+    }
     
     // Clicking delete will delete outfit and change current outfit to empty
     const handleDeleteOutfit = () => {
@@ -57,15 +56,15 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
         return(
             <>
                 <h1>Current Outfit</h1>
-                <p>{currOutfit.length === 0 ? "You haven't starting building an outfit yet." : `You have ${currOutfit.closet_item.length} closet items in your outfit so far.`} <a href='/'>Go to your closet to add items to your outfit.</a></p>
-                <div>
-                {console.log(currOutfit)}
+                <p>{Object.keys(currOutfit).length === 0 ? "You haven't starting building an outfit yet. " : `You have ${currOutfit.closet_item.length} closet items in your outfit so far. `}
+                <a href='/'>Go to your closet to add items to your outfit.</a></p>
+                {Object.keys(currOutfit).length === 0 ? "" :
+                <><div>
                     <DisplayOutfit outfit={currOutfit} location='editOutfit' />
                 </div>
                 <IconButton color="primary" aria-label="delete outfit" 
                 onClick={() => {
                     handleDeleteOutfit()
-                    // alert('delete clicked')
                 }
                 }
                 >
@@ -73,11 +72,11 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
                 </IconButton>
                 <div onClick={
                     () => {
-                    alert('save clicked')
+                    handleSubmit()
                 }
                 }>
                     <SaveButton />
-                </div>
+                </div></>}
             </>
         )
     }
