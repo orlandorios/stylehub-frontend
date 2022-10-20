@@ -1,7 +1,6 @@
 // TODO: Delete button functionality for individual items
 // TODO: Save button should move user to view outfits page
-// TODO: Tags input field
-// TODO: Finalize Tag selection list
+// TODO: Finalize Tag suggestion list
 
 // Note: Debounce code for Outfit Name input/API call is based on: https://usehooks.com/useDebounce/
 
