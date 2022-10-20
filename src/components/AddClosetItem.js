@@ -45,6 +45,13 @@ export const AddClosetItem = () => {
         }
     }
 
+    // Disables subcategory selection if category option isn't selected
+    if (category === 'top') {
+        
+    } else if (category === 'bottom') {
+        
+    }
+
     // Tag code
     // Tag documentation found here: https://www.npmjs.com/package/react-tag-input
     const [tags, setTags] = React.useState([])
@@ -141,12 +148,13 @@ export const AddClosetItem = () => {
                     <div><select name='category' id='category' onChange = {(e) => handleChange('category', e)} required>
                         <option value=''>--Select a category--</option>
                         <option value='top'>Top</option>
+                        <option value='bottom'>Bottom</option>
                     </select></div>
 
                     <div><label htmlFor='subcategory'>2. What subcategory is it? </label></div>
-                    <div><select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required>
+                    <div><select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required disabled={category === '' ? true: false}>
                         <option value=''>--Select a subcategory--</option>
-                        <option value='shirt'>Shirt</option>
+                        {getSubcat(category)}
                     </select></div>
 
                     <div><label htmlFor='photo'>2. Upload a photo:</label></div>
@@ -247,3 +255,17 @@ export const AddClosetItem = () => {
         </>
     )
 }
+
+// Determines category options based on subcategory display
+const getSubcat = (category) => {
+    if (category === 'top') {
+        return <>
+                <option value='shirt'>Shirt</option>
+            </>
+    }else if (category === 'bottom') {
+        return <>
+            <option value='pants'>Pants</option>
+        </>
+    }
+}
+
