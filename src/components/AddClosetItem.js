@@ -45,6 +45,20 @@ export const AddClosetItem = () => {
         }
     }
 
+    // Disables subcategory selection if category option isn't selected
+    // const subcatSelect = document.getElementById('subcategory');
+    // if (category ==='') {
+    //     subcatSelect.disabled = true;
+    // } else {
+    //     subcatSelect.disabled = false;
+    // }
+
+    // Determines subcategory options based on category selections
+    // const subcatOp = "<option value=''>--Select a subcategory--</option>"
+    // if (category === 'top') {
+    //     subcatOp = "<option value=''>--Select a subcategory--</option> <option value='shirt'>Shirt</option>"
+    // }
+
     // Tag code
     // Tag documentation found here: https://www.npmjs.com/package/react-tag-input
     const [tags, setTags] = React.useState([])
@@ -144,7 +158,7 @@ export const AddClosetItem = () => {
                     </select></div>
 
                     <div><label htmlFor='subcategory'>2. What subcategory is it? </label></div>
-                    <div><select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required>
+                    <div><select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} disabled required>
                         <option value=''>--Select a subcategory--</option>
                         <option value='shirt'>Shirt</option>
                     </select></div>
@@ -247,3 +261,17 @@ export const AddClosetItem = () => {
         </>
     )
 }
+
+
+// Disables subcategory dropdown after user selects category. Updates subcategory options based on user's selection for category option 
+// function onSelectChangeSubcat()
+// {
+//    var dropdown = document.getElementById("category");
+//    var index = dropdown.selectedIndex;
+//    var ddVal = dropdown.options[index].value;
+//    if((ddVal === "top"))
+//    {
+//       outputSubcat="<select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required><option value=''>--Select a subcategory--</option><option value='shirt'>Shirt</option></select>"; 
+//    }
+//    document.getElementById("subcategory").innerHTML = outputSubcat;
+// }

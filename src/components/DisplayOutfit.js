@@ -37,9 +37,9 @@ export const DisplayOutfit = ({ outfit, location, setCurrOutfit }) => {
         const outfitItems = outfit.closet_item
         const updatedOutfitItems = outfitItems.filter(item => item.id !== closetItem.id)
         
-        console.log(closetItem)
-        console.log(outfit)
-        console.log(updatedOutfitItems)
+        // console.log(closetItem)
+        // console.log(outfit)
+        // console.log(updatedOutfitItems)
 
         axios
             .patch(`https://stylehub.herokuapp.com/outfit/${outfit.id}`,
