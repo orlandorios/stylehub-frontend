@@ -66,8 +66,6 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
     // pull tag info from currOutfit so they display in form
     const currOutfitTags = currOutfit.tag
     const currOutfitTagsObj = currOutfitTags.map((x) => ({id: x, text: x}))
-    console.log(currOutfitTags)
-    console.log(currOutfitTagsObj)
 
     const [tags, setTags] = React.useState(currOutfitTagsObj)
 
@@ -111,13 +109,10 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
 
     // Save tags after user updates
     useEffect(() => {
-        console.log(currOutfit.tag)
-        console.log(tags)
         let tagsToPost = []
         for (const tag of tags) {
             tagsToPost.push(tag.id)
         }
-        console.log(tagsToPost)
 
         axios
         .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,

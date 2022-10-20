@@ -46,18 +46,11 @@ export const AddClosetItem = () => {
     }
 
     // Disables subcategory selection if category option isn't selected
-    // const subcatSelect = document.getElementById('subcategory');
-    // if (category ==='') {
-    //     subcatSelect.disabled = true;
-    // } else {
-    //     subcatSelect.disabled = false;
-    // }
-
-    // Determines subcategory options based on category selections
-    // const subcatOp = "<option value=''>--Select a subcategory--</option>"
-    // if (category === 'top') {
-    //     subcatOp = "<option value=''>--Select a subcategory--</option> <option value='shirt'>Shirt</option>"
-    // }
+    if (category === 'top') {
+        
+    } else if (category === 'bottom') {
+        
+    }
 
     // Tag code
     // Tag documentation found here: https://www.npmjs.com/package/react-tag-input
@@ -155,12 +148,13 @@ export const AddClosetItem = () => {
                     <div><select name='category' id='category' onChange = {(e) => handleChange('category', e)} required>
                         <option value=''>--Select a category--</option>
                         <option value='top'>Top</option>
+                        <option value='bottom'>Bottom</option>
                     </select></div>
 
                     <div><label htmlFor='subcategory'>2. What subcategory is it? </label></div>
-                    <div><select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} disabled required>
+                    <div><select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required disabled={category === '' ? true: false}>
                         <option value=''>--Select a subcategory--</option>
-                        <option value='shirt'>Shirt</option>
+                        {getSubcat(category)}
                     </select></div>
 
                     <div><label htmlFor='photo'>2. Upload a photo:</label></div>
@@ -262,16 +256,16 @@ export const AddClosetItem = () => {
     )
 }
 
+// Determines category options based on subcategory display
+const getSubcat = (category) => {
+    if (category === 'top') {
+        return <>
+                <option value='shirt'>Shirt</option>
+            </>
+    }else if (category === 'bottom') {
+        return <>
+            <option value='pants'>Pants</option>
+        </>
+    }
+}
 
-// Disables subcategory dropdown after user selects category. Updates subcategory options based on user's selection for category option 
-// function onSelectChangeSubcat()
-// {
-//    var dropdown = document.getElementById("category");
-//    var index = dropdown.selectedIndex;
-//    var ddVal = dropdown.options[index].value;
-//    if((ddVal === "top"))
-//    {
-//       outputSubcat="<select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required><option value=''>--Select a subcategory--</option><option value='shirt'>Shirt</option></select>"; 
-//    }
-//    document.getElementById("subcategory").innerHTML = outputSubcat;
-// }
