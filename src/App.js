@@ -13,12 +13,22 @@ import { Closet } from './components/Closet';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ViewOutfit } from './components/ViewOutfit';
+import useLocalStorageState from 'use-local-storage-state';
+import { ProtectedRoutes } from './components/ProtectedRoutes';
 
 
 function App() {
   const [currOutfit, setCurrOutfit] = useState({})
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false)
+  const [token, setToken] = useLocalStorageState('StyleHubToken', null )
+  const [username, setUsername] =  useLocalStorageState('StyleHubUsername', '')
+
+  const setAuth = (username, token) => {
+    setToken(token)
+    setUsername(username)
+
+  }
 
   useEffect(() => {
     axios
@@ -41,19 +51,29 @@ function App() {
       .catch((err) => setError(err.response.data.error))
 }, [])
 
+const isLoggedIn = username && token
+
   return (
   
     <div className="App">
+      {isLoggedIn && (
       <TopNavbar />
+      )}
         <Routes>
-          <Route path="/" element={<Closet/>} />
-          <Route path="add-item" element={<AddClosetItem />} />
-          <Route path="current-outfit" element={<CurrentOutfit currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} loading={loading} setLoading={setLoading} />} />
-          <Route path="user/1" element={<Profile />} />
-          <Route path="outfits" element={<ViewOutfits />} />
-          <Route path="outfit/:id" element={<ViewOutfit />} />
+          <Route index element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn} />} /> 
+          <Route path="*" element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn} />} />
+          <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}>
+            <Route path="closet" element={<Closet />} />
+            <Route path="add-item" element={<AddClosetItem />} />
+            <Route path="current-outfit" element={<CurrentOutfit currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} loading={loading} setLoading={setLoading} />} />
+            <Route path="user/1" element={<Profile />} />
+            <Route path="outfits" element={<ViewOutfits token={token}/>} />
+            <Route path="outfit/:id" element={<ViewOutfit token={token}/>} />
+          </Route>
         </Routes>
+      {isLoggedIn && (
       <BottomNavbar />
+      )}
     </div>
   );
 }
