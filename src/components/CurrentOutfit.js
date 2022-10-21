@@ -16,7 +16,7 @@ import React, { useEffect, useState } from "react"
 import { WithContext as ReactTags } from 'react-tag-input';
 
 
-export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }) => {
+export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, token }) => {
     const [name, setName] = useState(currOutfit.title)
     const debouncedName = useDebounce(name, 500)
 
@@ -24,7 +24,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
     // 500ms after user stops typing Outfit Name input, API call will save name
     useEffect(() => {
         if (debouncedName) {
-            updateName(debouncedName, currOutfit)
+            updateName(debouncedName, currOutfit, token)
         }
     }, [debouncedName])
 
@@ -36,7 +36,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
                 draft: false,
             },{
                 headers: {
-                    Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`,
+                    Authorization: `Token ${token}`,
                 },
             })
             .then((res) => {
@@ -51,7 +51,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
             .delete(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
             {
                 headers: {
-                    Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`,
+                    Authorization: `Token ${token}`,
                 },
             })
             .then((res) => {
@@ -120,7 +120,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
             tag: tagsToPost,
         },{
             headers: {
-                Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`,
+                Authorization: `Token ${token}`,
             },
         })
         .then((res) => {
@@ -191,14 +191,14 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
 }
 
 // API call for outfit name
-function updateName(nameInput, currOutfit) {
+function updateName(nameInput, currOutfit, token) {
     axios
         .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
         {
             title: nameInput,
         },{
             headers: {
-                Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`,
+                Authorization: `Token ${token}`,
             },
         })
         .then((res) => {

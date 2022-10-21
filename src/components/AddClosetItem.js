@@ -15,7 +15,7 @@ import { PhotoCamera } from "@mui/icons-material";
 import { SaveButton } from "./SaveButton";
 
 
-export const AddClosetItem = () => {
+export const AddClosetItem = (token) => {
     const [category, setCategory] = useState('')
     const [subcategory, setSubcategory] = useState('')
     const [imgFile, setImgFile] = useState('')
@@ -119,7 +119,7 @@ export const AddClosetItem = () => {
             url: 'https://stylehub.herokuapp.com/mycloset/',
             headers: {
                 'Content-Type': 'multipart/form-data; boundary=---011000010111000001101001',
-                Authorization: 'Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1'
+                Authorization: `Token ${token}`
             },
             data: form
         };
