@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 
-export const DisplayOutfit = ({ outfit, location, setCurrOutfit }) => {
+export const DisplayOutfit = ({ outfit, location, setCurrOutfit, token }) => {
     // location determines how outfit displays depending on page it is used in. Options: 'myOutfits', 'editOutfit', 'viewOutfit'
 
     // changes image width based on location
@@ -43,7 +43,7 @@ export const DisplayOutfit = ({ outfit, location, setCurrOutfit }) => {
                 closet_item: updatedOutfitItemIDs,
             },{
                 headers: {
-                    Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`,
+                    Authorization: `Token ${token}`,
                 },
             })
             .then((res) => {
