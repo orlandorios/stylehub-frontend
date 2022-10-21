@@ -1,6 +1,8 @@
 // TODO: Delete button functionality for individual items
 // TODO: Save button should move user to view outfits page
 // TODO: Finalize Tag suggestion list
+// TODO: Look into Axios call error messages when there is no current outfit
+// TODO: Code goes blank when refreshing
 
 // Note: Debounce code for Outfit Name input/API call is based on: https://usehooks.com/useDebounce/
 
@@ -63,8 +65,11 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
     // Tag documentation found here: https://www.npmjs.com/package/react-tag-input
 
     // pull tag info from currOutfit so they display in form
-    const currOutfitTags = currOutfit.tag
-    const currOutfitTagsObj = currOutfitTags.map((x) => ({id: x, text: x}))
+    let currOutfitTagsObj=[]
+    if (Object.keys(currOutfit).length !== 0) {
+        let currOutfitTags = currOutfit.tag
+        currOutfitTagsObj = currOutfitTags.map((x) => ({id: x, text: x}))
+    }
 
     const [tags, setTags] = React.useState(currOutfitTagsObj)
 
@@ -140,6 +145,10 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
         return(
             <>
                 <h1>Current Outfit</h1>
+
+                {/* Only display if outfit has been started */}
+                {Object.keys(currOutfit).length === 0 ? "" :
+                <>
                 <div><label htmlFor='name'>Outfit Name: </label></div>
                 <div><input
                     type='text'
@@ -162,9 +171,16 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading }
                 autocomplete
                 allowDeleteFromEmptyInput={false}
                 />
+                </>
+                }
 
+
+                {/* Display depends on whether outfit has been started */}
                 <p>{Object.keys(currOutfit).length === 0 ? "You haven't starting building an outfit yet. " : `You have ${currOutfit.closet_item.length} closet items in your outfit so far. `}
                 <a href='/'>Go to your closet to add items to your outfit.</a></p>
+
+
+                {/* Only display if outfit has been started */}
                 {Object.keys(currOutfit).length === 0 ? "" :
                 <><div>
                     <DisplayOutfit outfit={currOutfit} location='editOutfit' setCurrOutfit={setCurrOutfit} />
@@ -201,7 +217,7 @@ function updateName(nameInput, currOutfit) {
             },
         })
         .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
         })
         .catch((err) => console.error(err))
 }
