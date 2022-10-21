@@ -1,26 +1,31 @@
 import { ShowItems } from './ShowItems'
 import { useEffect, useState } from 'react'
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import Select from '@mui/material/Select';
-import practice from '../resources/items/item_info';
-// import axios from 'axios'
+import axios from 'axios'
 
 
 
-export const Closet = () => {
+export const Closet = ({currOutfit}) => {
+    const [items, setItems] = useState([])
     const [filteredList, setFilteredList] = useState([]);
     const [selectedCat, setSelectedCat] = useState("");
     const [selectedSubCat, setSelectedSubCat] = useState("");
     const [selectedColor, setSelectedColor] = useState("");
-// useEffect(() => {
-//     axios
-//     .get('https://stylehub.herokuapp.com/mycloset/')
-//     .then((res) => setItems(res.data.results))
-// }, [])
+
+useEffect(() => {
+    axios
+    .get('https://stylehub.herokuapp.com/mycloset/',
+    {
+        headers: {
+            Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`,
+        },
+    })
+    .then((res) => setItems(res.data))
+}, [])
 
 const filterByCategory = (filteredData) => {
     if (!selectedCat) {
@@ -64,11 +69,12 @@ const handleSubCatChange = (event) => {
 };
 
 useEffect(() => {
-    var filteredData = filterByCategory(practice);
+    var filteredData = filterByCategory(items);
     filteredData = filterBySubCategory(filteredData);
     filteredData = filterByColor(filteredData);
     setFilteredList(filteredData);
     console.log(filteredList)
+    console.log(items)
 }, [selectedCat, selectedColor]);
 
 
@@ -154,7 +160,7 @@ return (
     </FormControl>
 
     <div className="items-container">
-    <ShowItems items={filteredList}/>
+    <ShowItems items={items}/>
     </div>      
     </div>
 

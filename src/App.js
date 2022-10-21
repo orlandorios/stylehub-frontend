@@ -63,7 +63,7 @@ const isLoggedIn = username && token
           <Route index element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn} />} /> 
           <Route path="*" element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn} />} />
           <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}>
-            <Route path="closet" element={<Closet />} />
+            <Route path="closet" element={<Closet  currOutfit={currOutfit}/>} />
             <Route path="add-item" element={<AddClosetItem />} />
             <Route path="current-outfit" element={<CurrentOutfit currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} loading={loading} setLoading={setLoading} />} />
             <Route path="user/1" element={<Profile />} />
