@@ -1,3 +1,5 @@
+// TODO: Current outfit should only pull drafted outfit if it belongs to current user
+
 import logo from './logo.svg';
 import './reactTags.css'
 import './App.css';
