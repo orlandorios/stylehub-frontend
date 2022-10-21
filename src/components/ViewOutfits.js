@@ -49,7 +49,7 @@ export const ViewOutfits = ({token}) => {
                                 to={`/outfit/${outfit.id}`}>
                                 <CardContent>
                             <DisplayOutfit
-                                
+                                token={token}
                                 outfit={outfit}
                                 location='myOutfits'
                                 />

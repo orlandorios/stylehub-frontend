@@ -26,7 +26,7 @@ export const ViewOutfit = ({token}) => {
             {outfit && (<div> <h1>
                 {outfit.title}
             </h1>
-            <DisplayOutfit outfit={outfit}/> </div>)
+            <DisplayOutfit token={token} outfit={outfit}/> </div>)
             }
         </div>
 

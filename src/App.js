@@ -37,7 +37,7 @@ function App() {
       .get('https://stylehub.herokuapp.com/myoutfits/',
       {
           headers: {
-              Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`,
+              Authorization: `Token ${token}`,
           },
       })
       .then((res) => {

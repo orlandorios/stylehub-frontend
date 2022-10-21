@@ -183,7 +183,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
                 {/* Only display if outfit has been started */}
                 {Object.keys(currOutfit).length === 0 ? "" :
                 <><div>
-                    <DisplayOutfit outfit={currOutfit} location='editOutfit' setCurrOutfit={setCurrOutfit} />
+                    <DisplayOutfit token={token} outfit={currOutfit} location='editOutfit' setCurrOutfit={setCurrOutfit} />
                 </div>
                 <IconButton color="primary" aria-label="delete outfit" 
                 onClick={() => {
