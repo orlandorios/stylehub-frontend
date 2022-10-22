@@ -18,6 +18,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Link } from "react-router-dom";
 import CardActionArea from "@mui/material/CardActionArea";
 import { useParams } from "react-router-dom";
+import { ImageList } from "@mui/material";
+import { ImageListItem } from "@mui/material";
+
 
 export const ViewOutfits = ({token}) => {
     const url = 'https://stylehub.herokuapp.com/myoutfits/'
@@ -26,7 +29,8 @@ export const ViewOutfits = ({token}) => {
     useEffect(() => {
         axios.get(url, {
             headers: {
-                Authorization: `Token ${token}`
+                // Authorization: `Token ${token}`
+                Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`
             }
             
         })
@@ -39,6 +43,35 @@ export const ViewOutfits = ({token}) => {
         return(
             <div>
             <h1>My Outfits</h1>
+            <Grid2 container rowGap={2} columnGap={2}>
+                    {outfits.map((outfit) => (
+                        <Grid2 xs={3.5} key={outfit.id}>
+                <Card
+                elevation={3}>
+                <CardActionArea 
+                component={Link} 
+                to={`/outfit/${outfit.id}`}>
+                <CardContent>
+                <ImageList sx={{ width: 89.6, height: 140 }} cols={2} rowHeight={67.2}>
+                {/* We will only display up to 4 closet items in the outfit preview */}
+                {outfit.closet_item.slice(0, 4).map((item) => (
+                    <ImageListItem key={item.item_image}>
+                        <img
+                        src={`${item.item_image}?w=164&h=164&fit=crop&auto=format`}
+                        srcSet={`${item.item_image}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                        alt={item.id}
+                        loading="lazy"
+                            />
+                    </ImageListItem>
+                ))}
+                </ImageList>
+                {outfit.title}
+                </CardContent>
+                                </CardActionArea>
+                            </Card>
+                            </Grid2>
+                    ))}
+                </Grid2>
                 <Grid2 container rowGap={2} columnGap={2}>
                     {outfits.map((outfit) => (
                         <Grid2 xs={3} key={outfit.id}>

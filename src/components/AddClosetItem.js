@@ -13,6 +13,7 @@ import axios from "axios";
 import IconButton from '@mui/material/IconButton';
 import { PhotoCamera } from "@mui/icons-material";
 import { SaveButton } from "./SaveButton";
+import loadImage from "blueimp-load-image";
 
 
 export const AddClosetItem = (token) => {
@@ -96,10 +97,34 @@ export const AddClosetItem = (token) => {
 
     // Submit button action
     const handleSubmit = (event) => {
+
+        // Covert tags to list of tag strings
         let tagsToPost = []
         for (const tag of tags) {
             tagsToPost.push(tag.id)
         }
+
+        // Rotate iPhone images
+        // See https://stackoverflow.com/questions/72794830/uploaded-images-in-react-rotating-when-uploading-on-iphone
+        console.log(imgFile)
+        let file = imgFile
+        
+        loadImage(
+            file,
+            function (img, data) {
+                if (data.imageHead && data.exif) {
+                    loadImage.writeExifData(data.imageHead, data, "Orientation", 1)
+                    img.toBlob(function (blob) {
+                        loadImage.replaceHead(blob, data.imageHead, function (newBlob) {
+                            file = newBlob
+                        })
+                    }, "image/jpeg")
+                }
+            },
+            {meta: true, orientation: true, canvas: true}
+        )
+        console.log(file)
+        setImgFile(file)
 
         setSubmitted(true)
 
