@@ -8,8 +8,8 @@ export const ShowItems = ({items}) => {
     return (
         <div>
             <div className='item-list'>
-                {items.map((item) => (
-                    <div key={item.title} className='item-list'>
+                {items.map((item, index) => (
+                    <div key={index} className='item-list'>
                         <Item
                         item={item}
                         title={item.title}
