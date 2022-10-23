@@ -1,3 +1,4 @@
+// TODO: Iphone image gets flipped and cropped
 // TODO: Pull input options from backend when endpoints are ready (or just code them)
 // Decide whether to have one or two pulldowns for category and subcategory
 // TODO: Come up with final list for tag suggestion
@@ -16,7 +17,7 @@ import { SaveButton } from "./SaveButton";
 import loadImage from "blueimp-load-image";
 
 
-export const AddClosetItem = (token) => {
+export const AddClosetItem = ({token}) => {
     const [category, setCategory] = useState('')
     const [subcategory, setSubcategory] = useState('')
     const [imgFile, setImgFile] = useState('')
@@ -113,16 +114,19 @@ export const AddClosetItem = (token) => {
             file,
             function (img, data) {
                 if (data.imageHead && data.exif) {
-                    loadImage.writeExifData(data.imageHead, data, "Orientation", 1)
+                    // Reset Exif Orientation data:
+                    loadImage.writeExifData(data.imageHead, data, "Orientation", 1);
                     img.toBlob(function (blob) {
-                        loadImage.replaceHead(blob, data.imageHead, function (newBlob) {
-                            file = newBlob
-                        })
-                    }, "image/jpeg")
+                    loadImage.replaceHead(blob, data.imageHead, function (newBlob) {
+                        // do something with newBlob
+                        file = newBlob;
+                    });
+                    }, "image/jpeg");
                 }
             },
-            {meta: true, orientation: true, canvas: true}
-        )
+            { meta: true, orientation: true, canvas: true, maxWidth: 800 }
+        );
+        
         console.log(file)
         setImgFile(file)
 
