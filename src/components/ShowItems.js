@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Fab from '@mui/material/Fab'
 import axios from 'axios'
 
-export const ShowItems = ({items}) => {
+export const ShowItems = ({items, currOutfit, setCurrOutfit, token}) => {
     return (
         <div>
             <div className='item-list'>
@@ -22,6 +22,9 @@ export const ShowItems = ({items}) => {
                         brand={item.brand}
                         tag={item.tag}
                         image={item.item_image}
+                        currOutfit={currOutfit}
+                        setCurrOutfit={setCurrOutfit}
+                        token={token}
                         />
                     </div>
                 ))}
@@ -29,7 +32,7 @@ export const ShowItems = ({items}) => {
         </div>
     )}
 
-const Item = ({item, title, category, subcategory, color, size, material, source, brand, tag, image}) => {
+const Item = ({item, title, category, subcategory, color, size, material, source, brand, tag, image, currOutfit, setCurrOutfit, token}) => {
 const [expanded, setExpanded] = useState(false)
 const [selectedItem, setSelectedItem] = useState(null)
 
@@ -38,35 +41,52 @@ const handleClick = (item) => {
     setSelectedItem(item)
     console.log(selectedItem)
 }  
-// const handleAddItem = (selectedItem, currOutfit) => {
-//     if (Object.keys(currOutfit).length === 0) {
-//         axios
-//         .post(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
-//         {
-//             draft: false,
-//         },{
-//             headers: {
-//                 Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`,
-//             },
-//         })
-//         .then((res) => {
-        
-//         })
-//         .catch((err) => console.error(err))
-//         }
-//     else {
-//         axios
-//         .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
-//         {
-//             headers : {
-//                 Authorization: `Token af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1`,
-//             },
-//         })
-//         .then((res) => {
-//         })
-//         .catch((err) => console.error(err))
-//     }
-// }
+const handleAddItem = (newItem) => {
+    // console.log(newItem.id)
+    if (Object.keys(currOutfit).length === 0) {
+        axios
+        .post(`https://stylehub.herokuapp.com/myoutfits/`,
+        {
+            closet_item: [newItem.id],
+        },{
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        })
+        .then((res) => {
+            console.log(res.data)
+        })
+        .catch((err) => console.error(err))
+    } else {
+        console.log(`currOutfit`)
+        console.log(currOutfit)
+        // const outfitItems = currOutfit.closet_item
+        // console.log(`outfitItems`)
+        // console.log(outfitItems)
+        // const updatedOutfitItems = outfitItems.push(newItem)
+        // console.log(`updatedOutfitItems`)
+        // console.log(updatedOutfitItems)
+        // const updatedOutfitItemIDs = updatedOutfitItems.map(object => object.id)
+        // console.log(`updatedOutfitItemIDs`)
+        // console.log(updatedOutfitItemIDs)
+
+        // axios
+        // .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+        // {
+        //     closet_item: updatedOutfitItemIDs,
+        // },{
+        //     headers : {
+        //         Authorization: `Token ${token}`,
+        //     },
+        // })
+        // .then((res) => {
+        //     let outfitUpdate = res.data
+        //     outfitUpdate.closet_item = updatedOutfitItems
+        //     setCurrOutfit(outfitUpdate)
+        // })
+        // .catch((err) => console.error(err))
+    }
+}
 
 return (
     <div className='item-container'>
@@ -86,14 +106,17 @@ return (
                 { expanded ? ( tag ? <p>{tag}</p> : '') : ''}
                 {/* tags might be an array or items, might need to map? */}
                 <Fab
-                component={Link} to="/current-outfit"
+                // component={Link} to="/current-outfit"
                 position="absolute"
                 align="center"
                 style={{ color: "white", backgroundColor: "#9cc4d9",}}
                 sx={{ borderRadius: 20, margin: '2', }}
                 variant="contained"
                 aria-label="add"
-                // onClick={() => handleAddItem(selectedItem)}
+                onClick={() => {
+                    handleAddItem(item)
+                    // setSelectedItem(item)
+                }}
                 >
                 <AddCircleIcon></AddCircleIcon> 
             </Fab>

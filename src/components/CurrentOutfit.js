@@ -118,6 +118,9 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
             tagsToPost.push(tag.id)
         }
 
+        let currOutfitData = currOutfit
+        currOutfitData.tag = tagsToPost
+
         axios
         .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
         {
@@ -128,7 +131,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
             },
         })
         .then((res) => {
-            setCurrOutfit(res.data)
+            setCurrOutfit(currOutfitData)
         })
         .catch((err) => console.error(err))
     }, [tags])
