@@ -31,28 +31,43 @@ export const DisplayOutfit = ({ outfit, location, setCurrOutfit, token }) => {
 
 
     // Clicking remove will remove closet item from outfit and display updated outfit
-    const handleRemove = (closetItem) => {
+    const handleRemove = (selectedItem) => {
+        // Deletes outfit if there is only on item, otherwise updates the outfit to remove the item
+        if (outfit.closet_item.length === 1) {
+            axios
+                .delete(`https://stylehub.herokuapp.com/outfit/${outfit.id}`,
+                {
+                    headers: {
+                        Authorization: `Token ${token}`,
+                    },
+                })
+                .then((res) => {
+                    setCurrOutfit({})
+                })
+                .catch((err) => console.error(err))
+        } else {
         // get outfit items, remove requested item, transform to array of the id values
-        const outfitItems = outfit.closet_item
-        const updatedOutfitItems = outfitItems.filter(item => item.id !== closetItem.id)
-        const updatedOutfitItemIDs = updatedOutfitItems.map(object => object.id)
-        
-        axios
-            .patch(`https://stylehub.herokuapp.com/outfit-detail/${outfit.id}`,
-            {
-                closet_item: updatedOutfitItemIDs,
-            },{
-                headers: {
-                    Authorization: `Token ${token}`,
-                },
-            })
-            .then((res) => {
-                // Reformating response data to make closet_item a array of objects instead of just the id's.
-                let outfitUpdate = res.data
-                outfitUpdate.closet_item = updatedOutfitItems
-                setCurrOutfit(outfitUpdate)
-            })
-            .catch((err) => console.error(err))
+            const outfitItems = outfit.closet_item
+            const updatedOutfitItems = outfitItems.filter(item => item.id !== selectedItem.id)
+            const updatedOutfitItemIDs = updatedOutfitItems.map(object => object.id)
+            
+            axios
+                .patch(`https://stylehub.herokuapp.com/outfit-detail/${outfit.id}`,
+                {
+                    closet_item: updatedOutfitItemIDs,
+                },{
+                    headers: {
+                        Authorization: `Token ${token}`,
+                    },
+                })
+                .then((res) => {
+                    // Reformating response data to make closet_item a array of objects instead of just the id's.
+                    let outfitUpdate = res.data
+                    outfitUpdate.closet_item = updatedOutfitItems
+                    setCurrOutfit(outfitUpdate)
+                })
+                .catch((err) => console.error(err))
+        }
     }
 
     return (
@@ -62,10 +77,7 @@ export const DisplayOutfit = ({ outfit, location, setCurrOutfit, token }) => {
                     {tops.map((top) => (
                         <div key={top.id} className='outfitItem'>
                             {top.item_image ? <img src={top.item_image} alt='' width={size} /> : ''}
-                            {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => {
-                                handleRemove(top)
-                            }
-                            }>
+                            {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(top)}>
                                 <DeleteIcon style={{color:'#F06292'}} />
                             </IconButton>}
                         </div>
@@ -75,7 +87,7 @@ export const DisplayOutfit = ({ outfit, location, setCurrOutfit, token }) => {
                     {outers.map((outer) => (
                         <div key={outer.id} className='outfitItem'>
                             {outer.item_image ? <img src={outer.item_image} alt='' width={size} /> : ''}
-                            {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item">
+                            {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(outer)}>
                                 <DeleteIcon style={{color:'#F06292'}} />
                             </IconButton>}
                         </div>
@@ -86,7 +98,7 @@ export const DisplayOutfit = ({ outfit, location, setCurrOutfit, token }) => {
                 {bottoms.map((bottom) => (
                     <div key={bottom.id} className='outfitItem'>
                         {bottom.item_image ? <img src={bottom.item_image} alt='' width={size} /> : ''}
-                        {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item">
+                        {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(bottom)}>
                                 <DeleteIcon style={{color:'#F06292'}} />
                             </IconButton>}
                     </div>
@@ -96,7 +108,7 @@ export const DisplayOutfit = ({ outfit, location, setCurrOutfit, token }) => {
                 {shoes.map((shoe) => (
                     <div key={shoe.id} className='outfitItem'>
                         {shoe.item_image ? <img src={shoe.item_image} alt='' width={size} /> : ''}
-                        {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item">
+                        {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(shoe)}>
                                 <DeleteIcon style={{color:'#F06292'}} />
                             </IconButton>}
                     </div>
