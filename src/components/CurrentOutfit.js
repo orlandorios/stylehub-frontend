@@ -151,7 +151,6 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
     } else {
         return(
             <>
-                <h1>Current Outfit</h1>
 
                 {/* Only display if outfit has been started */}
                 {Object.keys(currOutfit).length === 0 ? "" :

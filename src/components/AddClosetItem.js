@@ -170,7 +170,6 @@ export const AddClosetItem = ({token}) => {
 
     return(
         <>
-            <h2>Add a Closet Item</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <div><label htmlFor='category'>1. What category is it? </label></div>
