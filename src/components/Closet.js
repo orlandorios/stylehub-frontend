@@ -11,6 +11,7 @@ import Radio from '@mui/material/Radio';
 import { pink } from '@mui/material/colors';
 import RadioGroup from '@mui/material/RadioGroup';
 import axios from 'axios'
+import { SearchBar } from './SearchBar';
 
 
 
@@ -144,6 +145,8 @@ return (
             <MenuItem value='multi'>multi</MenuItem>
         </Select>
     </FormControl>
+
+    <SearchBar setItems={setItems} token={ token }/>
 
     <div className="items-container">
     <ShowItems items={items} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token}/>
