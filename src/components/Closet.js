@@ -10,6 +10,8 @@ import Select from '@mui/material/Select';
 import Radio from '@mui/material/Radio';
 import { pink } from '@mui/material/colors';
 import RadioGroup from '@mui/material/RadioGroup';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 import axios from 'axios'
 
 
@@ -17,6 +19,7 @@ import axios from 'axios'
 export const Closet = ({currOutfit, token}) => {
     const [items, setItems] = useState([])
     const [selectedCat, setSelectedCat] = useState("");
+    const [selectedSubCat, setSelectedSubCat] = useState('');
     const [selectedColor, setSelectedColor] = useState('');
     const [url, setUrl] = useState('https://stylehub.herokuapp.com/mycloset/')
     const allUrl = 'https://stylehub.herokuapp.com/mycloset/'
@@ -43,18 +46,67 @@ useEffect(() => {
 }, [token, url])
 
 const handleColorChange = (event) => {
+    if (selectedColor === 'All Colors') {
+        setSelectedColor('')
+    }
     setSelectedColor(event.target.value);
+    console.log(selectedColor)
+    return (filterByColor(items))
 }; 
 
-const filterByColor = (filteredData) => {
+const filterByColor = (items) => {
     if (!selectedColor) {
-        return filteredData;
+        return items;
     }
-    const filteredItems = filteredData.filter(
+    const filteredItems = items.filter(
         (item) => item.color === selectedColor);
-        return filteredItems;
+        console.log(filteredItems)
+        return setItems(filteredItems);
 }
 
+// useEffect(() => {
+//     var filteredData = filterByColor(items);
+//     setItems(filteredData)
+//     console.log(items)
+// }, []);
+
+const handleSubCatChange = (event) => {
+    setSelectedSubCat(event.target.value)
+}
+
+const getSubcat = (selectedCat) => {
+    if (selectedCat === 'tops') {
+        return <>
+            <MenuItem value='button-down'>Button Down</MenuItem>
+            <MenuItem value='dress'>Dress</MenuItem>
+            <MenuItem value='shirt'>Shirt</MenuItem>
+            <MenuItem value='sweater'>Sweater</MenuItem>
+            <MenuItem value='t-shirt'>T-shirt</MenuItem>
+        </>
+    }else if (selectedCat === 'outerwear') {
+        return <>
+            <MenuItem value='cardigan'>Cardigan</MenuItem>
+            <MenuItem value='coat'>Coat</MenuItem>
+            <MenuItem value='jacket'>Jacket</MenuItem>
+            <MenuItem value='vest'>Vest</MenuItem>
+        </>
+    }else if (selectedCat === 'bottoms') {
+        return <>
+            <MenuItem value='pants'>Pants</MenuItem>
+            <MenuItem value='shorts'>Shorts</MenuItem>
+            <MenuItem value='skirt'>Skirt</MenuItem>
+        </>
+    }else if (selectedCat === 'shoes') {
+        return <>
+            <MenuItem value='boots'>Boots</MenuItem>
+            <MenuItem value='flats'>Flats</MenuItem>
+            <MenuItem value='heels'>Heels</MenuItem>
+            <MenuItem value='sandals'>Sandals</MenuItem>
+            <MenuItem value='slippers'>Slippers</MenuItem>
+            <MenuItem value='sneakers'>Sneakers</MenuItem>
+        </>
+    }
+}
 
 const handleAllChange = (event) => {
     setSelectedCat(event.target.value);
@@ -91,35 +143,29 @@ const handleShoesChange = (event) => {
     }
 };
 
-useEffect(() => {
-    var filteredData = filterByColor(items);
-    setItems(filteredData)
-    console.log(items)
-}, []);
-
 
 return (
-    <div className="select-bar">
-      <FormControl>
-      <FormLabel id="demo-row-radio-buttons-group-label">Category</FormLabel>
-      <FormControlLabel onChange={handleAllChange} control={<Radio {...controlProps('all')} sx={{
-    color: pink[800],
-    '&.Mui-checked': {
-      color: pink[600],
-    },
-  }} size="small" />} label="All Clothing Items" />
-      <RadioGroup
-        row
-        aria-labelledby="demo-row-radio-buttons-group-label"
-        name="row-radio-buttons-group"
-      >
-        <FormControlLabel onChange={handleTopsChange} control={<Radio {...controlProps('tops')} color="secondary" size="small" />} label="Tops" />
-        <FormControlLabel onChange={handleBottomsChange} control={<Radio {...controlProps('bottoms')} color="secondary" size="small"/>} label="Bottoms" />
-        <FormControlLabel onChange={handleOuterChange} control={<Radio {...controlProps('outerwear')} color="secondary" size="small"/>} label="Outerwear" />
-        <FormControlLabel onChange={handleShoesChange} control={<Radio {...controlProps('shoes')} color="secondary" size="small"/>} label="Shoes" />
-      </RadioGroup>
+    <> 
+    <Button variant="contained" onClick={handleAllChange} value='all' size="small">All Clothing Items</Button>
+<div className='buttons-box'>
+    <ButtonGroup row variant="contained" aria-label="outlined primary button group">
+        <Button onClick={handleTopsChange} value="tops" color="secondary" size="small">Tops</Button>
+        <Button onClick={handleBottomsChange} value="bottoms" color="secondary" size="small">Bottoms</Button>
+        <Button onClick={handleOuterChange} value="outerwear" color="secondary" size="small">Outerwear</Button>
+        <Button onClick={handleShoesChange} value="shoes" color="secondary" size="small">Shoes</Button>
+        
+      </ButtonGroup>
+    <FormControl sx={{ m: 2, minWidth: 150 }}>
+        <InputLabel id='subcategory-select-label'>SubCategory</InputLabel>          <Select 
+        labelId='subcategory-select-label'
+        id='subcategory-select'
+        onChange = {(e) => handleSubCatChange(e)} 
+        required disabled={selectedCat === '' ? true: false}>
+            <MenuItem value=''>All {selectedCat}</MenuItem>
+            {/* {getSubcat(selectedCat)} */}
+        </Select>
     </FormControl>
-    <FormControl sx={{ m: 4, minWidth: 150 }}>
+    <FormControl sx={{ m: 2, minWidth: 150 }}>
         <InputLabel id="color-select-label">Color</InputLabel>
         <Select
         labelId="color-select-label"
@@ -144,11 +190,8 @@ return (
             <MenuItem value='multi'>multi</MenuItem>
         </Select>
     </FormControl>
-
-    <div className="items-container">
-    <ShowItems items={items}/>
-    </div>      
-    </div>
-
+</div>
+    <ShowItems items={items}/>   
+</>
 )
 }
