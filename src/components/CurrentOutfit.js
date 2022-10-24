@@ -21,7 +21,8 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
     const [name, setName] = useState(currOutfit.title)
     const debouncedName = useDebounce(name, 500)
 
-
+    console.log(`Current Outfit`)
+    console.log(currOutfit)
     // 500ms after user stops typing Outfit Name input, API call will save name
     useEffect(() => {
         if (debouncedName) {
@@ -113,24 +114,30 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
 
     // Save tags after user updates
     useEffect(() => {
-        let tagsToPost = []
-        for (const tag of tags) {
-            tagsToPost.push(tag.id)
-        }
+        // Setting up conditional so code doesn't run when there's no current outfit
+        if (Object.keys(currOutfit).length !== 0) {
+            let tagsToPost = []
+            for (const tag of tags) {
+                tagsToPost.push(tag.id)
+            }
 
-        axios
-        .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
-        {
-            tag: tagsToPost,
-        },{
-            headers: {
-                Authorization: `Token ${token}`,
-            },
-        })
-        .then((res) => {
-            setCurrOutfit(res.data)
-        })
-        .catch((err) => console.error(err))
+            let currOutfitData = currOutfit
+            currOutfitData.tag = tagsToPost
+
+            axios
+            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+            {
+                tag: tagsToPost,
+            },{
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            })
+            .then((res) => {
+                setCurrOutfit(currOutfitData)
+            })
+            .catch((err) => console.error(err))
+        }
     }, [tags])
 
 
