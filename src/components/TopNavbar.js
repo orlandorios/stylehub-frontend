@@ -7,10 +7,33 @@ import navLogo from '../resources/logos/nav-logo-transparent.png'
 import Fab from '@mui/material/Fab';
 import { IconButton } from '@mui/material';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 
-export const TopNavbar = () => {
+export const TopNavbar = ({token}) => {
+
+    const location = useLocation()
+    const {id} = useParams()
+    
+    const getTitle = () => {
+
+        switch (location.pathname) {
+                case '/closet':
+                    return "My Closet"
+                case '/add-item':
+                    return "Add Closet Item"
+                case '/outfits':
+                    return "My Outfits"
+                case '/outfit/:id':
+                    return "Outfits"
+                case '/current-outfit':
+                    return "Current Outfit"
+                case '/user':
+                    return "User Profile"
+                default:
+                    return "My Outfits"
+                }
+            }
 
     return (
     <div style={{ paddingTop: 64 }}>
@@ -38,7 +61,7 @@ export const TopNavbar = () => {
                 component="div"
                 fontFamily="helvetica-bold"
                 sx={{ flexGrow: 1, }}>
-            "USER" CLOSET
+            {getTitle()}
             </Typography>
 
             <Fab
