@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Fab from '@mui/material/Fab'
 import axios from 'axios'
 
-export const ShowItems = ({items, currOutfit, setCurrOutfit, token}) => {
+export const ShowItems = ({items, currOutfit, setCurrOutfit, setLoading, token}) => {
     return (
         <div>
             <div className='item-list'>
@@ -24,6 +24,7 @@ export const ShowItems = ({items, currOutfit, setCurrOutfit, token}) => {
                         image={item.item_image}
                         currOutfit={currOutfit}
                         setCurrOutfit={setCurrOutfit}
+                        setLoading={setLoading}
                         token={token}
                         />
                     </div>
@@ -32,7 +33,7 @@ export const ShowItems = ({items, currOutfit, setCurrOutfit, token}) => {
         </div>
     )}
 
-const Item = ({item, title, category, subcategory, color, size, material, source, brand, tag, image, currOutfit, setCurrOutfit, token}) => {
+const Item = ({item, title, category, subcategory, color, size, material, source, brand, tag, image, currOutfit, setCurrOutfit, setLoading, token}) => {
 const [expanded, setExpanded] = useState(false)
 const [selectedItem, setSelectedItem] = useState(null)
 
@@ -55,7 +56,7 @@ const handleAddItem = (newItem) => {
         })
         .then((res) => {
             let newOutfit = res.data
-            newOutfit.closet_item = newItem
+            newOutfit.closet_item = [newItem]
             setCurrOutfit(newOutfit)
         })
         .catch((err) => console.error(err))
@@ -72,7 +73,7 @@ const handleAddItem = (newItem) => {
         const updatedOutfitItemIDs = updatedOutfitItems.map(object => object.id)
         console.log(`updatedOutfitItemIDs`)
         console.log(updatedOutfitItemIDs)
-
+        setLoading(true)
         axios
         .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
         {
@@ -83,9 +84,12 @@ const handleAddItem = (newItem) => {
             },
         })
         .then((res) => {
+            console.log(res.data)
             let outfitUpdate = res.data
             outfitUpdate.closet_item = updatedOutfitItems
+            console.log(outfitUpdate)
             setCurrOutfit(outfitUpdate)
+            setLoading(false)
         })
         .catch((err) => console.error(err))
     }
