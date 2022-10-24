@@ -53,7 +53,7 @@ export const BottomNavbar = () => {
 
             <Box sx={{ flexGrow: 1 }} />
             <Fab
-                component={Link} to="/user/1"
+                component={Link} to="/user"
                 style={{backgroundColor: "#9cc4d9"}}
                 variant="contained"
                 size="small">
