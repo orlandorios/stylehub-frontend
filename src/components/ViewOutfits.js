@@ -33,8 +33,10 @@ export const ViewOutfits = ({token}) => {
             }
             
         })
-        .then((res) => 
-        setOutfits(res.data))
+        .then((res) => {
+        let allOutfits = res.data
+        let savedOutfits = allOutfits.filter(outfit => outfit.draft !== false)
+        setOutfits(savedOutfits)})
     }, [token])
 
     if(outfits) {
