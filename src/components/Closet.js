@@ -14,7 +14,7 @@ import axios from 'axios'
 
 
 
-export const Closet = ({currOutfit, token}) => {
+export const Closet = ({currOutfit, setCurrOutfit, setLoading, token}) => {
     const [items, setItems] = useState([])
     const [selectedCat, setSelectedCat] = useState("");
     const [selectedColor, setSelectedColor] = useState('');
@@ -146,7 +146,7 @@ return (
     </FormControl>
 
     <div className="items-container">
-    <ShowItems items={items}/>
+    <ShowItems items={items} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token}/>
     </div>      
     </div>
 
