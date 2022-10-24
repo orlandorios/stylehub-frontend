@@ -13,10 +13,11 @@ import RadioGroup from '@mui/material/RadioGroup';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import axios from 'axios'
+import { SearchBar } from './SearchBar';
 
 
 
-export const Closet = ({currOutfit, token}) => {
+export const Closet = ({currOutfit, setCurrOutfit, setLoading, token}) => {
     const [items, setItems] = useState([])
     const [selectedCat, setSelectedCat] = useState("");
     const [selectedSubCat, setSelectedSubCat] = useState('');
@@ -190,8 +191,13 @@ return (
             <MenuItem value='multi'>multi</MenuItem>
         </Select>
     </FormControl>
-</div>
-    <ShowItems items={items}/>   
+
+    <SearchBar setItems={setItems} token={ token }/>
+
+    <div className="items-container">
+    <ShowItems items={items} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token}/>
+    </div>      
+    </div>
 </>
 )
 }
