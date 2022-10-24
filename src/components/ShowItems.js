@@ -54,37 +54,40 @@ const handleAddItem = (newItem) => {
             },
         })
         .then((res) => {
-            console.log(res.data)
+            let newOutfit = res.data
+            newOutfit.closet_item = newItem
+            setCurrOutfit(newOutfit)
         })
         .catch((err) => console.error(err))
     } else {
         console.log(`currOutfit`)
         console.log(currOutfit)
-        // const outfitItems = currOutfit.closet_item
-        // console.log(`outfitItems`)
-        // console.log(outfitItems)
-        // const updatedOutfitItems = outfitItems.push(newItem)
-        // console.log(`updatedOutfitItems`)
-        // console.log(updatedOutfitItems)
-        // const updatedOutfitItemIDs = updatedOutfitItems.map(object => object.id)
-        // console.log(`updatedOutfitItemIDs`)
-        // console.log(updatedOutfitItemIDs)
+        const outfitItems = currOutfit.closet_item
+        console.log(`outfitItems`)
+        console.log(outfitItems)
+        const outfitItemsArray = Array.isArray(outfitItems) ? outfitItems : [outfitItems]
+        const updatedOutfitItems = [ ...outfitItemsArray, newItem]
+        console.log(`updatedOutfitItems`)
+        console.log(updatedOutfitItems)
+        const updatedOutfitItemIDs = updatedOutfitItems.map(object => object.id)
+        console.log(`updatedOutfitItemIDs`)
+        console.log(updatedOutfitItemIDs)
 
-        // axios
-        // .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
-        // {
-        //     closet_item: updatedOutfitItemIDs,
-        // },{
-        //     headers : {
-        //         Authorization: `Token ${token}`,
-        //     },
-        // })
-        // .then((res) => {
-        //     let outfitUpdate = res.data
-        //     outfitUpdate.closet_item = updatedOutfitItems
-        //     setCurrOutfit(outfitUpdate)
-        // })
-        // .catch((err) => console.error(err))
+        axios
+        .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+        {
+            closet_item: updatedOutfitItemIDs,
+        },{
+            headers : {
+                Authorization: `Token ${token}`,
+            },
+        })
+        .then((res) => {
+            let outfitUpdate = res.data
+            outfitUpdate.closet_item = updatedOutfitItems
+            setCurrOutfit(outfitUpdate)
+        })
+        .catch((err) => console.error(err))
     }
 }
 
@@ -106,7 +109,7 @@ return (
                 { expanded ? ( tag ? <p>{tag}</p> : '') : ''}
                 {/* tags might be an array or items, might need to map? */}
                 <Fab
-                // component={Link} to="/current-outfit"
+                component={Link} to="/current-outfit"
                 position="absolute"
                 align="center"
                 style={{ color: "white", backgroundColor: "#9cc4d9",}}
@@ -115,7 +118,6 @@ return (
                 aria-label="add"
                 onClick={() => {
                     handleAddItem(item)
-                    // setSelectedItem(item)
                 }}
                 >
                 <AddCircleIcon></AddCircleIcon> 
