@@ -40,7 +40,6 @@ export const ViewOutfits = ({token}) => {
     if(outfits) {
         return(
             <div>
-            <h1>My Outfits</h1>
             <Grid2 container rowGap={2} columnGap={2}>
                 {outfits.map((outfit) => (
                     <Grid2 xs={3.5} key={outfit.id}>
