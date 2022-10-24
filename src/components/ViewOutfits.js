@@ -22,7 +22,7 @@ import { ImageList } from "@mui/material";
 import { ImageListItem } from "@mui/material";
 
 
-export const ViewOutfits = ({token}) => {
+export const ViewOutfits = ({token, currOutfit, setCurrOutfit}) => {
     const url = 'https://stylehub.herokuapp.com/myoutfits/'
     const [outfits, setOutfits] = useState(null);
 
@@ -35,9 +35,44 @@ export const ViewOutfits = ({token}) => {
         })
         .then((res) => {
         let allOutfits = res.data
-        let savedOutfits = allOutfits.filter(outfit => outfit.draft !== false)
+        let savedOutfits = allOutfits.filter(outfit => outfit.draft === false)
         setOutfits(savedOutfits)})
     }, [token])
+
+    const handleEdit = (outfit) => {
+        // Checks if there is already an outfit being edited
+        if (Object.keys(currOutfit).length !== 0) {
+            // Move current outfit out of drafts
+            axios
+            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+            {
+                draft: false,
+            },{
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            })
+            .then((res) => {
+                setCurrOutfit({})
+            })
+            .catch((err) => console.error(err))
+        }
+
+        // Move desired outfit to drafts
+        axios
+            .patch(`https://stylehub.herokuapp.com/outfit/${outfit.id}`,
+            {
+                draft: true,
+            },{
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            })
+            .then((res) => {
+                setCurrOutfit({outfit})
+            })
+            .catch((err) => console.error(err))
+    }
 
     if(outfits) {
         return(
@@ -65,6 +100,9 @@ export const ViewOutfits = ({token}) => {
                     ))}
                     </ImageList>
                     {outfit.title}
+                    <div onClick={() => handleEdit(outfit)}>
+                        <Button variant="contained">Edit</Button>
+                    </div>
                     </CardContent>
                     </CardActionArea>
                     </Card>
