@@ -25,21 +25,22 @@ export const SearchBar =
     }
 
     return(
-        <>
-        <form onSubmit={handleSearchCloset}>
-        <label htmlFor='search'>Search Closet: </label>
+        <div>
+        <form onSubmit={handleSearchCloset}
+        style={{marginBottom: 10}}>
         <input
             type='text'
             id='search'
+            placeholder="search closet items"
             value={searchText}
             onChange = {(e) => setSearchText(e.target.value)}
         ></input>
-        <Button variant='contained' component='label'>
+        {/* <Button variant='contained' component='label'>
             Search
             <input hidden type='submit'
             value='Search' />
-        </Button>
+        </Button> */}
         </form>
-        </>
+        </div>
     )
 }
