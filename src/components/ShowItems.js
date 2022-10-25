@@ -151,7 +151,7 @@ const ExpandMore = styled((props) => {
             />
 
             <Typography variant="body2" color="text.secondary">
-                {brand} {subcategory}
+                {/* {brand} {subcategory} */}
             </Typography>
             
             <CardActions disableSpacing>
@@ -186,20 +186,73 @@ const ExpandMore = styled((props) => {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-                <Typography>
+                <Typography
+                fontWeight='bold'>
                 category <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {category} <br></br> <br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 subcategory <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {subcategory} <br></br><br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 color <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {color} <br></br><br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 size <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {size} <br></br><br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 material <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {material} <br></br><br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 brand <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {brand} <br></br><br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 source <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {source} <br></br><br></br>
                 </Typography>
 

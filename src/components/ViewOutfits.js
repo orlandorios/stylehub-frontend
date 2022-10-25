@@ -145,7 +145,7 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit}) => {
                         </CardContent>
 
             <Typography variant="body2" color="text.secondary">
-            {outfit.title}
+            {/* {outfit.title} */}
         </Typography>
 
             <CardActions disableSpacing>
