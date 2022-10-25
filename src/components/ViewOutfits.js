@@ -53,25 +53,39 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit}) => {
                 },
             })
             .then((res) => {
-                setCurrOutfit({})
-            })
-            .catch((err) => console.error(err))
-        }
+                // Move desired outfit to drafts
+                axios
+                    .patch(`https://stylehub.herokuapp.com/outfit/${outfit.id}`,
+                    {
+                        draft: true,
+                    },{
+                        headers: {
+                            Authorization: `Token ${token}`,
+                        },
+                    })
+                    .then((res) => {
+                        setCurrOutfit(outfit)
+                    })
+                    .catch((err) => console.error(err))
+                    })
+                    .catch((err) => console.error(err))
+        } else {
 
-        // Move desired outfit to drafts
-        axios
-            .patch(`https://stylehub.herokuapp.com/outfit/${outfit.id}`,
-            {
-                draft: true,
-            },{
-                headers: {
-                    Authorization: `Token ${token}`,
-                },
-            })
-            .then((res) => {
-                setCurrOutfit({outfit})
-            })
-            .catch((err) => console.error(err))
+            // Move desired outfit to drafts
+            axios
+                .patch(`https://stylehub.herokuapp.com/outfit/${outfit.id}`,
+                {
+                    draft: true,
+                },{
+                    headers: {
+                        Authorization: `Token ${token}`,
+                    },
+                })
+                .then((res) => {
+                    setCurrOutfit(outfit)
+                })
+                .catch((err) => console.error(err))
+        }
     }
 
     if(outfits) {

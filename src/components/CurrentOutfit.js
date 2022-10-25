@@ -18,7 +18,13 @@ import { WithContext as ReactTags } from 'react-tag-input';
 
 
 export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, token }) => {
-    const [name, setName] = useState(currOutfit.title)
+    // replace null with empty string
+    let storedName = currOutfit.title
+    if (storedName === null) {
+        storedName = ""
+    }
+
+    const [name, setName] = useState(storedName)
     const debouncedName = useDebounce(name, 500)
 
     console.log(`Current Outfit`)
