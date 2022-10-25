@@ -17,7 +17,7 @@ import axios from 'axios';
 import { ViewOutfit } from './components/ViewOutfit';
 import useLocalStorageState from 'use-local-storage-state';
 import { ProtectedRoutes } from './components/ProtectedRoutes';
-
+import { ClosetComp } from './components/ClosetComp';
 
 function App() {
   const [currOutfit, setCurrOutfit] = useState({})
@@ -71,6 +71,7 @@ const isLoggedIn = username && token
             <Route path="user/1" element={<Profile />} />
             <Route path="outfits" element={<ViewOutfits token={token}/>} />
             <Route path="outfit/:id" element={<ViewOutfit token={token}/>} />
+            <Route path="closet-composition" element={<ClosetComp token={token} loading={loading} setLoading={setLoading} />} />
           </Route>
         </Routes>
       {isLoggedIn && (
