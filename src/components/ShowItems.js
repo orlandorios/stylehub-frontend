@@ -22,6 +22,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Add, Edit , Delete} from '@mui/icons-material'
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -68,11 +69,11 @@ const [expanded, setExpanded] = useState(false)
 const [selectedItem, setSelectedItem] = useState(null)
 const [open, setOpen] = React.useState(false);
 
-const handleClick = (item) => {
-    setExpanded(!expanded)
-    setSelectedItem(item)
-    console.log(selectedItem)
-}  
+// const handleClick = (item) => {
+//     setExpanded(!expanded)
+//     setSelectedItem(item)
+//     console.log(selectedItem)
+// }  
 const handleAddItem = (newItem) => {
     // console.log(newItem.id)
     if (Object.keys(currOutfit).length === 0) {
@@ -89,6 +90,7 @@ const handleAddItem = (newItem) => {
             let newOutfit = res.data
             newOutfit.closet_item = [newItem]
             setCurrOutfit(newOutfit)
+            console.log(res.data)
         })
         .catch((err) => console.error(err))
     } else {
@@ -175,22 +177,43 @@ const ExpandMore = styled((props) => {
         
 
     return (
-        <Card sx={{ maxWidth: 150 }}>
+        <div>
+            <Grid2
+            justifyContent="center"
+            container 
+            rowGap={1} 
+            columnGap={1}
+            >
+            <Grid2 xs={11.5}>
+            <Card
+            sx={{ maxWidth: 150 }}>
             <CardMedia
             component="img"
             height="194"
             image={image}
             alt={"Image for " + title}
             />
-            <CardContent>
+
             <Typography variant="body2" color="text.secondary">
-                {item.title}
+                {/* {brand} {subcategory} */}
             </Typography>
-        </CardContent>
+            
             <CardActions disableSpacing>
-            <IconButton aria-label="add-item" onClick={() => handleAddItem(item)}>
+
+                {currOutfit.closet_item?.includes(item) ? 
+            <IconButton           
+            aria-label="add-item"
+            >
+                <LibraryAddCheckIcon />
+            </IconButton> :
+                
+            <IconButton 
+            onClick={() => {handleAddItem(item)}}
+            aria-label="add-item"
+            >
                 <LibraryAddIcon />
             </IconButton>
+            }
 
             <IconButton aria-label="delete-item" onClick={handleClickOpen}>
                 <Delete />
@@ -228,25 +251,82 @@ const ExpandMore = styled((props) => {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-                <Typography>
+                <Typography
+                fontWeight='bold'>
                 category <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {category} <br></br> <br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 subcategory <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {subcategory} <br></br><br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 color <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {color} <br></br><br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 size <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {size} <br></br><br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 material <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {material} <br></br><br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 brand <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {brand} <br></br><br></br>
+                </Typography>
+
+                <Typography
+                fontWeight='bold'>
                 source <br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
                 {source} <br></br><br></br>
                 </Typography>
 
             </CardContent>
             </Collapse>
         </Card>
+        </Grid2>
+        </Grid2>
+        
+        </div>
     );
 }

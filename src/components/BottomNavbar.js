@@ -7,62 +7,89 @@ import IconButton from '@mui/material/IconButton';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
+import DryCleaningIcon from '@mui/icons-material/DryCleaning';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { Link } from 'react-router-dom';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import RestoreIcon from '@mui/icons-material/Restore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { Paper } from '@mui/material';
+import PersonIcon from '@mui/icons-material/Person';
+import { Person } from '@mui/icons-material';
+import PieChartIcon from '@mui/icons-material/PieChart';
+import DonutSmallIcon from '@mui/icons-material/DonutSmall';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import DoorSlidingIcon from '@mui/icons-material/DoorSliding';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 export const BottomNavbar = () => {
 
-    const StyledFab = styled(Fab)({
-        position: 'absolute',
-        zIndex: 1,
-        top: -15,
-        left: 0,
-        right: 0,
-        margin: '0 auto',
-    });
+    const [value, setValue] = React.useState(0); 
 
     return (
 
-    <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{ flexGrow: 1 }}>
         <AppBar
             position="fixed" 
-            sx={{ bgcolor: "#b19cd9", top: 'auto', bottom: 0, }}>
+            sx={{ bgcolor: "white", top: 'auto', bottom: 0, }}>
 
         <Toolbar>
 
-            <Fab
-                component={Link} to="/outfits"
-                style={{ color: "white", backgroundColor: "#9cc4d9" }}
-                sx={{ borderRadius: 20, }}
-                size="small"
-                variant="contained">
-                <CheckroomIcon 
-                fontSize="medium"/>
-            </Fab>
+        <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+        <BottomNavigation
+                sx={{
+                    "& .Mui-selected, .Mui-selected > svg": {
+                    color: " #b19cd9"
+                    }
+                }}
+            showLabels
+            value={value}
+            onChange={(event, newValue) => {
+                setValue(newValue);
+            }}
+        >
+            <BottomNavigationAction 
+            component={Link} to='/closet'
+            label="Closet"
+            icon={<DoorSlidingIcon />} 
+            />
 
-            <StyledFab
-                component={Link} to="/current-outfit"
-                position="absolute"
-                align="center"
-                style={{ color: "white", backgroundColor: "#9cc4d9",}}
-                sx={{ borderRadius: 20, margin: '0 auto', }}
-                variant="contained"
-                aria-label="add">
-                <AddIcon /> 
-            </StyledFab>
+            <BottomNavigationAction 
+            // component={Link} to=''
+            label="Stats" 
+            icon={<DonutSmallIcon />} 
+            />
 
-            <Box sx={{ flexGrow: 1 }} />
-            <Fab
-                component={Link} to="/user"
-                style={{backgroundColor: "#9cc4d9"}}
-                variant="contained"
-                size="small">
-                <AccountCircleOutlinedIcon
-                style={{color: "white" , backgroundColor: "#9cc4d9"}}
-                sx={{ borderRadius: 20 }}
-                fontSize="large"
-                />
-            </Fab>
+
+            <BottomNavigationAction 
+            component={Link} to='/current-outfit'
+            label="Current Outfit" 
+            icon={<CheckroomIcon />} />
+
+            <BottomNavigationAction 
+            component={Link} to='/outfits'
+            label="Outfits"
+            icon={<DryCleaningIcon />} 
+            />
+
+            <BottomNavigationAction 
+            component={Link} to='/add-item'
+            // sx={{ margin: -2.5 }}
+            fontSize='large'
+            label="Add Item"
+            icon={<AddAPhotoIcon />} 
+            />
+
+            {/* <BottomNavigationAction 
+            component={Link} to='/user'
+            label="Account" 
+            icon={<PersonIcon />} 
+            /> */}
+        
+        </BottomNavigation>
+        </Paper>
 
         </Toolbar>
         </AppBar>
