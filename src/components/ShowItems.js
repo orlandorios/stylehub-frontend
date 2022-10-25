@@ -19,13 +19,21 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
-import { Add, Edit } from '@mui/icons-material'
+import { Add, Edit , Delete} from '@mui/icons-material'
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
-export const ShowItems = ({items, currOutfit, setCurrOutfit, setLoading, token}) => {
+
+export const ShowItems = ({items, setItems, url, currOutfit, setCurrOutfit, setLoading, token}) => {
     return (
         <div>
             <div className='item-list'>
@@ -46,6 +54,8 @@ export const ShowItems = ({items, currOutfit, setCurrOutfit, setLoading, token})
                         currOutfit={currOutfit}
                         setCurrOutfit={setCurrOutfit}
                         setLoading={setLoading}
+                        setItems={setItems}
+                        url={url}
                         token={token}
                         />
                     </div>
@@ -54,9 +64,10 @@ export const ShowItems = ({items, currOutfit, setCurrOutfit, setLoading, token})
         </div>
     )}
 
-const Item = ({item, title, category, subcategory, color, size, material, source, brand, tag, image, currOutfit, setCurrOutfit, setLoading, token}) => {
+const Item = ({item, title, category, subcategory, color, size, material, source, brand, tag, image, currOutfit, setCurrOutfit, setLoading, setItems, url, token}) => {
 const [expanded, setExpanded] = useState(false)
 const [selectedItem, setSelectedItem] = useState(null)
+const [open, setOpen] = React.useState(false);
 
 // const handleClick = (item) => {
 //     setExpanded(!expanded)
@@ -117,6 +128,30 @@ const handleAddItem = (newItem) => {
     }
 }
 
+const handleDeleteItem = (deletedItem) => {
+    console.log(deletedItem)
+    axios
+        .delete(`https://stylehub.herokuapp.com/closet-item/${deletedItem.id}`,
+        {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        })
+        .then((res) => {
+            axios
+            .get(url,
+            {
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            })
+            .then((res) => setItems(res.data))
+        })
+        .catch((err) => console.error(err))
+
+    // Redisplay items so deleted item is removed
+}
+
 const ExpandMore = styled((props) => {
         const { expand, ...other } = props;
         return <IconButton {...other} />;
@@ -131,6 +166,15 @@ const ExpandMore = styled((props) => {
         const handleExpandClick = () => {
         setExpanded(!expanded);
         };
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+        
+    const handleClose = () => {
+        setOpen(false);
+    };
+        
 
     return (
         <div>
@@ -155,9 +199,9 @@ const ExpandMore = styled((props) => {
             </Typography>
             
             <CardActions disableSpacing>
+
                 {currOutfit.closet_item?.includes(item) ? 
-            <IconButton
-            onClick={() => {handleAddItem(item)}}
+            <IconButton           
             aria-label="add-item"
             >
                 <LibraryAddCheckIcon />
@@ -171,10 +215,31 @@ const ExpandMore = styled((props) => {
             </IconButton>
             }
 
-            <IconButton aria-label="edit-item">
-                <Edit />
+            <IconButton aria-label="delete-item" onClick={handleClickOpen}>
+                <Delete />
             </IconButton>
-            
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                Are you sure you want to delete?
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={() => {
+                    handleDeleteItem(item)
+                    handleClose()
+                    }} autoFocus>
+                    Delete
+                </Button>
+                </DialogActions>
+            </Dialog>
+
             <ExpandMore
                 expand={expanded}
                 onClick={handleExpandClick}
