@@ -13,32 +13,32 @@ constructor(props) {
                 {
                     name: this.props.comp.brand_percentages[0].brand,
                     y: this.props.comp.brand_percentages[0].item_count,
-                    brand: '#f6acfc'
+                    color: '#f6acfc'
                 },
                 {
                     name: this.props.comp.brand_percentages[1].brand,
                     y: this.props.comp.brand_percentages[1].item_count,
-                    brand: '#a5f2b6'
+                    color: '#a5f2b6'
                 },
                 {
                     name: this.props.comp.brand_percentages[2].brand,
                     y: this.props.comp.brand_percentages[2].item_count,
-                    brand: '#bba5f2'
+                    color: '#bba5f2'
                 },
                 {
                     name: this.props.comp.brand_percentages[3].brand,
                     y: this.props.comp.brand_percentages[3].item_count,
-                    brand: '#faf378'
+                    color: '#faf378'
                 },
                 {
                     name: this.props.comp.brand_percentages[4].brand,
                     y: this.props.comp.brand_percentages[4].item_count,
-                    brand: '#89d3fa'
+                    color: '#89d3fa'
                 },
                 {
                     name: this.props.comp.brand_percentages[5].brand,
                     y: this.props.comp.brand_percentages[5].item_count,
-                    brand: '#787e82'
+                    color: '#787e82'
                 }
             ]
         }]
