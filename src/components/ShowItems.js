@@ -30,6 +30,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -65,6 +66,7 @@ export const ShowItems = ({items, setItems, url, currOutfit, setCurrOutfit, setL
     )}
 
 const Item = ({item, title, category, subcategory, color, size, material, source, brand, tag, image, currOutfit, setCurrOutfit, setLoading, setItems, url, token}) => {
+const navigate = useNavigate()
 const [expanded, setExpanded] = useState(false)
 const [selectedItem, setSelectedItem] = useState(null)
 const [open, setOpen] = React.useState(false);
@@ -91,6 +93,7 @@ const handleAddItem = (newItem) => {
             newOutfit.closet_item = [newItem]
             setCurrOutfit(newOutfit)
             console.log(res.data)
+            navigate('/current-outfit')
         })
         .catch((err) => console.error(err))
     } else {
@@ -123,6 +126,7 @@ const handleAddItem = (newItem) => {
             console.log(outfitUpdate)
             setCurrOutfit(outfitUpdate)
             setLoading(false)
+            navigate('/current-outfit')
         })
         .catch((err) => console.error(err))
     }

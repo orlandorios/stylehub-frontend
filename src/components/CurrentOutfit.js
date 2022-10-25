@@ -19,12 +19,14 @@ import { WithContext as ReactTags } from 'react-tag-input';
 
 export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, token }) => {
     // replace null with empty string
+    console.log("ehrer" + currOutfit.title)
     let storedName = currOutfit.title
     if (storedName === null) {
+        console.log("sdfdsfds")
         storedName = ""
     }
-
-    const [name, setName] = useState(storedName)
+    console.log(currOutfit?.title + "why is this null")
+    const [name, setName] = useState(currOutfit?.title || "")
     const debouncedName = useDebounce(name, 500)
 
     console.log(`Current Outfit`)
@@ -126,7 +128,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
             for (const tag of tags) {
                 tagsToPost.push(tag.id)
             }
-
+            console.log(tagsToPost)
             let currOutfitData = currOutfit
             currOutfitData.tag = tagsToPost
 

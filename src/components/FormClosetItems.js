@@ -169,7 +169,7 @@ export const FormClosetItem = ({token}) => {
         <>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <div><label htmlFor='category'>1. What category is it? </label></div>
+                    <div><label htmlFor='category'>What category is it? </label></div>
                     <div><select name='category' id='category' onChange = {(e) => handleChange('category', e)} required>
                         <option value=''>--Select a category--</option>
                         <option value='top'>Top</option>
@@ -178,13 +178,13 @@ export const FormClosetItem = ({token}) => {
                         <option value='shoes'>Shoes</option>
                     </select></div>
 
-                    <div><label htmlFor='subcategory'>2. What subcategory is it? </label></div>
+                    <div><label htmlFor='subcategory'>What subcategory is it? </label></div>
                     <div><select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required disabled={category === '' ? true: false}>
                         <option value=''>--Select a subcategory--</option>
                         {getSubcat(category)}
                     </select></div>
 
-                    <div><label htmlFor='photo'>2. Upload a photo:</label></div>
+                    <div><label htmlFor='photo'>Upload a photo:</label></div>
                     <IconButton color="primary" aria-label="upload picture" component="label" type='button'>
                         <input
                             hidden
@@ -203,7 +203,7 @@ export const FormClosetItem = ({token}) => {
                     </IconButton>
                     <div><img id='preview' alt='' width='100rem' /></div>
 
-                    <div>3. Add info about the item.</div>
+                    <div>Additional information info about the item.</div>
                     <div><label htmlFor='size'>Size: </label></div>
                     <div><input
                         type='text'
@@ -261,7 +261,7 @@ export const FormClosetItem = ({token}) => {
                         required
                     ></input></div>
 
-                    <div>4. Add tags:</div>
+                    <div>Tags:</div>
                     <ReactTags
                     tags={tags}
                     suggestions={suggestions}

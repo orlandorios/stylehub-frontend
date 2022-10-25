@@ -61,7 +61,7 @@ const isLoggedIn = username && token
       {isLoggedIn && (
       <TopNavbar />
       )}
-        <Routes>
+        {!loading && (<Routes>
           <Route index element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn}  />} /> 
           <Route path="*" element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn} />} />
           <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}>
@@ -69,10 +69,10 @@ const isLoggedIn = username && token
             <Route path="add-item" element={<AddClosetItem token={token} />} />
             <Route path="current-outfit" element={<CurrentOutfit currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} loading={loading} setLoading={setLoading} token={token} />} />
             <Route path="user" element={<Profile setAuth={setAuth} token={token} />} />
-            <Route path="outfits" element={<ViewOutfits token={token} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} />} />
+            <Route path="outfits" element={<ViewOutfits token={token} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading}/>} />
             <Route path="outfit/:id" element={<ViewOutfit token={token}/>} />
           </Route>
-        </Routes>
+        </Routes>)}
       {isLoggedIn && (
       <BottomNavbar />
       )}
