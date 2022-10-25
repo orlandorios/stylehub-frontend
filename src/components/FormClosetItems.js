@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import { PhotoCamera } from "@mui/icons-material";
 import { SaveButton } from "./SaveButton";
 import loadImage from "blueimp-load-image";
+import TextField from '@mui/material/TextField';
 
 
 export const FormClosetItem = ({token}) => {
@@ -170,7 +171,7 @@ export const FormClosetItem = ({token}) => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <div><label htmlFor='category'>What category is it? </label></div>
-                    <div><select name='category' id='category' onChange = {(e) => handleChange('category', e)} required>
+                    <div className='form-input'><select name='category' id='category' onChange = {(e) => handleChange('category', e)} required>
                         <option value=''>--Select a category--</option>
                         <option value='top'>Top</option>
                         <option value='outerwear'>Outerwear</option>
@@ -203,18 +204,27 @@ export const FormClosetItem = ({token}) => {
                     </IconButton>
                     <div><img id='preview' alt='' width='100rem' /></div>
 
-                    <div>Additional information info about the item.</div>
-                    <div><label htmlFor='size'>Size: </label></div>
-                    <div><input
+                    <div>Additional information</div>
+                    <div>
+                        <label htmlFor='size'>Size </label> 
+                        <input
                         type='text'
                         id='size'
                         value={size}
                         onChange = {(e) => setSize(e.target.value)}
                         required
-                    ></input></div>
-
-                    <div><label htmlFor='color'>Color: </label></div>
-                    <div><select name='colors' id='color' onChange = {(e) => handleChange('color', e)} required>
+                        ></input>
+                    </div>
+                    {/* <TextField
+                            required
+                            id="outlined-required"
+                            label="Size"
+                            value={size}
+                            onChange = {(e) => setSize(e.target.value)}
+                            /> */}
+                    <div>
+                        <label htmlFor='color'>Color </label> 
+                        <select name='colors' id='color' onChange = {(e) => handleChange('color', e)} required>
                         <option value=''>--Select a color--</option>
                         <option value='white'>White</option>
                         <option value='green'>Green</option>
@@ -229,19 +239,23 @@ export const FormClosetItem = ({token}) => {
                         <option value='black'>Black</option>
                         <option value='grey'>Grey</option>
                         <option value='multi'>Multi</option>
-                    </select></div>
+                        </select>
+                    </div>
 
-                    <div><label htmlFor='material'>Material: </label></div>
-                    <div><input
+                    <div>
+                        <label htmlFor='material'>Material </label>
+                        <input
                         type='text'
                         id='material'
                         value={material}
                         onChange = {(e) => setMaterial(e.target.value)}
                         required
-                    ></input></div>
+                        ></input>
+                    </div>
 
-                    <div><label htmlFor='source'>Source: </label></div>
-                    <div><select name='sources' id='source' onChange = {(e) => handleChange('source', e)} required>
+                    <div>
+                        <label htmlFor='source'>Source </label>
+                        <select name='sources' id='source' onChange = {(e) => handleChange('source', e)} required>
                         <option value=''>--Select a source--</option>
                         <option value='brand_store'>Brand Store</option>
                         <option value='department_store'>Department Store</option>
@@ -250,32 +264,37 @@ export const FormClosetItem = ({token}) => {
                         <option value='resale/consignment_shop'>Resale/Consignment Shop</option>
                         <option value='friend'>Friend</option>
                         <option value='other'>Other</option>
-                    </select></div>
+                        </select>
+                    </div>
 
-                    <div><label htmlFor='brand'>Brand: </label></div>
-                    <div><input
+                    <div>
+                        <label htmlFor='brand'>Brand </label>
+                        <input
                         type='text'
                         id='brand'
                         value={brand}
                         onChange = {(e) => setBrand(e.target.value)}
                         required
-                    ></input></div>
+                        ></input>
+                    </div>
 
-                    <div>Tags:</div>
-                    <ReactTags
-                    tags={tags}
-                    suggestions={suggestions}
-                    delimiters={delimiters}
-                    handleDelete={handleDelete}
-                    handleAddition={handleAddition}
-                    handleDrag={handleDrag}
-                    handleTagClick={handleTagClick}
-                    inputFieldPosition="top"
-                    autocomplete
-                    allowDeleteFromEmptyInput={false}
-                    />
+                    <div>
+                        Tags
+                        <ReactTags
+                        tags={tags}
+                        suggestions={suggestions}
+                        delimiters={delimiters}
+                        handleDelete={handleDelete}
+                        handleAddition={handleAddition}
+                        handleDrag={handleDrag}
+                        handleTagClick={handleTagClick}
+                        inputFieldPosition="top"
+                        autocomplete
+                        allowDeleteFromEmptyInput={false}
+                        />
                     <div>
                         <SaveButton />
+                    </div>
                     </div>
                 </div>
             </form>
