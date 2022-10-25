@@ -22,6 +22,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { Add, Edit } from '@mui/icons-material'
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 
 export const ShowItems = ({items, currOutfit, setCurrOutfit, setLoading, token}) => {
@@ -57,11 +58,11 @@ const Item = ({item, title, category, subcategory, color, size, material, source
 const [expanded, setExpanded] = useState(false)
 const [selectedItem, setSelectedItem] = useState(null)
 
-const handleClick = (item) => {
-    setExpanded(!expanded)
-    setSelectedItem(item)
-    console.log(selectedItem)
-}  
+// const handleClick = (item) => {
+//     setExpanded(!expanded)
+//     setSelectedItem(item)
+//     console.log(selectedItem)
+// }  
 const handleAddItem = (newItem) => {
     // console.log(newItem.id)
     if (Object.keys(currOutfit).length === 0) {
@@ -78,6 +79,7 @@ const handleAddItem = (newItem) => {
             let newOutfit = res.data
             newOutfit.closet_item = [newItem]
             setCurrOutfit(newOutfit)
+            console.log(res.data)
         })
         .catch((err) => console.error(err))
     } else {
@@ -131,25 +133,48 @@ const ExpandMore = styled((props) => {
         };
 
     return (
-        <Card sx={{ maxWidth: 150 }}>
+        <div>
+            <Grid2
+            justifyContent="center"
+            container 
+            rowGap={1} 
+            columnGap={1}
+            >
+            <Grid2 xs={11.5}>
+            <Card
+            sx={{ maxWidth: 150 }}>
             <CardMedia
             component="img"
             height="194"
             image={image}
             alt={"Image for " + title}
             />
-            <CardContent>
+
             <Typography variant="body2" color="text.secondary">
-                {item.title}
+                {brand} {subcategory}
             </Typography>
-        </CardContent>
+            
             <CardActions disableSpacing>
-            <IconButton aria-label="add-item">
+                {currOutfit.closet_item?.includes(item) ? 
+            <IconButton
+            onClick={() => {handleAddItem(item)}}
+            aria-label="add-item"
+            >
+                <LibraryAddCheckIcon />
+            </IconButton> :
+                
+            <IconButton 
+            onClick={() => {handleAddItem(item)}}
+            aria-label="add-item"
+            >
                 <LibraryAddIcon />
             </IconButton>
+            }
+
             <IconButton aria-label="edit-item">
                 <Edit />
             </IconButton>
+            
             <ExpandMore
                 expand={expanded}
                 onClick={handleExpandClick}
@@ -181,5 +206,9 @@ const ExpandMore = styled((props) => {
             </CardContent>
             </Collapse>
         </Card>
+        </Grid2>
+        </Grid2>
+        
+        </div>
     );
 }
