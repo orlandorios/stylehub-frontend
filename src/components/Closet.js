@@ -28,12 +28,6 @@ export const Closet = ({currOutfit, setCurrOutfit, setLoading, token}) => {
     const bottomsUrl = 'https://stylehub.herokuapp.com/mycloset-bottoms/'
     const outerUrl = 'https://stylehub.herokuapp.com/mycloset-outerwear/'
     const shoesUrl = 'https://stylehub.herokuapp.com/mycloset-shoes/'
-    const controlProps = (item) => ({
-        checked: selectedCat === item,
-        value: item,
-        name: 'color-radio-button-demo',
-        inputProps: { 'aria-label': item },
-      });
 
 useEffect(() => {
     axios
@@ -45,69 +39,6 @@ useEffect(() => {
     })
     .then((res) => setItems(res.data))
 }, [token, url])
-
-const handleColorChange = (event) => {
-    if (selectedColor === 'All Colors') {
-        setSelectedColor('')
-    }
-    setSelectedColor(event.target.value);
-    console.log(selectedColor)
-    return (filterByColor(items))
-}; 
-
-const filterByColor = (items) => {
-    if (!selectedColor) {
-        return items;
-    }
-    const filteredItems = items.filter(
-        (item) => item.color === selectedColor);
-        console.log(filteredItems)
-        return setItems(filteredItems);
-}
-
-// useEffect(() => {
-//     var filteredData = filterByColor(items);
-//     setItems(filteredData)
-//     console.log(items)
-// }, []);
-
-const handleSubCatChange = (event) => {
-    setSelectedSubCat(event.target.value)
-}
-
-const getSubcat = (selectedCat) => {
-    if (selectedCat === 'tops') {
-        return <>
-            <MenuItem value='button-down'>Button Down</MenuItem>
-            <MenuItem value='dress'>Dress</MenuItem>
-            <MenuItem value='shirt'>Shirt</MenuItem>
-            <MenuItem value='sweater'>Sweater</MenuItem>
-            <MenuItem value='t-shirt'>T-shirt</MenuItem>
-        </>
-    }else if (selectedCat === 'outerwear') {
-        return <>
-            <MenuItem value='cardigan'>Cardigan</MenuItem>
-            <MenuItem value='coat'>Coat</MenuItem>
-            <MenuItem value='jacket'>Jacket</MenuItem>
-            <MenuItem value='vest'>Vest</MenuItem>
-        </>
-    }else if (selectedCat === 'bottoms') {
-        return <>
-            <MenuItem value='pants'>Pants</MenuItem>
-            <MenuItem value='shorts'>Shorts</MenuItem>
-            <MenuItem value='skirt'>Skirt</MenuItem>
-        </>
-    }else if (selectedCat === 'shoes') {
-        return <>
-            <MenuItem value='boots'>Boots</MenuItem>
-            <MenuItem value='flats'>Flats</MenuItem>
-            <MenuItem value='heels'>Heels</MenuItem>
-            <MenuItem value='sandals'>Sandals</MenuItem>
-            <MenuItem value='slippers'>Slippers</MenuItem>
-            <MenuItem value='sneakers'>Sneakers</MenuItem>
-        </>
-    }
-}
 
 const handleAllChange = (event) => {
     setSelectedCat(event.target.value);
@@ -146,51 +77,15 @@ const handleShoesChange = (event) => {
 
 
 return (
-    <> 
+    <div> 
     <Button variant="contained" onClick={handleAllChange} value='all' size="small">All Clothing Items</Button>
 <div className='buttons-box'>
-    <ButtonGroup row variant="contained" aria-label="outlined primary button group">
+    <ButtonGroup variant="contained" aria-label="outlined primary button group">
         <Button onClick={handleTopsChange} value="tops" color="secondary" size="small">Tops</Button>
         <Button onClick={handleBottomsChange} value="bottoms" color="secondary" size="small">Bottoms</Button>
         <Button onClick={handleOuterChange} value="outerwear" color="secondary" size="small">Outerwear</Button>
         <Button onClick={handleShoesChange} value="shoes" color="secondary" size="small">Shoes</Button>
-        
-      </ButtonGroup>
-    <FormControl sx={{ m: 2, minWidth: 150 }}>
-        <InputLabel id='subcategory-select-label'>SubCategory</InputLabel>          <Select 
-        labelId='subcategory-select-label'
-        id='subcategory-select'
-        onChange = {(e) => handleSubCatChange(e)} 
-        required disabled={selectedCat === '' ? true: false}>
-            <MenuItem value=''>All {selectedCat}</MenuItem>
-            {/* {getSubcat(selectedCat)} */}
-        </Select>
-    </FormControl>
-    <FormControl sx={{ m: 2, minWidth: 150 }}>
-        <InputLabel id="color-select-label">Color</InputLabel>
-        <Select
-        labelId="color-select-label"
-        id="color-select"
-        value={selectedColor}
-        label="Color"
-        onChange={handleColorChange}
-        >
-            <MenuItem value='All Colors'>All Colors</MenuItem>
-            <MenuItem value='green'>green</MenuItem>
-            <MenuItem value='turquoise'>turquoise</MenuItem>
-            <MenuItem value='blue'>blue</MenuItem>
-            <MenuItem value='purple'>purple</MenuItem>
-            <MenuItem value='red'>red</MenuItem>
-            <MenuItem value='pink'>pink</MenuItem>
-            <MenuItem value='orange'>orange</MenuItem>
-            <MenuItem value='yellow'>yellow</MenuItem>
-            <MenuItem value='white'>white</MenuItem>
-            <MenuItem value='grey'>grey</MenuItem>
-            <MenuItem value='black'>black</MenuItem>
-            <MenuItem value='brown'>brown</MenuItem>
-            <MenuItem value='multi'>multi</MenuItem>
-        </Select>
-    </FormControl>
+    </ButtonGroup>
 
     <SearchBar setItems={setItems} token={ token }/>
 
@@ -198,6 +93,6 @@ return (
     <ShowItems items={items} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token}/>
     </div>      
     </div>
-</>
+</div>
 )
 }
