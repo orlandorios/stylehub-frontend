@@ -5,20 +5,36 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import navLogo from '../resources/logos/StyleHub-Logo-Black.png'
 import Fab from '@mui/material/Fab';
-import { IconButton } from '@mui/material';
+import { IconButton, Menu } from '@mui/material';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import {Paper} from '@mui/material';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import PersonIcon from '@mui/icons-material/Person';
+import { MenuItem } from '@mui/material';
+
+
 
 
 export const TopNavbar = ({token}) => {
 
-    const [value, setValue] = React.useState(0);
+    const settings = ['Logout'];
     const location = useLocation()
     const {id} = useParams()
+    // const [value, setValue] = React.useState(0);
+
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
+
     
     const getTitle = () => {
 
@@ -73,27 +89,40 @@ export const TopNavbar = ({token}) => {
             {getTitle()}
             </Typography>
 
-            
-            <BottomNavigation
-            sx={{
-                "& .Mui-selected, .Mui-selected > svg": {
-                color: " #b19cd9"
-                }
-            }}
-            showLabels
-            value={value}
-            onChange={(event, newValue) => {
-                setValue(newValue);
-            }}
-        >
-            <BottomNavigationAction 
-            component={Link} to='/user'
-            sx={{ margin: -2.5 }}
+            <Box sx={{flexgrow: 0}}>
+            <IconButton 
+            style={{ color: '#b19cd9'}}
+            onClick={handleOpenUserMenu}
+            sx={{ p: 0,  }}
             fontSize='large'
-            label="User"
-            icon={<PersonIcon />} 
+            label='user'>
+            <PersonIcon 
             />
-            </BottomNavigation>
+            </IconButton>
+
+            <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+            >
+            {settings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">{setting}</Typography>
+                </MenuItem>
+            ))}
+            </Menu>
+            </Box>
             
 
         </Toolbar>
