@@ -78,7 +78,7 @@ return (
     <SearchBar setItems={setItems} token={ token }/>
 
     <div className="items-container">
-    <ShowItems items={items} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token}/>
+    <ShowItems items={items} setItems={setItems} url={url} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token}/>
     </div>      
     </div>
 </div>
