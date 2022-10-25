@@ -14,16 +14,16 @@ import { SaveButton } from "./SaveButton";
 import loadImage from "blueimp-load-image";
 
 
-export const FormClosetItem = ({token, itemCategory, itemSubcategory, itemSize, itemColor, itemSource, itemImage, itemTag, itemMaterial, itemBrand}) => {
-    const [category, setCategory] = useState(itemCategory || '')
-    const [subcategory, setSubcategory] = useState(itemSubcategory || '')
+export const FormClosetItem = ({token}) => {
+    const [category, setCategory] = useState('')
+    const [subcategory, setSubcategory] = useState('')
     const [imgFile, setImgFile] = useState('')
-    const [size, setSize] = useState(itemSize || '')
-    const [color, setColor] = useState(itemColor || '')
-    const [material, setMaterial] = useState(itemMaterial || '')
-    const [source, setSource] = useState(itemSource || '')
-    const [brand, setBrand] = useState(itemBrand || '')
-    const [tagList, setTagList] = useState(itemTag || [])
+    const [size, setSize] = useState('')
+    const [color, setColor] = useState('')
+    const [material, setMaterial] = useState('')
+    const [source, setSource] = useState('')
+    const [brand, setBrand] = useState('')
+    const [tagList, setTagList] = useState([])
 
     const [error, setError] = useState(false)
     const [submitted,setSubmitted] = useState(false)

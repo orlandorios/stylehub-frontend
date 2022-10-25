@@ -191,14 +191,8 @@ const ExpandMore = styled((props) => {
             <IconButton aria-label="add-item" onClick={() => handleAddItem(item)}>
                 <LibraryAddIcon />
             </IconButton>
-            {/* <Link to={"../edit-item/" + item.id}>
-                <IconButton aria-label="edit-item">
-                    <Edit />
-                </IconButton>
-            </Link> */}
 
             <IconButton aria-label="delete-item" onClick={handleClickOpen}>
-                {/* onClick={() => handleDeleteItem(item)} */}
                 <Delete />
             </IconButton>
             <Dialog
@@ -207,9 +201,6 @@ const ExpandMore = styled((props) => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                {/* <DialogTitle id="alert-dialog-title">
-                {"Are you sure you want to delete?"}
-                </DialogTitle> */}
                 <DialogContent>
                 <DialogContentText id="alert-dialog-description">
                 Are you sure you want to delete?

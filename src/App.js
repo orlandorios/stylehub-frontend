@@ -17,7 +17,6 @@ import axios from 'axios';
 import { ViewOutfit } from './components/ViewOutfit';
 import useLocalStorageState from 'use-local-storage-state';
 import { ProtectedRoutes } from './components/ProtectedRoutes';
-import { EditClosetItem } from './components/EditClosetItems'
 
 
 function App() {
@@ -68,7 +67,6 @@ const isLoggedIn = username && token
           <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}>
             <Route path="closet" element={<Closet  currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token} />} />
             <Route path="add-item" element={<AddClosetItem token={token} />} />
-            <Route path="edit-item/:id" element={<EditClosetItem token={token} />} />
             <Route path="current-outfit" element={<CurrentOutfit currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} loading={loading} setLoading={setLoading} token={token} />} />
             <Route path="user" element={<Profile setAuth={setAuth} token={token} />} />
             <Route path="outfits" element={<ViewOutfits token={token} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} />} />
