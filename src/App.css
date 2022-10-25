@@ -81,3 +81,12 @@
   right: 15%;
   bottom: 5%;
 }
+
+#all-button {
+  background-color: #9cc4d9;
+}
+
+.cat-buttons {
+  background-color:  #b19cd9;
+  color: white;
+}
