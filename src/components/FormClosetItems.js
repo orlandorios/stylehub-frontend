@@ -188,7 +188,7 @@ export const FormClosetItem = ({token}) => {
                                 <option value='bottom'>Bottom</option>
                                 <option value='shoes'>Shoes</option>
                             </select>
-                            <label htmlFor='category'>What category is it? </label>
+                            <label htmlFor='category'>Category </label>
                         </div>
                     </div>
 
@@ -198,7 +198,7 @@ export const FormClosetItem = ({token}) => {
                         <option value=''>--Select a subcategory--</option>
                         {getSubcat(category)}
                     </select>
-                    <label htmlFor='subcategory'>What subcategory is it? </label>
+                    <label htmlFor='subcategory'>Subcategory </label>
                     </div>
                     </div>
                     <div className='row'>
