@@ -109,10 +109,6 @@
   padding-left: 0.6rem;
 }
 
-.select-group {
-  /* margin-bottom: 0px; */
-}
-
 .select-group > label {
   color: red;
   top: -40px;
@@ -148,6 +144,16 @@
   margin: 0 0 8px 0;
 }
 
+.my-draft-message {
+  font-size: 1rem;
+  padding-left: 0.6rem;
+}
 .my-draft-buttons {
-  
+  padding-left: 7px;
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
+
+.my-draft-delete {
+  padding-left: 15px;
 }

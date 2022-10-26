@@ -1,13 +1,7 @@
-// TODO: Delete button functionality for individual items
-// TODO: Save button should move user to view outfits page
-// TODO: Finalize Tag suggestion list
-// TODO: Look into Axios call error messages when there is no current outfit
-// TODO: Code goes blank when refreshing
 
 // Note: Debounce code for Outfit Name input/API call is based on: https://usehooks.com/useDebounce/
 
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+
 import { SaveButton } from "./SaveButton";
 import { DisplayOutfit } from './DisplayOutfit';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -24,13 +18,11 @@ import DialogContentText from '@mui/material/DialogContentText';
 
 export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, token }) => {
     // replace null with empty string
-    console.log("ehrer" + currOutfit.title)
     let storedName = currOutfit.title
     if (storedName === null) {
-        console.log("sdfdsfds")
         storedName = ""
     }
-    console.log(currOutfit?.title + "why is this null")
+
     const [name, setName] = useState(currOutfit?.title || "")
     const debouncedName = useDebounce(name, 500)
 
@@ -44,8 +36,6 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
         setOpen(false);
     };
 
-    console.log(`Current Outfit`)
-    console.log(currOutfit)
     // 500ms after user stops typing Outfit Name input, API call will save name
     useEffect(() => {
         if (debouncedName) {
@@ -143,11 +133,8 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
             for (const tag of tags) {
                 tagsToPost.push(tag.id)
             }
-            console.log(tagsToPost)
             let currOutfitData = currOutfit
             currOutfitData.tag = tagsToPost
-            console.log(tagsToPost, "dsfsdf")
-            console.log(token)
             axios
             .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
             {
@@ -179,42 +166,49 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
                 {/* Only display if outfit has been started */}
                 {Object.keys(currOutfit).length === 0 ? "" :
                 <>
-                <div><label htmlFor='name'>Outfit Name: </label></div>
-                <div><input
+                <div className='row'>
+                        <div className="input-field col s12">
+                <input
                     type='text'
                     id='name'
                     value={name}
                     onChange = {(e) => setName(e.target.value)}
                     required
-                ></input></div>
+                ></input>
+                <label htmlFor='name'>Outfit Name: </label>
+                </div>
+                </div>
 
-                <div>Add tags:</div>
-                <ReactTags
-                tags={tags}
-                suggestions={suggestions}
-                delimiters={delimiters}
-                handleDelete={handleDelete}
-                handleAddition={handleAddition}
-                handleDrag={handleDrag}
-                handleTagClick={handleTagClick}
-                inputFieldPosition="top"
-                autocomplete
-                allowDeleteFromEmptyInput={false}
-                />
+                <div className='row'>
+                    <div className="col s12">
+                        <label htmlFor='tags'>Tags </label>
+                        <ReactTags
+                        tags={tags}
+                        suggestions={suggestions}
+                        delimiters={delimiters}
+                        handleDelete={handleDelete}
+                        handleAddition={handleAddition}
+                        handleDrag={handleDrag}
+                        handleTagClick={handleTagClick}
+                        inline
+                        autocomplete
+                        allowDeleteFromEmptyInput={false}
+                        />
+                    </div>
+                </div>
                 </>
                 }
 
-
                 {/* Display depends on whether outfit has been started */}
-                <p>{Object.keys(currOutfit).length === 0 ? "You haven't starting building an outfit yet. " : `You have ${currOutfit.closet_item.length} closet items in your outfit so far. `}
-                <a href='/'>Add items in closet.</a></p>
-
+                <div className='my-draft-message'>{Object.keys(currOutfit).length === 0 ? "Start building a new outfit. " : `You have ${currOutfit.closet_item.length} closet items in your outfit so far. `}
+                <a href='/'>Add items in closet.</a></div>
 
                 {/* Only display if outfit has been started */}
                 {Object.keys(currOutfit).length === 0 ? "" :
                 <><div>
                     <DisplayOutfit token={token} outfit={currOutfit} location='editOutfit' setCurrOutfit={setCurrOutfit} />
                 </div>
+
                 <div className='my-draft-buttons'>
                     <span onClick={
                         () => {
@@ -223,7 +217,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
                     }>
                         <SaveButton />
                     </span>
-                    <span  onClick={(e) => {
+                    <span className='my-draft-delete' onClick={(e) => {
                     handleClickOpen()
                     e.preventDefault()
                     }}>
@@ -272,7 +266,6 @@ function updateName(nameInput, currOutfit, token) {
             },
         })
         .then((res) => {
-            // console.log(res.data)
         })
         .catch((err) => console.error(err))
 }
