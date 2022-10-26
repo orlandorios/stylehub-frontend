@@ -128,7 +128,6 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit, setLoading}) => {
         
         return(
             <div>
-                {console.log(currOutfit)}
             <Grid2
             justifyContent="center"
             container 
@@ -205,8 +204,6 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit, setLoading}) => {
                 fontWeight='bold'>
                 {outfit.title} <br></br>
                 <br></br>
-                {/* Outfit created <br></br>
-                {outfit.outfit_date} <br></br> */}
                 </Typography>
 
             </CardContent>

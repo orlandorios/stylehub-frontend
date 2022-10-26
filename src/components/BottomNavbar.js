@@ -57,7 +57,7 @@ export const BottomNavbar = () => {
             />
 
             <BottomNavigationAction 
-            // component={Link} to=''
+            component={Link} to='/closet-composition'
             label="Stats" 
             icon={<DonutSmallIcon />} 
             />
