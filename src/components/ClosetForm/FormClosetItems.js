@@ -164,7 +164,7 @@ export const FormClosetItem = ({token}) => {
     }, [category]);
 
     return(
-        <>
+        <div className="form-container">
             <form onSubmit={handleSubmit}>
                 <div>
                     <div className='add-item-instr'>Enter your closet item information.</div>
@@ -302,6 +302,7 @@ export const FormClosetItem = ({token}) => {
                             <label htmlFor='tags'>Tags </label>
                             <ReactTags
                                 tags={tags}
+                                autofocus={false}
                                 suggestions={suggestions}
                                 delimiters={delimiters}
                                 handleDelete={handleDelete}
@@ -320,7 +321,7 @@ export const FormClosetItem = ({token}) => {
 
                 </div>
             </form>
-        </>
+        </div>
     )
 }
 
