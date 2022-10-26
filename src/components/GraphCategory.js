@@ -29,7 +29,7 @@ constructor(props) {
                 {
                     name: this.props.comp.category_percentages[3].category,
                     y: this.props.comp.category_percentages[3].item_count,
-                    c: '#faf378'
+                    color: '#faf378'
                 }
             ]
         }]
