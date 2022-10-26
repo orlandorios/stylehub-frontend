@@ -14,22 +14,22 @@ constructor(props) {
                 {
                     name: this.props.comp.category_percentages[0].category,
                     y: this.props.comp.category_percentages[0].item_count,
-                    color: '#51dbed'
+                    color: '#f6acfc'
                 },
                 {
                     name: this.props.comp.category_percentages[1].category,
                     y: this.props.comp.category_percentages[1].item_count,
-                    color: '#ed51ed'
+                    color: '#a5f2b6'
                 },
                 {
                     name: this.props.comp.category_percentages[2].category,
                     y: this.props.comp.category_percentages[2].item_count,
-                    color: '#f3f584'
+                    color: '#bba5f2'
                 },
                 {
                     name: this.props.comp.category_percentages[3].category,
                     y: this.props.comp.category_percentages[3].item_count,
-                    c: '#f58495'
+                    c: '#faf378'
                 }
             ]
         }]
