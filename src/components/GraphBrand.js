@@ -48,23 +48,28 @@ constructor(props) {
 highChartsRender() {
     Highcharts.chart({
         chart: {
+            height: '100%',
             type: 'pie',
             renderTo: 'brand-composition'
         },
+        legend: {
+            labelFormat: '{name}: {percentage: .1f} %'
+        },
         title: {
-            verticalAlign: 'middle',
-            floating: true,
             text: 'Brand Composition',
             style: {
-                forntSize: "10px"
+                fontSize: "3vh"
                 }
             },
             plotOptions: {
                 pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
                     dataLabels: {
-                        format: '{point.name}: {point.percentage: .1f} %'
+                    enabled: false
                     },
-                    innerSize: '70%'
+                    innerSize: '50%',
+                    showInLegend: true
                 }
             },
             series: this.state.series
@@ -77,8 +82,10 @@ componentDidMount() {
 
 render() {
     return (
-     <div id="brand-composition">
-     </div>
+    <div style={{height: '100vw'}}>
+        <div style={{height: '100%'}} id="brand-composition">
+        </div>
+    </div>
     );
 }
 }

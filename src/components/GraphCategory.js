@@ -3,6 +3,7 @@ import Highcharts from 'highcharts'
 import { render } from '@testing-library/react'
 
 
+
 class GraphCategory extends React.Component {
 constructor(props) {
     super(props);
@@ -28,7 +29,7 @@ constructor(props) {
                 {
                     name: this.props.comp.category_percentages[3].category,
                     y: this.props.comp.category_percentages[3].item_count,
-                    color: '#f58495'
+                    c: '#f58495'
                 }
             ]
         }]
@@ -39,22 +40,26 @@ highChartsRender() {
     Highcharts.chart({
         chart: {
             type: 'pie',
-            renderTo: 'category-composition'
+            renderTo: 'category-composition',
+        },
+        legend: {
+            labelFormat: '{name}: {percentage: .1f} %'
         },
         title: {
-            verticalAlign: 'middle',
-            floating: true,
             text: 'Category Composition',
             style: {
-                forntSize: "10px"
+                fontSize: "3vh"
                 }
             },
             plotOptions: {
                 pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
                     dataLabels: {
-                        format: '{point.name}: {point.percentage: .1f} %'
+                    enabled: false
                     },
-                    innerSize: '70%'
+                    innerSize: '50%',
+                    showInLegend: true
                 }
             },
             series: this.state.series
@@ -67,7 +72,9 @@ componentDidMount() {
 
 render() {
     return (
-     <div id="category-composition">
+    <div style={{height: '100vw'}}>
+        <div style={{height: '100%'}}  id="category-composition">
+        </div>
      </div>
     );
 }

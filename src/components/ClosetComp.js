@@ -3,9 +3,6 @@ import { useEffect, useState } from "react"
 import { Box } from "@mui/material"
 import CircularProgress from "@mui/material/CircularProgress"
 import React from "react"
-import { render } from "react-dom"
-import Highcharts from "highcharts"
-import { PieChart } from "highcharts-react-official"
 import GraphColor from './GraphColor'
 import GraphBrand from './GraphBrand'
 import GraphCategory from './GraphCategory'
@@ -38,7 +35,6 @@ axios
         } else {
     return(
         <>
-<p>Closet Comp</p>
 <GraphCategory comp={comp}/>
 <GraphColor comp={comp}/>
 <GraphBrand comp={comp}/>

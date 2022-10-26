@@ -51,20 +51,24 @@ highChartsRender() {
             type: 'pie',
             renderTo: 'source-composition'
         },
+        legend: {
+            labelFormat: '{name}: {percentage: .1f} %'
+        },
         title: {
-            verticalAlign: 'middle',
-            floating: true,
             text: 'Source Composition',
             style: {
-                forntSize: "10px"
+                fontSize: "3vh"
                 }
             },
             plotOptions: {
                 pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
                     dataLabels: {
-                        format: '{point.name}: {point.percentage: .1f} %'
+                    enabled: false
                     },
-                    innerSize: '70%'
+                    innerSize: '50%',
+                    showInLegend: true
                 }
             },
             series: this.state.series
@@ -77,8 +81,10 @@ componentDidMount() {
 
 render() {
     return (
-     <div id="source-composition">
-     </div>
+        <div style={{height: '100vw'}}>
+        <div style={{height: '100%'}}  id="source-composition">
+        </div>
+    </div>
     );
 }
 }
