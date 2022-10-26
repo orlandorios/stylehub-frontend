@@ -31,7 +31,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
     const handleClickOpen = () => {
         setOpen(true);
     };
-        
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -59,7 +59,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
             })
             .catch((err) => console.error(err))
     }
-    
+
     // Clicking delete will delete outfit and change current outfit to empty
     const handleDeleteOutfit = () => {
         axios
@@ -99,27 +99,27 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
         comma: 188,
         enter: 13
     };
-    
+
     const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
     const handleDelete = i => {
         setTags(tags.filter((tag, index) => index !== i));
     };
-    
+
     const handleAddition = tag => {
         setTags([...tags, tag]);
     };
-    
+
     const handleDrag = (tag, currPos, newPos) => {
         const newTags = tags.slice();
-    
+
         newTags.splice(currPos, 1);
         newTags.splice(newPos, 0, tag);
-    
+
         // re-render
         setTags(newTags);
     };
-    
+
     const handleTagClick = index => {
         console.log('The tag at index ' + index + ' was clicked');
     };
@@ -152,7 +152,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
     }, [tags])
 
 
-    // Loading symbol will display until currOutfit API call returns (in App.js) 
+    // Loading symbol will display until currOutfit API call returns (in App.js)
     if (loading) {
         return(
             <Box sx={{ display: 'flex' }}>
@@ -161,7 +161,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
         )
     } else {
         return(
-            <>
+            <div className="outfit-container">
 
                 {/* Only display if outfit has been started */}
                 {Object.keys(currOutfit).length === 0 ? "" :
@@ -171,6 +171,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
                 <input
                     type='text'
                     id='name'
+                    className='input'
                     value={name}
                     onChange = {(e) => setName(e.target.value)}
                     required
@@ -184,6 +185,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
                         <label htmlFor='tags'>Tags </label>
                         <ReactTags
                         tags={tags}
+                        autofocus={false}
                         suggestions={suggestions}
                         delimiters={delimiters}
                         handleDelete={handleDelete}
@@ -205,51 +207,53 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
 
                 {/* Only display if outfit has been started */}
                 {Object.keys(currOutfit).length === 0 ? "" :
-                <><div>
-                    <DisplayOutfit token={token} outfit={currOutfit} location='editOutfit' setCurrOutfit={setCurrOutfit} />
-                </div>
+                  <>
+                  <div>
+                      <DisplayOutfit token={token} outfit={currOutfit} location='editOutfit' setCurrOutfit={setCurrOutfit} />
+                  </div>
 
-                <div className='my-draft-buttons'>
-                    <span onClick={
-                        () => {
-                        handleSubmit()
-                    }
-                    }>
-                        <SaveButton />
-                    </span>
-                    <span className='my-draft-delete' onClick={(e) => {
-                    handleClickOpen()
-                    e.preventDefault()
-                    }}>
-                    <Button type="button" variant="contained" aria-label="delete outfit">
-                        Delete
-                    </Button>
-                    </span>
-                    <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                    Are you sure you want to delete?
-                    </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <div onClick={handleClose}>
-                    <Button type="button" onClick={(e) => e.preventDefault()} >Cancel</Button></div>
-                    <Button type="button" onClick={() => {
-                        handleDeleteOutfit()
-                        handleClose()
-                        }} autoFocus>
-                        Delete
-                    </Button>
-                    </DialogActions>
-                    </Dialog>
-                </div>
-                </>}
-            </>
+                  <div className='my-draft-buttons'>
+                      <span onClick={
+                          () => {
+                          handleSubmit()
+                      }
+                      }>
+                          <SaveButton />
+                      </span>
+                      <span className='my-draft-delete' onClick={(e) => {
+                      handleClickOpen()
+                      e.preventDefault()
+                      }}>
+                      <Button type="button" variant="contained" aria-label="delete outfit">
+                          Delete
+                      </Button>
+                      </span>
+                      <Dialog
+                      open={open}
+                      onClose={handleClose}
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                  >
+                      <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                      Are you sure you want to delete?
+                      </DialogContentText>
+                      </DialogContent>
+                      <DialogActions>
+                          <div onClick={handleClose}>
+                      <Button type="button" onClick={(e) => e.preventDefault()} >Cancel</Button></div>
+                      <Button type="button" onClick={() => {
+                          handleDeleteOutfit()
+                          handleClose()
+                          }} autoFocus>
+                          Delete
+                      </Button>
+                      </DialogActions>
+                      </Dialog>
+                  </div>
+                  </>
+                }
+            </div>
         )
     }
 }

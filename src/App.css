@@ -53,7 +53,7 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  text-align: center;
+  justify-content: center;
 }
 
 .type-choices {
@@ -156,4 +156,8 @@
 
 .my-draft-delete {
   padding-left: 15px;
+}
+
+.closet-container, .form-container, .outfit-container {
+  margin: 0 20px;
 }
