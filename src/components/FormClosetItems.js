@@ -30,6 +30,7 @@ export const FormClosetItem = ({token}) => {
     const [submitted,setSubmitted] = useState(false)
     const navigate = useNavigate()
 
+
     const handleChange = (inputType, event) => {
         if (inputType === 'category') {
             setCategory(event.target.value)
@@ -170,22 +171,30 @@ export const FormClosetItem = ({token}) => {
         <>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <div><label htmlFor='category'>What category is it? </label></div>
-                    <div className='form-input'><select name='category' id='category' onChange = {(e) => handleChange('category', e)} required>
-                        <option value=''>--Select a category--</option>
-                        <option value='top'>Top</option>
-                        <option value='outerwear'>Outerwear</option>
-                        <option value='bottom'>Bottom</option>
-                        <option value='shoes'>Shoes</option>
-                    </select></div>
+                    <div className='row'>
+                        <div className="input-field col s12">
+                            <div className='form-input'><select className="browser-default" name='category' id='category' onChange = {(e) => handleChange('category', e)} required>
+                                <option value=''>--Select a category--</option>
+                                <option value='top'>Top</option>
+                                <option value='outerwear'>Outerwear</option>
+                                <option value='bottom'>Bottom</option>
+                                <option value='shoes'>Shoes</option>
+                            </select></div>
+                            <label htmlFor='category'>What category is it? </label>
+                        </div>
+                    </div>
 
-                    <div><label htmlFor='subcategory'>What subcategory is it? </label></div>
-                    <div><select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required disabled={category === '' ? true: false}>
+                    <div className='row'>
+                        <div className="input-field col s12">
+                    <select className="browser-default" name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required disabled={category === '' ? true: false}>
                         <option value=''>--Select a subcategory--</option>
                         {getSubcat(category)}
-                    </select></div>
+                    </select>
+                    <label htmlFor='subcategory'>What subcategory is it? </label>
+                    </div>
+                    </div>
 
-                    <div><label htmlFor='photo'>Upload a photo:</label></div>
+                    <div className="photo-upload-text"><label htmlFor='photo' className="photo-upload-text">Upload a photo:</label></div>
                     <IconButton color="primary" aria-label="upload picture" component="label" type='button'>
                         <input
                             hidden
@@ -205,15 +214,18 @@ export const FormClosetItem = ({token}) => {
                     <div><img id='preview' alt='' width='100rem' /></div>
 
                     <div>Additional information</div>
-                    <div>
-                        <label htmlFor='size'>Size </label> 
-                        <input
-                        type='text'
-                        id='size'
-                        value={size}
-                        onChange = {(e) => setSize(e.target.value)}
-                        required
-                        ></input>
+                    <div className='row'>
+                        <div className="input-field col s12">
+                            <input
+                            className="validate"
+                            type='text'
+                            id='size'
+                            value={size}
+                            onChange = {(e) => setSize(e.target.value)}
+                            required
+                            ></input>
+                            <label htmlFor='size'>Size </label> 
+                        </div>
                     </div>
                     {/* <TextField
                             required
@@ -222,27 +234,31 @@ export const FormClosetItem = ({token}) => {
                             value={size}
                             onChange = {(e) => setSize(e.target.value)}
                             /> */}
-                    <div>
-                        <label htmlFor='color'>Color </label> 
-                        <select name='colors' id='color' onChange = {(e) => handleChange('color', e)} required>
-                        <option value=''>--Select a color--</option>
-                        <option value='white'>White</option>
-                        <option value='green'>Green</option>
-                        <option value='yellow'>Yellow</option>
-                        <option value='orange'>Orange</option>
-                        <option value='red'>Red</option>
-                        <option value='pink'>Pink</option>
-                        <option value='purple'>Purple</option>
-                        <option value='turquoise'>Turquoise</option>
-                        <option value='blue'>Blue</option>
-                        <option value='brown'>Brown</option>
-                        <option value='black'>Black</option>
-                        <option value='grey'>Grey</option>
-                        <option value='multi'>Multi</option>
-                        </select>
+                    <div className='row'>
+                        <div className="input-field col s12">
+                        
+                            <select className="browser-default" name='colors' id='color' onChange = {(e) => handleChange('color', e)} required>
+                            <option value='' disabled selected>--Select a color--</option>
+                            <option value='white'>White</option>
+                            <option value='green'>Green</option>
+                            <option value='yellow'>Yellow</option>
+                            <option value='orange'>Orange</option>
+                            <option value='red'>Red</option>
+                            <option value='pink'>Pink</option>
+                            <option value='purple'>Purple</option>
+                            <option value='turquoise'>Turquoise</option>
+                            <option value='blue'>Blue</option>
+                            <option value='brown'>Brown</option>
+                            <option value='black'>Black</option>
+                            <option value='grey'>Grey</option>
+                            <option value='multi'>Multi</option>
+                            </select>
+                            <label htmlFor='color'>Color </label> 
+                        </div>
                     </div>
 
-                    <div>
+                    <div className='row'>
+                        <div className="input-field col s12">
                         <label htmlFor='material'>Material </label>
                         <input
                         type='text'
@@ -252,22 +268,26 @@ export const FormClosetItem = ({token}) => {
                         required
                         ></input>
                     </div>
-
-                    <div>
-                        <label htmlFor='source'>Source </label>
-                        <select name='sources' id='source' onChange = {(e) => handleChange('source', e)} required>
-                        <option value=''>--Select a source--</option>
-                        <option value='brand_store'>Brand Store</option>
-                        <option value='department_store'>Department Store</option>
-                        <option value='discount_store'>Discount Store</option>
-                        <option value='thrift_shop'>Thrift Shop</option>
-                        <option value='resale/consignment_shop'>Resale/Consignment Shop</option>
-                        <option value='friend'>Friend</option>
-                        <option value='other'>Other</option>
-                        </select>
                     </div>
 
-                    <div>
+                    <div className='row'>
+                        <div className="input-field col s12">
+                            <select className="browser-default" name='sources' id='source' onChange = {(e) => handleChange('source', e)} required>
+                            <option value=''>--Select a source--</option>
+                            <option value='brand_store'>Brand Store</option>
+                            <option value='department_store'>Department Store</option>
+                            <option value='discount_store'>Discount Store</option>
+                            <option value='thrift_shop'>Thrift Shop</option>
+                            <option value='resale/consignment_shop'>Resale/Consignment Shop</option>
+                            <option value='friend'>Friend</option>
+                            <option value='other'>Other</option>
+                            </select>
+                            <label htmlFor='source'>Source </label>
+                        </div>
+                    </div>
+
+                    <div className='row'>
+                        <div className="input-field col s12">
                         <label htmlFor='brand'>Brand </label>
                         <input
                         type='text'
@@ -276,6 +296,7 @@ export const FormClosetItem = ({token}) => {
                         onChange = {(e) => setBrand(e.target.value)}
                         required
                         ></input>
+                    </div>
                     </div>
 
                     <div>
@@ -288,14 +309,15 @@ export const FormClosetItem = ({token}) => {
                         handleAddition={handleAddition}
                         handleDrag={handleDrag}
                         handleTagClick={handleTagClick}
-                        inputFieldPosition="top"
+                        inline
                         autocomplete
                         allowDeleteFromEmptyInput={false}
                         />
+                    </div>
                     <div>
                         <SaveButton />
                     </div>
-                    </div>
+                    
                 </div>
             </form>
         </>

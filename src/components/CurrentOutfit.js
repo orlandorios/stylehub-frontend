@@ -41,7 +41,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
     // Clicking save will move outfit out of draft (changing current outfit to empty) and navigate user to View Outfit page
     const handleSubmit = () => {
         axios
-            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
             {
                 draft: false,
             },{
@@ -131,9 +131,10 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
             console.log(tagsToPost)
             let currOutfitData = currOutfit
             currOutfitData.tag = tagsToPost
-
+            console.log(tagsToPost, "dsfsdf")
+            console.log(token)
             axios
-            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
             {
                 tag: tagsToPost,
             },{
@@ -222,7 +223,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
 // API call for outfit name
 function updateName(nameInput, currOutfit, token) {
     axios
-        .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+        .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
         {
             title: nameInput,
         },{
