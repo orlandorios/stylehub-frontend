@@ -26,13 +26,13 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 export const BottomNavbar = () => {
 
-    const [value, setValue] = React.useState(0); 
+    const [value, setValue] = React.useState(0);
 
     return (
 
         <Box sx={{ flexGrow: 1 }}>
         <AppBar
-            position="fixed" 
+            position="fixed"
             sx={{ bgcolor: "white", top: 'auto', bottom: 0, }}>
 
         <Toolbar>
@@ -50,44 +50,44 @@ export const BottomNavbar = () => {
                 setValue(newValue);
             }}
         >
-            <BottomNavigationAction 
+            <BottomNavigationAction
             component={Link} to='/closet'
             label="Closet"
-            icon={<DoorSlidingIcon />} 
+            icon={<DoorSlidingIcon />}
             />
 
-            <BottomNavigationAction 
-            // component={Link} to=''
-            label="Stats" 
-            icon={<DonutSmallIcon />} 
+            <BottomNavigationAction
+            component={Link} to='/closet-composition'
+            label="Stats"
+            icon={<DonutSmallIcon />}
             />
 
 
-            <BottomNavigationAction 
+            <BottomNavigationAction
             component={Link} to='/current-outfit'
-            label="My Draft" 
+            label="My Draft"
             icon={<CheckroomIcon />} />
 
-            <BottomNavigationAction 
+            <BottomNavigationAction
             component={Link} to='/outfits'
             label="Outfits"
-            icon={<DryCleaningIcon />} 
+            icon={<DryCleaningIcon />}
             />
 
-            <BottomNavigationAction 
+            <BottomNavigationAction
             component={Link} to='/add-item'
             // sx={{ margin: -2.5 }}
             fontSize='large'
             label="Add Item"
-            icon={<AddAPhotoIcon />} 
+            icon={<AddAPhotoIcon />}
             />
 
-            {/* <BottomNavigationAction 
+            {/* <BottomNavigationAction
             component={Link} to='/user'
-            label="Account" 
-            icon={<PersonIcon />} 
+            label="Account"
+            icon={<PersonIcon />}
             /> */}
-        
+
         </BottomNavigation>
         </Paper>
 
