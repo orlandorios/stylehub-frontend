@@ -34,6 +34,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
+
 export const ShowItems = ({items, setItems, url, currOutfit, setCurrOutfit, setLoading, token, draftItems, setDraftItems}) => {
     return (
         <div>
