@@ -40,7 +40,7 @@ useEffect(() => {
         },
     })
     .then((res) => setItems(res.data))
-    
+
     // 2nd then request to get items in the current outfit
     .then((res) => {
         axios.get(
@@ -54,8 +54,8 @@ useEffect(() => {
         })
         .catch((error) => {
             console.log(error)
-        }) 
-        
+        })
+
     }, [token, url])
 
 
@@ -96,8 +96,8 @@ const handleShoesChange = (event) => {
 
 
 return (
-    <div> 
-    <Button variant="contained" onClick={handleAllChange} value='all' size="small">All Clothing Items</Button>
+    <div className="closet-container">
+    <Button variant="contained" style={{marginBottom: '5px'}} onClick={handleAllChange} value='all' size="small">All Clothing Items</Button>
 <div className='buttons-box'>
     <ButtonGroup variant="contained" aria-label="outlined primary button group">
         <Button onClick={handleTopsChange} value="tops" color="secondary" size="small">Tops</Button>
@@ -110,7 +110,7 @@ return (
 
     <div className="items-container">
     <ShowItems draftItems={draftItems} setDraftItems={setDraftItems} items={items} setItems={setItems} url={url} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token}/>
-    </div>      
+    </div>
     </div>
 </div>
 )
