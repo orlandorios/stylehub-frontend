@@ -15,6 +15,11 @@ import Box from '@mui/material/Box';
 import axios from 'axios';
 import React, { useEffect, useState } from "react"
 import { WithContext as ReactTags } from 'react-tag-input';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
 
 
 export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, token }) => {
@@ -26,6 +31,16 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
 
     const [name, setName] = useState(storedName)
     const debouncedName = useDebounce(name, 500)
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+        
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     console.log(`Current Outfit`)
     console.log(currOutfit)
@@ -189,7 +204,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
 
                 {/* Display depends on whether outfit has been started */}
                 <p>{Object.keys(currOutfit).length === 0 ? "You haven't starting building an outfit yet. " : `You have ${currOutfit.closet_item.length} closet items in your outfit so far. `}
-                <a href='/'>Go to your closet to add items to your outfit.</a></p>
+                <a href='/'>Add items in closet.</a></p>
 
 
                 {/* Only display if outfit has been started */}
@@ -197,21 +212,46 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
                 <><div>
                     <DisplayOutfit token={token} outfit={currOutfit} location='editOutfit' setCurrOutfit={setCurrOutfit} />
                 </div>
-                <IconButton color="primary" aria-label="delete outfit" 
-                onClick={() => {
-                    handleDeleteOutfit()
-                }
-                }
+                <div className='my-draft-buttons'>
+                    <span onClick={
+                        () => {
+                        handleSubmit()
+                    }
+                    }>
+                        <SaveButton />
+                    </span>
+                    <span  onClick={(e) => {
+                    handleClickOpen()
+                    e.preventDefault()
+                    }}>
+                    <Button type="button" variant="contained" aria-label="delete outfit">
+                        Delete
+                    </Button>
+                    </span>
+                    <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
                 >
-                    <DeleteIcon style={{color:'#F06292'}} />
-                </IconButton>
-                <div onClick={
-                    () => {
-                    handleSubmit()
-                }
-                }>
-                    <SaveButton />
-                </div></>}
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                    Are you sure you want to delete?
+                    </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <div onClick={handleClose}>
+                    <Button type="button" onClick={(e) => e.preventDefault()} >Cancel</Button></div>
+                    <Button type="button" onClick={() => {
+                        handleDeleteOutfit()
+                        handleClose()
+                        }} autoFocus>
+                        Delete
+                    </Button>
+                    </DialogActions>
+                    </Dialog>
+                </div>
+                </>}
             </>
         )
     }
