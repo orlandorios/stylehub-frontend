@@ -97,7 +97,7 @@ const handleShoesChange = (event) => {
 
 return (
     <div className="closet-container">
-    <Button variant="contained" onClick={handleAllChange} value='all' size="small">All Clothing Items</Button>
+    <Button variant="contained" style={{marginBottom: '5px'}} onClick={handleAllChange} value='all' size="small">All Clothing Items</Button>
 <div className='buttons-box'>
     <ButtonGroup variant="contained" aria-label="outlined primary button group">
         <Button onClick={handleTopsChange} value="tops" color="secondary" size="small">Tops</Button>
