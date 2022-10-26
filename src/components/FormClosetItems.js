@@ -1,11 +1,5 @@
-// TODO: Come up with final list for tag suggestion
-// TODO (?): Replace camera image with file image if on computer?
-// TODO: Add CSS
-// TODO (?): Display option to to upload file in addition to camera?
-// TODO: test all input options
 
 import M from 'materialize-css';
-
 import React, { useEffect, useState } from "react"
 import { WithContext as ReactTags } from 'react-tag-input';
 import { useNavigate } from "react-router";
@@ -14,7 +8,6 @@ import IconButton from '@mui/material/IconButton';
 import { PhotoCamera } from "@mui/icons-material";
 import { SaveButton } from "./SaveButton";
 import loadImage from "blueimp-load-image";
-import TextField from '@mui/material/TextField';
 
 
 export const FormClosetItem = ({token}) => {
@@ -26,9 +19,7 @@ export const FormClosetItem = ({token}) => {
     const [material, setMaterial] = useState('')
     const [source, setSource] = useState('')
     const [brand, setBrand] = useState('')
-    const [tagList, setTagList] = useState([])
 
-    const [error, setError] = useState(false)
     const [submitted,setSubmitted] = useState(false)
     const navigate = useNavigate()
 
@@ -109,7 +100,6 @@ export const FormClosetItem = ({token}) => {
 
         // Rotate iPhone images
         // See https://stackoverflow.com/questions/72794830/uploaded-images-in-react-rotating-when-uploading-on-iphone
-        console.log(imgFile)
         let file = imgFile
         
         loadImage(
@@ -129,7 +119,6 @@ export const FormClosetItem = ({token}) => {
             { meta: true, orientation: true, canvas: true, maxWidth: 800 }
         );
         
-        console.log(file)
         setImgFile(file)
 
         setSubmitted(true)
@@ -157,7 +146,7 @@ export const FormClosetItem = ({token}) => {
 
         event.preventDefault()
         axios.request(options).then(function (response) {
-            console.log(`Response: ${response.data}`);
+            
         }).catch(function (error) {
             console.error(error);
         });

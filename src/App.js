@@ -1,4 +1,3 @@
-// TODO: Current outfit should only pull drafted outfit if it belongs to current user
 
 import logo from './logo.svg';
 
@@ -64,7 +63,7 @@ const isLoggedIn = username && token
       {isLoggedIn && (
       <TopNavbar setAuth={setAuth} token={token} />
       )}
-        {!loading && (<Routes>
+        <Routes>
           <Route index element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn}  />} /> 
           <Route path="*" element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn} />} />
           <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}>
@@ -75,7 +74,7 @@ const isLoggedIn = username && token
             <Route path="outfits" element={<ViewOutfits token={token} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading}/>} />
             <Route path="outfit/:id" element={<ViewOutfit token={token}/>} />
           </Route>
-        </Routes>)}
+        </Routes>
       {isLoggedIn && (
       <BottomNavbar />
       )}
