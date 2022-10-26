@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.1.2",
     "blueimp-load-image": "^5.16.0",
+    "materialize-css": "^1.0.0-rc.2",
     "react": "^18.2.0",
     "react-dnd": "^14.0.5",
     "react-dnd-html5-backend": "^14.1.0",
