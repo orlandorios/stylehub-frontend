@@ -1,12 +1,12 @@
-
-import M from 'materialize-css';
+import './materialize-classified.css';
+import { AutoInit } from 'materialize-css';
 import React, { useEffect, useState } from "react"
 import { WithContext as ReactTags } from 'react-tag-input';
 import { useNavigate } from "react-router";
 import axios from "axios";
 import IconButton from '@mui/material/IconButton';
 import { PhotoCamera } from "@mui/icons-material";
-import { SaveButton } from "./SaveButton";
+import { SaveButton } from "../SaveButton";
 import loadImage from "blueimp-load-image";
 
 
@@ -42,9 +42,9 @@ export const FormClosetItem = ({token}) => {
 
     // Disables subcategory selection if category option isn't selected
     if (category === 'top') {
-        
+
     } else if (category === 'bottom') {
-        
+
     }
 
     // Tag code
@@ -63,27 +63,27 @@ export const FormClosetItem = ({token}) => {
         comma: 188,
         enter: 13
     };
-    
+
     const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
     const handleDelete = i => {
         setTags(tags.filter((tag, index) => index !== i));
     };
-    
+
     const handleAddition = tag => {
         setTags([...tags, tag]);
     };
-    
+
     const handleDrag = (tag, currPos, newPos) => {
         const newTags = tags.slice();
-    
+
         newTags.splice(currPos, 1);
         newTags.splice(newPos, 0, tag);
-    
+
         // re-render
         setTags(newTags);
     };
-    
+
     const handleTagClick = index => {
         console.log('The tag at index ' + index + ' was clicked');
     };
@@ -101,7 +101,7 @@ export const FormClosetItem = ({token}) => {
         // Rotate iPhone images
         // See https://stackoverflow.com/questions/72794830/uploaded-images-in-react-rotating-when-uploading-on-iphone
         let file = imgFile
-        
+
         loadImage(
             file,
             function (img, data) {
@@ -118,7 +118,7 @@ export const FormClosetItem = ({token}) => {
             },
             { meta: true, orientation: true, canvas: true, maxWidth: 800 }
         );
-        
+
         setImgFile(file)
 
         setSubmitted(true)
@@ -146,7 +146,7 @@ export const FormClosetItem = ({token}) => {
 
         event.preventDefault()
         axios.request(options).then(function (response) {
-            
+
         }).catch(function (error) {
             console.error(error);
         });
@@ -157,10 +157,10 @@ export const FormClosetItem = ({token}) => {
             navigate('../')
         }
     },[navigate,submitted])
-    
+
     useEffect(() => {
         // Init Tabs Materialize JS
-        M.AutoInit();
+        AutoInit();
     }, [category]);
 
     return(
@@ -195,7 +195,7 @@ export const FormClosetItem = ({token}) => {
                             <label htmlFor='photo' className="photo-upload-prompt">Upload a photo </label>
                             <div className="photo-icon-container">
                                 <IconButton className='photo-upload-button' color="primary" aria-label="upload picture" component="label" type='button'>
-                                    
+
                                     <input
                                         hidden
                                         type='file'
@@ -220,20 +220,20 @@ export const FormClosetItem = ({token}) => {
                     <div className='row'>
                         <div className="input-field col s12">
                             <input
-                            className="validate"
+                            className="validate input"
                             type='text'
                             id='size'
                             value={size}
                             onChange = {(e) => setSize(e.target.value)}
                             required
                             ></input>
-                            <label htmlFor='size'>Size </label> 
+                            <label htmlFor='size'>Size </label>
                         </div>
                     </div>
 
                     <div className='row'>
                         <div className="input-field col s12">
-                        
+
                             <select name='colors' id='color' onChange = {(e) => handleChange('color', e)} required>
                             <option value=''>--Select a color--</option>
                             <option value='white'>White</option>
@@ -250,7 +250,7 @@ export const FormClosetItem = ({token}) => {
                             <option value='grey'>Grey</option>
                             <option value='multi'>Multi</option>
                             </select>
-                            <label htmlFor='color'>Color </label> 
+                            <label htmlFor='color'>Color </label>
                         </div>
                     </div>
 
@@ -260,6 +260,7 @@ export const FormClosetItem = ({token}) => {
                         <input
                         type='text'
                         id='material'
+                        className='input'
                         value={material}
                         onChange = {(e) => setMaterial(e.target.value)}
                         required
@@ -289,6 +290,7 @@ export const FormClosetItem = ({token}) => {
                             <input
                             type='text'
                             id='brand'
+                            className='input'
                             value={brand}
                             onChange = {(e) => setBrand(e.target.value)}
                             required
@@ -315,7 +317,7 @@ export const FormClosetItem = ({token}) => {
                     <div className='add-item-save'>
                         <SaveButton />
                     </div>
-                    
+
                 </div>
             </form>
         </>
