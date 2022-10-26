@@ -18,10 +18,19 @@ import { WithContext as ReactTags } from 'react-tag-input';
 
 
 export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, token }) => {
-    const [name, setName] = useState(currOutfit.title)
+    // replace null with empty string
+    console.log("ehrer" + currOutfit.title)
+    let storedName = currOutfit.title
+    if (storedName === null) {
+        console.log("sdfdsfds")
+        storedName = ""
+    }
+    console.log(currOutfit?.title + "why is this null")
+    const [name, setName] = useState(currOutfit?.title || "")
     const debouncedName = useDebounce(name, 500)
 
-
+    console.log(`Current Outfit`)
+    console.log(currOutfit)
     // 500ms after user stops typing Outfit Name input, API call will save name
     useEffect(() => {
         if (debouncedName) {
@@ -32,7 +41,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
     // Clicking save will move outfit out of draft (changing current outfit to empty) and navigate user to View Outfit page
     const handleSubmit = () => {
         axios
-            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
             {
                 draft: false,
             },{
@@ -113,24 +122,31 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
 
     // Save tags after user updates
     useEffect(() => {
-        let tagsToPost = []
-        for (const tag of tags) {
-            tagsToPost.push(tag.id)
+        // Setting up conditional so code doesn't run when there's no current outfit
+        if (Object.keys(currOutfit).length !== 0) {
+            let tagsToPost = []
+            for (const tag of tags) {
+                tagsToPost.push(tag.id)
+            }
+            console.log(tagsToPost)
+            let currOutfitData = currOutfit
+            currOutfitData.tag = tagsToPost
+            console.log(tagsToPost, "dsfsdf")
+            console.log(token)
+            axios
+            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
+            {
+                tag: tagsToPost,
+            },{
+                headers: {
+                    Authorization: `Token ${token}`,
+                },
+            })
+            .then((res) => {
+                setCurrOutfit(currOutfitData)
+            })
+            .catch((err) => console.error(err))
         }
-
-        axios
-        .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
-        {
-            tag: tagsToPost,
-        },{
-            headers: {
-                Authorization: `Token ${token}`,
-            },
-        })
-        .then((res) => {
-            setCurrOutfit(res.data)
-        })
-        .catch((err) => console.error(err))
     }, [tags])
 
 
@@ -144,7 +160,6 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
     } else {
         return(
             <>
-                <h1>Current Outfit</h1>
 
                 {/* Only display if outfit has been started */}
                 {Object.keys(currOutfit).length === 0 ? "" :
@@ -208,7 +223,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
 // API call for outfit name
 function updateName(nameInput, currOutfit, token) {
     axios
-        .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+        .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
         {
             title: nameInput,
         },{

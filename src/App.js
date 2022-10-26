@@ -1,8 +1,11 @@
 // TODO: Current outfit should only pull drafted outfit if it belongs to current user
 
 import logo from './logo.svg';
+
 import './reactTags.css'
+import './materialize.css'
 import './App.css';
+
 import { TopNavbar } from './components/TopNavbar';
 import { BottomNavbar } from './components/BottomNavbar';
 import { Routes, Route, Switch } from 'react-router';
@@ -30,7 +33,7 @@ function App() {
     setToken(token)
     setUsername(username)
 
-  }
+  } 
 
   useEffect(() => {
     axios
@@ -59,21 +62,21 @@ const isLoggedIn = username && token
   
     <div className="App">
       {isLoggedIn && (
-      <TopNavbar />
+      <TopNavbar setAuth={setAuth} token={token} />
       )}
-        <Routes>
-          <Route index element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn} />} /> 
+        {!loading && (<Routes>
+          <Route index element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn}  />} /> 
           <Route path="*" element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn} />} />
           <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}>
-            <Route path="closet" element={<Closet  currOutfit={currOutfit} token={token} />} />
+            <Route path="closet" element={<Closet  currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token} />} />
             <Route path="add-item" element={<AddClosetItem token={token} />} />
             <Route path="current-outfit" element={<CurrentOutfit currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} loading={loading} setLoading={setLoading} token={token} />} />
-            <Route path="user/1" element={<Profile />} />
-            <Route path="outfits" element={<ViewOutfits token={token}/>} />
+            <Route path="user" element={<Profile setAuth={setAuth} token={token} />} />
+            <Route path="outfits" element={<ViewOutfits token={token} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading}/>} />
             <Route path="outfit/:id" element={<ViewOutfit token={token}/>} />
             <Route path="closet-composition" element={<ClosetComp token={token} loading={loading} setLoading={setLoading} />} />
           </Route>
-        </Routes>
+        </Routes>)}
       {isLoggedIn && (
       <BottomNavbar />
       )}
