@@ -57,7 +57,6 @@ useEffect(() => {
         }) 
         
     }, [token, url])
-    console.log(draftItems)
 
 
 const handleAllChange = (event) => {
