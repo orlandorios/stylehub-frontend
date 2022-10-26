@@ -1,5 +1,3 @@
-// TODO: Replace faulty image src with error image
-// TODO: Conditional display of delete button for edit outfits
 
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';

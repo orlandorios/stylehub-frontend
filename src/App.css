@@ -82,12 +82,78 @@
   bottom: 5%;
 }
 
-#all-button {
-  background-color: #9cc4d9;
+.add-item-instr{
+  font-size: 1rem;
+  padding-left: 0.6rem;
+}
+
+.photo-upload-prompt{
+  font-size: 0.8rem;
+}
+
+.photo-upload-preview{
   text-align: center;
 }
 
-.cat-buttons {
-  background-color:  #b19cd9;
-  color: white;
+.photo-icon-container {
+  margin-left: -10px;
+}
+
+.add-item-save{
+  padding-left: 7px;
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
+
+.add-item-tags{
+  padding-left: 0.6rem;
+}
+
+.select-group > label {
+  color: red;
+  top: -40px;
+}
+
+.form-group {
+  margin-top: 25px;
+}
+
+/* Overwrites to react tag styling */
+
+.ReactTags__selected {
+  margin-left: -5px;
+}
+
+.ReactTags__tagInput {
+  Width: calc(100% - 10px);
+  margin-left: 5px;
+}
+
+.ReactTags__selected span.ReactTags__tag {
+  margin-bottom: 3px;
+  margin-top: 2px;
+}
+
+.ReactTags__tagInput input.ReactTags__tagInputField, .ReactTags__tagInput input.ReactTags__tagInputField {
+  padding-left: 5px;
+}
+
+.ReactTags__tagInput input.ReactTags__tagInputField, .ReactTags__tagInput input.ReactTags__tagInputField:focus {
+  font-size: 16px;
+  height: 3rem;
+  margin: 0 0 8px 0;
+}
+
+.my-draft-message {
+  font-size: 1rem;
+  padding-left: 0.6rem;
+}
+.my-draft-buttons {
+  padding-left: 7px;
+  padding-top: 20px;
+  padding-bottom: 15px;
+}
+
+.my-draft-delete {
+  padding-left: 15px;
 }
