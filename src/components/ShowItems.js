@@ -203,10 +203,10 @@ const ExpandMore = styled((props) => {
             
             <CardActions disableSpacing>
 
-            {/* isInDraftItems={draftItems.some((elem) => elem.id === item.id )} */}
                 {(draftItems[0] || {closet_item:[]}).closet_item.some((elem) => elem === item.id ) || beenChecked ? 
             <IconButton           
             aria-label="add-item"
+            style={{color: '#b19cd9'}}
             >
                 <LibraryAddCheckIcon />
             </IconButton> :
