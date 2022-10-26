@@ -4,6 +4,8 @@
 // TODO (?): Display option to to upload file in addition to camera?
 // TODO: test all input options
 
+import M from 'materialize-css';
+
 import React, { useEffect, useState } from "react"
 import { WithContext as ReactTags } from 'react-tag-input';
 import { useNavigate } from "react-router";
@@ -29,6 +31,7 @@ export const FormClosetItem = ({token}) => {
     const [error, setError] = useState(false)
     const [submitted,setSubmitted] = useState(false)
     const navigate = useNavigate()
+
 
 
     const handleChange = (inputType, event) => {
@@ -165,55 +168,66 @@ export const FormClosetItem = ({token}) => {
             navigate('../')
         }
     },[navigate,submitted])
-
+    
+    useEffect(() => {
+        // Init Tabs Materialize JS
+        M.AutoInit();
+    }, [category]);
 
     return(
         <>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <div className='row'>
+                    <div className='add-item-instr'>Enter your closet item information.</div>
+                    <div className='form-group row'>
                         <div className="input-field col s12">
-                            <div className='form-input'><select className="browser-default" name='category' id='category' onChange = {(e) => handleChange('category', e)} required>
+                            <select name='category' id='category' onChange = {(e) => handleChange('category', e)} required>
                                 <option value=''>--Select a category--</option>
                                 <option value='top'>Top</option>
                                 <option value='outerwear'>Outerwear</option>
                                 <option value='bottom'>Bottom</option>
                                 <option value='shoes'>Shoes</option>
-                            </select></div>
+                            </select>
                             <label htmlFor='category'>What category is it? </label>
                         </div>
                     </div>
 
                     <div className='row'>
                         <div className="input-field col s12">
-                    <select className="browser-default" name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required disabled={category === '' ? true: false}>
+                    <select name='subcategory' id='subcategory' onChange = {(e) => handleChange('subcategory', e)} required disabled={category === '' ? true: false}>
                         <option value=''>--Select a subcategory--</option>
                         {getSubcat(category)}
                     </select>
                     <label htmlFor='subcategory'>What subcategory is it? </label>
                     </div>
                     </div>
+                    <div className='row'>
+                        <div className="col s12">
+                            <label htmlFor='photo' className="photo-upload-prompt">Upload a photo </label>
+                            <div className="photo-icon-container">
+                                <IconButton className='photo-upload-button' color="primary" aria-label="upload picture" component="label" type='button'>
+                                    
+                                    <input
+                                        hidden
+                                        type='file'
+                                        id='photo'
+                                        capture='environment'
+                                        accept='image/*'
+                                        onChange= {(e) => {
+                                            document.getElementById("preview").src = window.URL.createObjectURL(e.target.files[0])
+                                            setImgFile(e.target.files[0])
+                                        }}
+                                        required
+                                        >
+                                    </input>
+                                    <PhotoCamera type='button' />
+                                </IconButton>
+                            </div>
+                            <div className="photo-upload-preview"><img id='preview' alt='' width='100rem' />
+                            </div>
+                        </div>
+                    </div>
 
-                    <div className="photo-upload-text"><label htmlFor='photo' className="photo-upload-text">Upload a photo:</label></div>
-                    <IconButton color="primary" aria-label="upload picture" component="label" type='button'>
-                        <input
-                            hidden
-                            type='file'
-                            id='photo'
-                            capture='environment'
-                            accept='image/*'
-                            onChange= {(e) => {
-                                document.getElementById("preview").src = window.URL.createObjectURL(e.target.files[0])
-                                setImgFile(e.target.files[0])
-                            }}
-                            required
-                            >
-                        </input>
-                        <PhotoCamera type='button' />
-                    </IconButton>
-                    <div><img id='preview' alt='' width='100rem' /></div>
-
-                    <div>Additional information</div>
                     <div className='row'>
                         <div className="input-field col s12">
                             <input
@@ -227,17 +241,11 @@ export const FormClosetItem = ({token}) => {
                             <label htmlFor='size'>Size </label> 
                         </div>
                     </div>
-                    {/* <TextField
-                            required
-                            id="outlined-required"
-                            label="Size"
-                            value={size}
-                            onChange = {(e) => setSize(e.target.value)}
-                            /> */}
+
                     <div className='row'>
                         <div className="input-field col s12">
                         
-                            <select className="browser-default" name='colors' id='color' onChange = {(e) => handleChange('color', e)} required>
+                            <select name='colors' id='color' onChange = {(e) => handleChange('color', e)} required>
                             <option value='' disabled selected>--Select a color--</option>
                             <option value='white'>White</option>
                             <option value='green'>Green</option>
@@ -272,7 +280,7 @@ export const FormClosetItem = ({token}) => {
 
                     <div className='row'>
                         <div className="input-field col s12">
-                            <select className="browser-default" name='sources' id='source' onChange = {(e) => handleChange('source', e)} required>
+                            <select name='sources' id='source' onChange = {(e) => handleChange('source', e)} required>
                             <option value=''>--Select a source--</option>
                             <option value='brand_store'>Brand Store</option>
                             <option value='department_store'>Department Store</option>
@@ -288,33 +296,34 @@ export const FormClosetItem = ({token}) => {
 
                     <div className='row'>
                         <div className="input-field col s12">
-                        <label htmlFor='brand'>Brand </label>
-                        <input
-                        type='text'
-                        id='brand'
-                        value={brand}
-                        onChange = {(e) => setBrand(e.target.value)}
-                        required
-                        ></input>
+                            <label htmlFor='brand'>Brand </label>
+                            <input
+                            type='text'
+                            id='brand'
+                            value={brand}
+                            onChange = {(e) => setBrand(e.target.value)}
+                            required
+                            ></input>
+                        </div>
                     </div>
+                    <div className='row'>
+                        <div className="col s12">
+                            <label htmlFor='tags'>Tags </label>
+                            <ReactTags
+                                tags={tags}
+                                suggestions={suggestions}
+                                delimiters={delimiters}
+                                handleDelete={handleDelete}
+                                handleAddition={handleAddition}
+                                handleDrag={handleDrag}
+                                handleTagClick={handleTagClick}
+                                inline
+                                autocomplete
+                                allowDeleteFromEmptyInput={false}
+                            />
+                        </div>
                     </div>
-
-                    <div>
-                        Tags
-                        <ReactTags
-                        tags={tags}
-                        suggestions={suggestions}
-                        delimiters={delimiters}
-                        handleDelete={handleDelete}
-                        handleAddition={handleAddition}
-                        handleDrag={handleDrag}
-                        handleTagClick={handleTagClick}
-                        inline
-                        autocomplete
-                        allowDeleteFromEmptyInput={false}
-                        />
-                    </div>
-                    <div>
+                    <div className='add-item-save'>
                         <SaveButton />
                     </div>
                     
