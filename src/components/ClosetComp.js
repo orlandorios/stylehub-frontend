@@ -10,9 +10,10 @@ import GraphSource from './GraphSource'
 
 export const ClosetComp = ({token, loading, setLoading}) => {
     const [comp, setComp] = useState ({})
+
 useEffect(() => {
     setLoading(true)
-axios
+        axios
             .get(`https://stylehub.herokuapp.com/closet-composition/`,
             {
                 headers: {
@@ -20,12 +21,11 @@ axios
                 },
             })
             .then((res) => {
-                console.log(res.data)
                 setComp(res.data)
                 setLoading(false)
             })
             .catch((err) => console.error(err))
-        }, [])
+        }, [setLoading, token])
         if (loading) {
             return(
                 <Box sx={{ display: 'flex' }}>
@@ -33,6 +33,7 @@ axios
                 </Box>
             )
         } else {
+
     return(
         <>
 <GraphCategory comp={comp}/>

@@ -73,6 +73,8 @@ export const TopNavbar = ({setAuth, token}) => {
                     return "Current Outfit"
                 case '/user':
                     return "User Profile"
+                case '/closet-composition':
+                    return "Closet Stats"
                 default:
                     return "My Outfits"
                 }
