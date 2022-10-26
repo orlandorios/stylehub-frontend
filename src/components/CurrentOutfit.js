@@ -24,12 +24,14 @@ import DialogContentText from '@mui/material/DialogContentText';
 
 export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, token }) => {
     // replace null with empty string
+    console.log("ehrer" + currOutfit.title)
     let storedName = currOutfit.title
     if (storedName === null) {
+        console.log("sdfdsfds")
         storedName = ""
     }
-
-    const [name, setName] = useState(storedName)
+    console.log(currOutfit?.title + "why is this null")
+    const [name, setName] = useState(currOutfit?.title || "")
     const debouncedName = useDebounce(name, 500)
 
     const [open, setOpen] = React.useState(false);
@@ -54,7 +56,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
     // Clicking save will move outfit out of draft (changing current outfit to empty) and navigate user to View Outfit page
     const handleSubmit = () => {
         axios
-            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
             {
                 draft: false,
             },{
@@ -141,12 +143,13 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
             for (const tag of tags) {
                 tagsToPost.push(tag.id)
             }
-
+            console.log(tagsToPost)
             let currOutfitData = currOutfit
             currOutfitData.tag = tagsToPost
-
+            console.log(tagsToPost, "dsfsdf")
+            console.log(token)
             axios
-            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
             {
                 tag: tagsToPost,
             },{
@@ -260,7 +263,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
 // API call for outfit name
 function updateName(nameInput, currOutfit, token) {
     axios
-        .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+        .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
         {
             title: nameInput,
         },{

@@ -24,10 +24,11 @@ import {CardMedia} from "@mui/material";
 import { styled } from '@mui/material/styles';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 
-export const ViewOutfits = ({token, currOutfit, setCurrOutfit}) => {
+export const ViewOutfits = ({token, currOutfit, setCurrOutfit, setLoading}) => {
     const navigate = useNavigate()
     const url = 'https://stylehub.herokuapp.com/myoutfits/'
     const [outfits, setOutfits] = useState(null);
@@ -46,8 +47,10 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit}) => {
     }, [token])
 
     const handleEdit = (outfit) => {
+        setLoading(true)
         // Checks if there is already an outfit being edited
         if (Object.keys(currOutfit).length !== 0) {
+            console.log('got here')
             // Move current outfit out of drafts
             axios
             .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
@@ -72,6 +75,8 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit}) => {
                     })
                     .then((res) => {
                         setCurrOutfit(outfit)
+                        setLoading(false)
+                        navigate('/current-outfit')
                     })
                     .catch((err) => console.error(err))
                     })
@@ -90,6 +95,8 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit}) => {
                 })
                 .then((res) => {
                     setCurrOutfit(outfit)
+                    setLoading(false)
+                    navigate('/current-outfit')
                 })
                 .catch((err) => console.error(err))
         }
@@ -121,6 +128,7 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit}) => {
         
         return(
             <div>
+                {console.log(currOutfit)}
             <Grid2
             justifyContent="center"
             container 
@@ -171,8 +179,10 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit}) => {
                 <VisibilityIcon />
             </IconButton> 
             
-            <IconButton>
-                <DeleteIcon />
+            <IconButton
+                onClick={() => handleEdit(outfit)}
+            >
+                <EditIcon />
             </IconButton>
 
 
