@@ -1,11 +1,12 @@
 import * as React from 'react';
+import axios from 'axios';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import navLogo from '../resources/logos/StyleHub-Logo-Black.png'
 import Fab from '@mui/material/Fab';
-import { IconButton, Menu } from '@mui/material';
+import { Button, IconButton, Menu } from '@mui/material';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import {Paper} from '@mui/material';
@@ -15,14 +16,37 @@ import PersonIcon from '@mui/icons-material/Person';
 import { MenuItem } from '@mui/material';
 
 
+export const TopNavbar = ({setAuth, token}) => {
 
-
-export const TopNavbar = ({token}) => {
-
-    const settings = ['Logout'];
+    const settings = ['Logout']
     const location = useLocation()
     const {id} = useParams()
     // const [value, setValue] = React.useState(0);
+
+    const handleLogout = () => {
+        // console.log(setAuth)
+        // console.log(token)
+        if(token == null) {
+            throw new Error('token is not defined')
+        }
+        // send request to log out on the server
+        axios
+        .post(
+            'https://stylehub.herokuapp.com/auth/token/logout/', {
+
+            },
+            {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+            }
+        )
+        .then(() =>
+            // log out in React
+        setAuth('', null),
+    
+        )
+    }
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -33,8 +57,6 @@ export const TopNavbar = ({token}) => {
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
-
     
     const getTitle = () => {
 
@@ -67,7 +89,7 @@ export const TopNavbar = ({token}) => {
 
         <Toolbar>
 
-    <Link to="closet">
+
         <IconButton>
             <Box
                 component="img"
@@ -76,7 +98,6 @@ export const TopNavbar = ({token}) => {
                 src={navLogo}
             />
         </IconButton>
-    </Link>
             
             <Typography
                 align='center'
@@ -118,7 +139,12 @@ export const TopNavbar = ({token}) => {
             >
             {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">{setting}</Typography>
+                    <Button
+                    type='submit'
+                    onClick={handleLogout}
+                >
+                    {setting}
+                </Button>                    
                 </MenuItem>
             ))}
             </Menu>

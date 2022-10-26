@@ -62,7 +62,7 @@ const isLoggedIn = username && token
   
     <div className="App">
       {isLoggedIn && (
-      <TopNavbar />
+      <TopNavbar setAuth={setAuth} token={token} />
       )}
         {!loading && (<Routes>
           <Route index element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn}  />} /> 

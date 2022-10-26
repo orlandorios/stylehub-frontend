@@ -65,7 +65,7 @@ export const BottomNavbar = () => {
 
             <BottomNavigationAction 
             component={Link} to='/current-outfit'
-            label="Current Outfit" 
+            label="My Draft" 
             icon={<CheckroomIcon />} />
 
             <BottomNavigationAction 

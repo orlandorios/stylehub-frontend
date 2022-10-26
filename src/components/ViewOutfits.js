@@ -199,12 +199,14 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit, setLoading}) => {
                     in={outfit.id === selectedId ? true : false}
                     timeout="auto" 
                     unmountOnExit>
-            <CardContent>            
-                <Typography>
-                    {outfit.title} <br></br>
-                    <br></br>
-                    Outfit created <br></br>
-                    {outfit.outfit_date} <br></br>
+            <CardContent>       
+                <Typography
+                sx={{ textTransform: 'capitalize'}}
+                fontWeight='bold'>
+                {outfit.title} <br></br>
+                <br></br>
+                {/* Outfit created <br></br>
+                {outfit.outfit_date} <br></br> */}
                 </Typography>
 
             </CardContent>

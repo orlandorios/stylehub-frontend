@@ -246,7 +246,7 @@ export const FormClosetItem = ({token}) => {
                         <div className="input-field col s12">
                         
                             <select name='colors' id='color' onChange = {(e) => handleChange('color', e)} required>
-                            <option value='' disabled selected>--Select a color--</option>
+                            <option value=''>--Select a color--</option>
                             <option value='white'>White</option>
                             <option value='green'>Green</option>
                             <option value='yellow'>Yellow</option>
