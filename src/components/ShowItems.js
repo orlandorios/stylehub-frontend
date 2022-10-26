@@ -33,7 +33,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 
 
-export const ShowItems = ({items, setItems, url, currOutfit, setCurrOutfit, setLoading, token}) => {
+export const ShowItems = ({items, setItems, url, currOutfit, setCurrOutfit, setLoading, token, draftItems, setDraftItems}) => {
     return (
         <div>
             <div className='item-list'>
@@ -57,14 +57,15 @@ export const ShowItems = ({items, setItems, url, currOutfit, setCurrOutfit, setL
                         setItems={setItems}
                         url={url}
                         token={token}
+                        draftItems={draftItems}
                         />
                     </div>
                 ))}
             </div>
         </div>
     )}
-
-const Item = ({item, title, category, subcategory, color, size, material, source, brand, tag, image, currOutfit, setCurrOutfit, setLoading, setItems, url, token}) => {
+    
+const Item = ({item, title, category, subcategory, color, size, material, source, brand, tag, image, currOutfit, setCurrOutfit, setLoading, setItems, draftItems, url, token}) => {
 const [expanded, setExpanded] = useState(false)
 const [selectedItem, setSelectedItem] = useState(null)
 const [open, setOpen] = React.useState(false);
@@ -163,6 +164,8 @@ const ExpandMore = styled((props) => {
         }),
     }));
     
+        const [beenChecked, setBeenChecked] = useState(false)
+
         const handleExpandClick = () => {
         setExpanded(!expanded);
         };
@@ -200,15 +203,19 @@ const ExpandMore = styled((props) => {
             
             <CardActions disableSpacing>
 
-                {currOutfit.closet_item?.includes(item) ? 
+                {(draftItems[0] || {closet_item:[]}).closet_item.some((elem) => elem === item.id ) || beenChecked ? 
             <IconButton           
             aria-label="add-item"
+            style={{color: '#b19cd9'}}
             >
                 <LibraryAddCheckIcon />
             </IconButton> :
                 
             <IconButton 
-            onClick={() => {handleAddItem(item)}}
+            onClick={() => {
+                handleAddItem(item)
+                setBeenChecked (true)
+            }}
             aria-label="add-item"
             >
                 <LibraryAddIcon />

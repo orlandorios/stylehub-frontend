@@ -28,6 +28,8 @@ export const Closet = ({currOutfit, setCurrOutfit, setLoading, token}) => {
     const bottomsUrl = 'https://stylehub.herokuapp.com/mycloset-bottoms/'
     const outerUrl = 'https://stylehub.herokuapp.com/mycloset-outerwear/'
     const shoesUrl = 'https://stylehub.herokuapp.com/mycloset-shoes/'
+    const [draftItems, setDraftItems] = useState([])
+
 
 useEffect(() => {
     axios
@@ -38,7 +40,24 @@ useEffect(() => {
         },
     })
     .then((res) => setItems(res.data))
-}, [token, url])
+    
+    // 2nd then request to get items in the current outfit
+    .then((res) => {
+        axios.get(
+            'https://stylehub.herokuapp.com/draft-outfit/',
+            {
+                headers: {
+                    Authorization: `Token ${token}`,
+                }
+            })
+    .then((res) => setDraftItems(res.data))
+        })
+        .catch((error) => {
+            console.log(error)
+        }) 
+        
+    }, [token, url])
+
 
 const handleAllChange = (event) => {
     setSelectedCat(event.target.value);
@@ -90,7 +109,7 @@ return (
     <SearchBar setItems={setItems} token={ token }/>
 
     <div className="items-container">
-    <ShowItems items={items} setItems={setItems} url={url} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token}/>
+    <ShowItems draftItems={draftItems} setDraftItems={setDraftItems} items={items} setItems={setItems} url={url} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token}/>
     </div>      
     </div>
 </div>
