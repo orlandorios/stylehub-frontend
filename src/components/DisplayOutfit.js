@@ -2,6 +2,15 @@
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import Collapse from '@mui/material/Collapse';
+import Box from '@mui/material/Box';
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import { Typography } from '@mui/material';
+
 
 export const DisplayOutfit = ({ outfit, location, setCurrOutfit, token }) => {
     // location determines how outfit displays depending on page it is used in. Options: 'myOutfits', 'editOutfit', 'viewOutfit'
@@ -70,48 +79,114 @@ export const DisplayOutfit = ({ outfit, location, setCurrOutfit, token }) => {
 
     return (
         <>
+        <Box>
+            <Grid2>
             <div className='upperBody'>
                 <div className='tops'>
+                    <Card>
                     {tops.map((top) => (
                         <div key={top.id} className='outfitItem'>
                             {top.item_image ? <img src={top.item_image} alt='' width={size} /> : ''}
-                            {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(top)}>
-                                <DeleteIcon style={{color:'#F06292'}} />
-                            </IconButton>}
+                            {location==='editOutfit' && 
+                            <CardContent
+                            align="center"
+                            sx={{ backgroundColor: '#b19cd9', marginBottom: -2, marginTop: -2}}
+                            >
+                            <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(top)}>
+                                <DeleteIcon                                
+                                style={{color:'white', marginLeft:10}} />
+                                <Typography
+                                paddingLeft={1}
+                                color='white'
+                                fontSize='small'>
+                                Delete
+                                </Typography>
+                            </IconButton>
+                            </CardContent>}
                         </div>
                     ))}
+                    </Card>                    
                 </div>
+
                 <div className='outers'>
+                    <Card>               
                     {outers.map((outer) => (
                         <div key={outer.id} className='outfitItem'>
                             {outer.item_image ? <img src={outer.item_image} alt='' width={size} /> : ''}
-                            {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(outer)}>
-                                <DeleteIcon style={{color:'#F06292'}} />
-                            </IconButton>}
+                            {location==='editOutfit' && 
+                            <CardContent
+                            align="center"
+                            sx={{ backgroundColor: '#b19cd9', marginBottom: -2, marginTop: -2}}>                        
+                            <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(outer)}>
+                                <DeleteIcon style={{color:'white', marginLeft:10}} />
+                                <Typography
+                                paddingLeft={1}
+                                color='white'
+                                fontSize='small'>
+                                Delete
+                                </Typography>
+                            </IconButton>
+                            </CardContent>}
                         </div>
                     ))}
-                </div>
+                    </Card>
+
+                    </div>
             </div>
             <div className='bottoms'>
-                {bottoms.map((bottom) => (
-                    <div key={bottom.id} className='outfitItem'>
-                        {bottom.item_image ? <img src={bottom.item_image} alt='' width={size} /> : ''}
-                        {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(bottom)}>
-                                <DeleteIcon style={{color:'#F06292'}} />
-                            </IconButton>}
+                    <Card>
+
+                    {bottoms.map((bottom) => (
+                        <div key={bottom.id} className='outfitItem'>
+                            {bottom.item_image ? <img src={bottom.item_image} alt='' width={size} /> : ''}
+                            {location==='editOutfit' && 
+                            <CardContent
+                            align="center"                            
+                            sx={{ backgroundColor: '#b19cd9', marginBottom: -2, marginTop: -2}}>                                 
+                            <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(bottom)}>
+                                <DeleteIcon style={{color:'white', marginLeft:10}} /> 
+                                <Typography
+                                paddingLeft={1}
+                                color='white'
+                                fontSize='small'>
+                                Delete
+                                </Typography>
+                            </IconButton>
+                            </CardContent>}
+
                     </div>
                 ))}
+
+                    </Card>
             </div>
             <div className='shoes'>
-                {shoes.map((shoe) => (
-                    <div key={shoe.id} className='outfitItem'>
-                        {shoe.item_image ? <img src={shoe.item_image} alt='' width={size} /> : ''}
-                        {location==='editOutfit' && <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(shoe)}>
-                                <DeleteIcon style={{color:'#F06292'}} />
-                            </IconButton>}
+                    <Card>
+
+                    {shoes.map((shoe) => (
+                        <div key={shoe.id} className='outfitItem'>
+                            {shoe.item_image ? <img src={shoe.item_image} alt='' width={size} /> : ''}
+                            {location==='editOutfit' && 
+                            <CardContent
+                            align="center"
+                            sx={{ backgroundColor: '#b19cd9', marginBottom: -2, marginTop: -2}}>                                
+                            <IconButton className='outfitItemBtn' color="secondary" aria-label="remove item" onClick={() => handleRemove(shoe)}>
+                                <DeleteIcon 
+                                style={{color:'white', marginLeft:10}} /> 
+                                <Typography
+                                paddingLeft={1}
+                                color='white'
+                                fontSize='small'>
+                                Delete
+                                </Typography>
+                            </IconButton> 
+                            </CardContent>}
+
                     </div>
                 ))}
+                </Card>
             </div>
+            </Grid2>
+        </Box>
         </>
     )
 }

@@ -50,7 +50,6 @@ export const BottomNavbar = () => {
             icon={<DonutSmallIcon />}
             />
 
-
             <BottomNavigationAction
             component={Link} to='/current-outfit'
             label="My Draft"
@@ -69,13 +68,6 @@ export const BottomNavbar = () => {
             label="Add Item"
             icon={<AddAPhotoIcon />}
             />
-
-            {/* <BottomNavigationAction
-            component={Link} to='/user'
-            label="Account"
-            icon={<PersonIcon />}
-            /> */}
-
         </BottomNavigation>
         </Paper>
 

@@ -14,6 +14,10 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import { Typography } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+
+
 
 
 export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, token }) => {
@@ -202,56 +206,81 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
                 }
 
                 {/* Display depends on whether outfit has been started */}
-                <div className='my-draft-message'>{Object.keys(currOutfit).length === 0 ? "Start building a new outfit. " : `You have ${currOutfit.closet_item.length} closet items in your outfit so far. `}
-                <a href='/'>Add items in closet.</a></div>
+                <div className='my-draft-message'>
+                <Typography
+                marginTop={1}
+                marginBottom={2}
+                align="center">
+                {Object.keys(currOutfit).length === 0 ? "Start building a new outfit. " : null }
+                {Object.keys(currOutfit).length === 0 ?
+                <a href='/' style={{color: "#b19cd9"}}>Add items to closet</a> :
+                <a href='/' style={{color: "#b19cd9"}}>Add more items to closet</a> }
+                </Typography>
+                </div>
 
                 {/* Only display if outfit has been started */}
                 {Object.keys(currOutfit).length === 0 ? "" :
-                  <>
-                  <div>
-                      <DisplayOutfit token={token} outfit={currOutfit} location='editOutfit' setCurrOutfit={setCurrOutfit} />
-                  </div>
+                <>
+                <Grid2
+                    justifyContent="center"
+                    container
+                    >
+                <div>
+                    <DisplayOutfit token={token} outfit={currOutfit} location='editOutfit' setCurrOutfit={setCurrOutfit} />
+                </div>
+                </Grid2>
 
-                  <div className='my-draft-buttons'>
-                      <span onClick={
-                          () => {
-                          handleSubmit()
-                      }
-                      }>
-                          <SaveButton />
-                      </span>
-                      <span className='my-draft-delete' onClick={(e) => {
-                      handleClickOpen()
-                      e.preventDefault()
-                      }}>
-                      <Button type="button" variant="contained" aria-label="delete outfit">
-                          Delete
-                      </Button>
-                      </span>
-                      <Dialog
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby="alert-dialog-title"
-                      aria-describedby="alert-dialog-description"
-                  >
-                      <DialogContent>
-                      <DialogContentText id="alert-dialog-description">
-                      Are you sure you want to delete?
-                      </DialogContentText>
-                      </DialogContent>
-                      <DialogActions>
-                          <div onClick={handleClose}>
-                      <Button type="button" onClick={(e) => e.preventDefault()} >Cancel</Button></div>
-                      <Button type="button" onClick={() => {
-                          handleDeleteOutfit()
-                          handleClose()
-                          }} autoFocus>
-                          Delete
-                      </Button>
-                      </DialogActions>
-                      </Dialog>
-                  </div>
-                  </>
+
+                <Grid2
+                container
+                justifyContent="center">
+                <div className='my-draft-buttons'>
+                    <span onClick={
+                        () => {
+                        handleSubmit()
+                    }
+                    }>
+                        <SaveButton />
+                    </span>
+                    <span className='my-draft-delete' onClick={(e) => {
+                    handleClickOpen()
+                    e.preventDefault()
+                    }}>
+
+                    <Button 
+                    sx={{backgroundColor: "#b19cd9"}}
+                    type="button" 
+                    variant="contained" 
+                    aria-label="delete outfit">
+                        Delete
+                    </Button>
+                    </span>
+                    <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                    Are you sure you want to delete?
+                    </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <div onClick={handleClose}>
+                    <Button type="button" onClick={(e) => e.preventDefault()} >Cancel</Button></div>
+                    <Button type="button" onClick={() => {
+                        handleDeleteOutfit()
+                        handleClose()
+                        }} autoFocus>
+                        Delete
+                    </Button>
+                    </DialogActions>
+                    </Dialog>
+                </div>
+                </Grid2>
+                
+                </>
                 }
             </div>
         )

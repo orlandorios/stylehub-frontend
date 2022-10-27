@@ -85,13 +85,28 @@ const handleShoesChange = (event) => {
 
 return (
     <div className="closet-container">
-    <Button variant="contained" style={{marginBottom: '5px'}} onClick={handleAllChange} value='all' size="small">All Clothing Items</Button>
+    <Button variant="contained" style={{ backgroundColor: '#b19cd9', marginBottom: '5px'}} onClick={handleAllChange} value='all' size="small">All Clothing Items</Button>
 <div className='buttons-box'>
-    <ButtonGroup variant="outlined" color="#b19cd9" aria-label="outlined primary button group">
-        <Button className="cat-button" onClick={handleTopsChange} value="tops" color="secondary" size="small">Tops</Button>
-        <Button className="cat-button" onClick={handleBottomsChange} value="bottoms" color="secondary" size="small">Bottoms</Button>
-        <Button className="cat-button" onClick={handleOuterChange} value="outerwear" color="secondary" size="small">Outerwear</Button>
-        <Button className="cat-button" onClick={handleShoesChange} value="shoes" color="secondary" size="small">Shoes</Button>
+    <ButtonGroup 
+    variant="text"
+    color='secondary'
+    aria-label="outlined button group">
+        <Button 
+        onClick={handleTopsChange} 
+        value="tops" size="small" 
+        style={{ color: 'white', backgroundColor: '#9cc4d9', borderColor: 'white'}} >Tops</Button>
+        <Button 
+        onClick={handleBottomsChange} 
+        value="bottoms" size="small" 
+        style={{ color: 'white', backgroundColor: '#9cc4d9', borderColor: 'white'}}>Bottoms</Button>
+        <Button 
+        onClick={handleOuterChange} 
+        value="outerwear" size="small" 
+        style={{ color: 'white', backgroundColor: '#9cc4d9', borderColor: 'white'}}>Outerwear</Button>
+        <Button 
+        onClick={handleShoesChange} 
+        value="shoes" size="small" 
+        style={{ color: 'white', backgroundColor: '#9cc4d9', borderColor: 'white'}}>Shoes</Button>
     </ButtonGroup>
 
     <SearchBar setItems={setItems} token={ token }/>

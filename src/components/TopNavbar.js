@@ -66,6 +66,8 @@ export const TopNavbar = ({setAuth, token}) => {
                     return "Current Outfit"
                 case '/user':
                     return "User Profile"
+                case '/closet-composition':
+                    return "Closet Stats"
                 default:
                     return "My Outfits"
                 }
@@ -89,6 +91,7 @@ export const TopNavbar = ({setAuth, token}) => {
                 sx={{ height: 40, margin: -1 }}
                 alt="nav logo"
                 src={navLogo}
+                
             />
         </IconButton>
             
@@ -99,7 +102,8 @@ export const TopNavbar = ({setAuth, token}) => {
                 fontFamily="helvetica-bold"
                 fontSize={27}
                 color='#9cc4d9'
-                sx={{ flexGrow: 1, }}>
+                sx={{ flexGrow: 1, marginRight: 2}}
+                >
             {getTitle()}
             </Typography>
 
@@ -133,6 +137,7 @@ export const TopNavbar = ({setAuth, token}) => {
             {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Button
+                    sx={{color: '#b19cd9'}}
                     type='submit'
                     onClick={handleLogout}
                 >
