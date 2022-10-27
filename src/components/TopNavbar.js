@@ -5,13 +5,8 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import navLogo from '../resources/logos/StyleHub-Logo-Black.png'
-import Fab from '@mui/material/Fab';
 import { Button, IconButton, Menu } from '@mui/material';
-import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import { Link, useLocation, useParams } from 'react-router-dom';
-import {Paper} from '@mui/material';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import { useLocation, useParams } from 'react-router-dom';
 import PersonIcon from '@mui/icons-material/Person';
 import { MenuItem } from '@mui/material';
 
@@ -24,8 +19,6 @@ export const TopNavbar = ({setAuth, token}) => {
     // const [value, setValue] = React.useState(0);
 
     const handleLogout = () => {
-        // console.log(setAuth)
-        // console.log(token)
         if(token == null) {
             throw new Error('token is not defined')
         }

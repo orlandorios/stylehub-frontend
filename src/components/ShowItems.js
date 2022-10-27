@@ -1,25 +1,15 @@
 import { useState } from 'react'
-import AddCircleIcon from '@mui/icons-material/AddCircle'
-import { Link } from 'react-router-dom'
-import Fab from '@mui/material/Fab'
 import axios from 'axios'
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import EditIcon from '@mui/icons-material/Edit';
-import { Add, Edit , Delete} from '@mui/icons-material'
+import { Delete} from '@mui/icons-material'
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
@@ -29,13 +19,12 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from "react-router-dom";
 
 
 
 
-export const ShowItems = ({items, setItems, url, currOutfit, setCurrOutfit, setLoading, token, draftItems, setDraftItems}) => {
+export const ShowItems = ({items, setItems, url, currOutfit, setCurrOutfit, setLoading, token, draftItems}) => {
     return (
         <div>
             <div className='item-list'>
@@ -72,16 +61,9 @@ const Item = ({item, title, category, subcategory, color, size, material, source
 
     const navigate = useNavigate()
     const [expanded, setExpanded] = useState(false)
-    const [selectedItem, setSelectedItem] = useState(null)
     const [open, setOpen] = React.useState(false);
 
-// const handleClick = (item) => {
-//     setExpanded(!expanded)
-//     setSelectedItem(item)
-//     console.log(selectedItem)
-// }  
 const handleAddItem = (newItem) => {
-    // console.log(newItem.id)
     if (Object.keys(currOutfit).length === 0) {
         axios
         .post(`https://stylehub.herokuapp.com/myoutfits/`,
@@ -96,23 +78,13 @@ const handleAddItem = (newItem) => {
             let newOutfit = res.data
             newOutfit.closet_item = [newItem]
             setCurrOutfit(newOutfit)
-            console.log(res.data)
-            
         })
         .catch((err) => console.error(err))
     } else {
-        console.log(`currOutfit`)
-        console.log(currOutfit)
         const outfitItems = currOutfit.closet_item
-        console.log(`outfitItems`)
-        console.log(outfitItems)
         const outfitItemsArray = Array.isArray(outfitItems) ? outfitItems : [outfitItems]
         const updatedOutfitItems = [ ...outfitItemsArray, newItem]
-        console.log(`updatedOutfitItems`)
-        console.log(updatedOutfitItems)
         const updatedOutfitItemIDs = updatedOutfitItems.map(object => object.id)
-        console.log(`updatedOutfitItemIDs`)
-        console.log(updatedOutfitItemIDs)
         setLoading(true)
         axios
         .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
@@ -124,10 +96,8 @@ const handleAddItem = (newItem) => {
             },
         })
         .then((res) => {
-            console.log(res.data)
             let outfitUpdate = res.data
             outfitUpdate.closet_item = updatedOutfitItems
-            console.log(outfitUpdate)
             setCurrOutfit(outfitUpdate)
             setLoading(false)
             navigate('/current-outfit')
@@ -137,7 +107,6 @@ const handleAddItem = (newItem) => {
 }
 
 const handleDeleteItem = (deletedItem) => {
-    console.log(deletedItem)
     axios
         .delete(`https://stylehub.herokuapp.com/closet-item/${deletedItem.id}`,
         {
@@ -156,8 +125,6 @@ const handleDeleteItem = (deletedItem) => {
             .then((res) => setItems(res.data))
         })
         .catch((err) => console.error(err))
-
-    // Redisplay items so deleted item is removed
 }
 
 const ExpandMore = styled((props) => {

@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Welcome to StyleHub!
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Contributors: Christopher Mosley, Heather Smith, Orlando Rios, Nathan Zeager and Aziza Littlejohn.
 
 ## Available Scripts
 
@@ -14,57 +16,46 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+## Deployment
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app has been deployed to: https://https://style-hub.netlify.app/
 
-### `npm run build`
+With every push to this GitHub repository, the live website will reflect your changes.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Note: This app is intended for mobile view as opposed to browser view. To change your view, left-click on the browser, choose Inspect, and the second button from the top left allows you to toggle between mobile views**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How Does StyleHub Work?
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Login and Registration
 
-### `npm run eject`
+When first coming to the site, users will be prompted to login or register. Through the registration form, each user profile is given a unique token for authentication. This token allows users to essentially build their closet; add closet items, build and view outfits, and view their closet composition.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Note: `View Outfit` is the only component that does not require authentication. This allows users to share their StyleHub outfits on other social media platforms as intended**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### My Closet
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+After successfully logging in, users enter their closet. In the top navigation bar, there is a button to the far left with our abbreviated logo. This brings the user to their closet from any page. On the far right of the top navbar is a button to add a new closet item. Beneath the header is a collection of filtering buttons for the closet; each category has a button that renders that specific type of clothing. Below the filter buttons is a search bar where users can also filter through their closet in a more concise way. The main portion of the Closet displays all of the clothing items the user can build an outfit with! Clothing items are represented by cards that display their photo and a short description. On each clothing item's card, there is an option to add the selected item to the Current Outfit Draft, delete the item from the closet, and show all information about the item; category, subcategory, color, material, source, brand, and personalized tags where the user can add more searchable info. Users can also navigate to this page using the button on the far left of the bottom navigation bar.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Add Closet Item
 
-## Learn More
+To add a new closet item, users are prompted to fill out a form where they can choose the Category, Subcategory, Material, and Source from a drop-down list, and enter their own Brand and Tags. When successfully saved, the new item will display in the closet.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### My Draft
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+On each closet item, there is a button on the bottom left of the card that allows the user to add that item to My Draft. Once clicked, the plus sign turns into a check to show that the the item is added and the user is automatically brought to view the current outfit draft. Here, the items are displayed in their respective areas, to mimick how they might look on the user's body! There is a hyperlink on the top of this view to add more items to the draft, which reroutes the user back to the closet. Once the draft outfit is finished, the user can save it to their outfits by giving the outfit a name and adding unique tags.
 
-### Code Splitting
+**Note: There is only one draft allowed at a time.**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Outfits
 
-### Analyzing the Bundle Size
+On the bottom navbar, the second button from the right is where the user can find all of their saved outfits. On each outfit card, there is a button to view, edit, and expand to see the outfit name.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Stats
 
-### Making a Progressive Web App
+The second button from the left on the bottom navbar brings the user to their Style Stats page. Here they can see a colorful donut chart displaying the differnt variables of their closet composition (category, color, brand, and source) by percentage points.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Logout
 
-### Advanced Configuration
+To logout of StyleHub, there is an account icon at the top right of the page that drops down to show a Logout button. Once clicked, the user is brought back to our login and registration page.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thank you for checking out our app, we hope you enjoy planning your fire fits with StyleHub!

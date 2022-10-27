@@ -1,29 +1,20 @@
-import { Box } from "@mui/material";
 import axios from "axios"
 import { useEffect, useState } from "react";
-import { DisplayOutfit } from './DisplayOutfit'
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import Card from "@mui/material/Card"
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
-import { Container } from "@mui/system";
-import InfoIcon from '@mui/icons-material/Info';
 import IconButton from "@mui/material/IconButton";
 import Collapse from '@mui/material/Collapse';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Link } from "react-router-dom";
-import CardActionArea from "@mui/material/CardActionArea";
 import { useNavigate } from "react-router-dom";
 import { ImageList } from "@mui/material";
 import { ImageListItem } from "@mui/material";
 import {CardMedia} from "@mui/material";
 import { styled } from '@mui/material/styles';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 
@@ -149,7 +140,6 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit, setLoading}) => {
             >
             <ImageList
                     sx={{ width: 105, height: 140, margin: 'auto' }} cols={2} rowHeight={67.2}>
-                    {/* We will only display up to 4 closet items in the outfit preview */}
                     {outfit.closet_item.slice(0, 4).map((item) => (
                         <ImageListItem
                         key={item.item_image}>

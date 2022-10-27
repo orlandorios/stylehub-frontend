@@ -1,6 +1,5 @@
 import React from 'react'
 import Highcharts from 'highcharts'
-import { render } from '@testing-library/react'
 
 
 class GraphSource extends React.Component {
