@@ -91,6 +91,7 @@ export const TopNavbar = ({setAuth, token}) => {
                 sx={{ height: 40, margin: -1 }}
                 alt="nav logo"
                 src={navLogo}
+                
             />
         </IconButton>
             
@@ -101,7 +102,8 @@ export const TopNavbar = ({setAuth, token}) => {
                 fontFamily="helvetica-bold"
                 fontSize={27}
                 color='#9cc4d9'
-                sx={{ flexGrow: 1, }}>
+                sx={{ flexGrow: 1, marginRight: 2}}
+                >
             {getTitle()}
             </Typography>
 
