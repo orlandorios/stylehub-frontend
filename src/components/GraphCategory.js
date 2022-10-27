@@ -2,7 +2,6 @@ import React from 'react'
 import Highcharts from 'highcharts'
 
 
-
 class GraphCategory extends React.Component {
 constructor(props) {
     super(props);

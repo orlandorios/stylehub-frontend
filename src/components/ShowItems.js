@@ -22,8 +22,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import { useNavigate } from "react-router-dom";
 
 
-
-
 export const ShowItems = ({items, setItems, url, currOutfit, setCurrOutfit, setLoading, token, draftItems}) => {
     return (
         <div>
@@ -56,7 +54,7 @@ export const ShowItems = ({items, setItems, url, currOutfit, setCurrOutfit, setL
         </div>
     )}
 
-    
+
 const Item = ({item, title, category, subcategory, color, size, material, source, brand, tag, image, currOutfit, setCurrOutfit, setLoading, setItems, draftItems, url, token}) => {
 
     const navigate = useNavigate()
