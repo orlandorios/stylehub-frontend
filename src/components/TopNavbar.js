@@ -137,6 +137,7 @@ export const TopNavbar = ({setAuth, token}) => {
             {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Button
+                    sx={{color: '#b19cd9'}}
                     type='submit'
                     onClick={handleLogout}
                 >
