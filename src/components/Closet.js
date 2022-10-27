@@ -28,8 +28,8 @@ useEffect(() => {
         },
     })
     .then((res) => setItems(res.data))
-    
-    
+
+    // 2nd then request to get items in the current outfit
     .then((res) => {
         axios.get(
             'https://stylehub.herokuapp.com/draft-outfit/',
@@ -42,8 +42,8 @@ useEffect(() => {
         })
         .catch((error) => {
             console.log(error)
-        }) 
-        
+        })
+
     }, [token, url])
 
 
@@ -84,8 +84,8 @@ const handleShoesChange = (event) => {
 
 
 return (
-    <div> 
-    <Button id="all-button" variant="contained" onClick={handleAllChange} value='all' size="small">All Clothing Items</Button>
+    <div className="closet-container">
+    <Button variant="contained" style={{marginBottom: '5px'}} onClick={handleAllChange} value='all' size="small">All Clothing Items</Button>
 <div className='buttons-box'>
     <ButtonGroup variant="outlined" color="#b19cd9" aria-label="outlined primary button group">
         <Button className="cat-button" onClick={handleTopsChange} value="tops" color="secondary" size="small">Tops</Button>
@@ -98,7 +98,7 @@ return (
 
     <div className="items-container">
     <ShowItems draftItems={draftItems} setDraftItems={setDraftItems} items={items} setItems={setItems} url={url} currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token}/>
-    </div>      
+    </div>
     </div>
 </div>
 )

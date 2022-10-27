@@ -1,10 +1,9 @@
 import './reactTags.css'
-import './materialize.css'
 import './App.css';
 import { TopNavbar } from './components/TopNavbar';
 import { BottomNavbar } from './components/BottomNavbar';
-import { Routes, Route } from 'react-router';
-import { AddClosetItem } from './components/AddClosetItem'
+import { Routes, Route, Switch } from 'react-router';
+import { AddClosetItem } from './components/ClosetForm/AddClosetItem'
 import { CurrentOutfit } from './components/CurrentOutfit';
 import { Profile } from './components/Profile';
 import { ViewOutfits } from './components/ViewOutfits';
@@ -28,7 +27,7 @@ function App() {
     setToken(token)
     setUsername(username)
 
-  } 
+  }
 
   useEffect(() => {
     axios
@@ -46,7 +45,7 @@ function App() {
           }
         }
         setLoading(false)
-        
+
       })
       .catch((err) => setError(err.response.data.error))
 }, [])
@@ -54,13 +53,13 @@ function App() {
 const isLoggedIn = username && token
 
   return (
-  
+
     <div className="App">
       {isLoggedIn && (
       <TopNavbar setAuth={setAuth} token={token} />
       )}
         <Routes>
-          <Route index element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn}  />} /> 
+          <Route index element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn}  />} />
           <Route path="*" element={<Auth setAuth={setAuth} isLoggedIn={isLoggedIn} />} />
           <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}>
             <Route path="closet" element={<Closet  currOutfit={currOutfit} setCurrOutfit={setCurrOutfit} setLoading={setLoading} token={token} />} />

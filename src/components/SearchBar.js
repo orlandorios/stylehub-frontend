@@ -1,13 +1,13 @@
 import axios from "axios"
 import { useState } from "react"
 
-export const SearchBar = 
+export const SearchBar =
 ({setItems, token}) => {
     const [searchText, setSearchText] = useState('')
 
     const handleSearchCloset = (e) => {
         e.preventDefault();
-        
+
         axios
             .get(`https://stylehub.herokuapp.com/mycloset/?search=${searchText}`,
             {
@@ -30,6 +30,7 @@ export const SearchBar =
         <input
             type='text'
             id='search'
+            className='input'
             placeholder="search closet items"
             value={searchText}
             onChange = {(e) => setSearchText(e.target.value)}
