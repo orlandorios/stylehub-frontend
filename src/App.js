@@ -1,13 +1,9 @@
-
-import logo from './logo.svg';
-
 import './reactTags.css'
 import './materialize.css'
 import './App.css';
-
 import { TopNavbar } from './components/TopNavbar';
 import { BottomNavbar } from './components/BottomNavbar';
-import { Routes, Route, Switch } from 'react-router';
+import { Routes, Route } from 'react-router';
 import { AddClosetItem } from './components/AddClosetItem'
 import { CurrentOutfit } from './components/CurrentOutfit';
 import { Profile } from './components/Profile';

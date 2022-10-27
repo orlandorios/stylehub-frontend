@@ -29,7 +29,7 @@ useEffect(() => {
     })
     .then((res) => setItems(res.data))
     
-    // 2nd then request to get items in the current outfit
+    
     .then((res) => {
         axios.get(
             'https://stylehub.herokuapp.com/draft-outfit/',

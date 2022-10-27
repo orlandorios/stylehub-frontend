@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, TextField, Typography, useStepContext, Paper } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import Logo from '../resources/logos/StyleHub-Logo-Splash.png'
 import axios from "axios";
 import { Navigate, useNavigate } from "react-router";
@@ -33,7 +33,6 @@ const handleRegister = (e) => {
     )
     .then((res) =>
         setAuth(username, res.data.auth_token))
-        // console.log(res.data.auth_token)
     
     .catch((error) => {
         if (error.response.data.username)
@@ -84,7 +83,6 @@ const resetState = () => {
 
 }
 
-// console.log(isRegistered);
 
     return (  
         <div>

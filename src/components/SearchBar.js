@@ -1,6 +1,5 @@
 import axios from "axios"
 import { useState } from "react"
-import Button from '@mui/material/Button';
 
 export const SearchBar = 
 ({setItems, token}) => {
@@ -35,11 +34,6 @@ export const SearchBar =
             value={searchText}
             onChange = {(e) => setSearchText(e.target.value)}
         ></input>
-        {/* <Button variant='contained' component='label'>
-            Search
-            <input hidden type='submit'
-            value='Search' />
-        </Button> */}
         </form>
         </div>
     )

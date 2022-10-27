@@ -1,13 +1,10 @@
 import { Button } from "@mui/material"
-import { Link } from "react-router-dom"
 import axios from "axios"
 
 
 export const Profile = ({setAuth, token}) => {
 
     const handleLogout = () => {
-        // console.log(setAuth)
-        // console.log(token)
         if(token == null) {
             throw new Error('token is not defined')
         }

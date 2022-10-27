@@ -5,7 +5,6 @@ import { DisplayOutfit } from "./DisplayOutfit";
 
 export const ViewOutfit = ({token}) => {
     const [outfit, setOutfit] = useState(null);
-    // const AuthStr = 'Token '.concat('af6053eea103fe7a3e9c9d9e4d054cf5f7a527d1')
     const {id} = useParams()
 
 
@@ -18,7 +17,6 @@ export const ViewOutfit = ({token}) => {
         })
         .then((res) => 
         setOutfit(res.data))
-        // console.log(res.data.closet_item))
     }, [token, id])
 
     return (
