@@ -165,8 +165,13 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit, setLoading}) => {
             </CardMedia>
                         </CardContent>
 
-            <Typography variant="body2" color="text.secondary">
-            {/* {outfit.title} */}
+            <Typography
+            marginTop={-1}
+            marginBottom={-1}
+            align="center"
+            variant="body2" 
+            color="text.secondary">
+            {outfit.title}
         </Typography>
 
             <CardActions disableSpacing>
@@ -198,11 +203,15 @@ export const ViewOutfits = ({token, currOutfit, setCurrOutfit, setLoading}) => {
                     in={outfit.id === selectedId ? true : false}
                     timeout="auto" 
                     unmountOnExit>
-            <CardContent>       
-                <Typography
-                sx={{ textTransform: 'capitalize'}}
+            <CardContent> 
+            <Typography
                 fontWeight='bold'>
-                {outfit.title} <br></br>
+                Date Created<br></br>
+                </Typography>
+
+                <Typography
+                fontStyle='italic'>
+                {outfit.outfit_date} <br></br>
                 <br></br>
                 </Typography>
 

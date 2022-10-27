@@ -97,7 +97,7 @@ const handleAddItem = (newItem) => {
             newOutfit.closet_item = [newItem]
             setCurrOutfit(newOutfit)
             console.log(res.data)
-            navigate('/current-outfit')
+            
         })
         .catch((err) => console.error(err))
     } else {

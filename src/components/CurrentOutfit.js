@@ -14,6 +14,7 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import { Typography } from "@mui/material";
 
 
 export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, token }) => {
@@ -202,8 +203,17 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
                 }
 
                 {/* Display depends on whether outfit has been started */}
-                <div className='my-draft-message'>{Object.keys(currOutfit).length === 0 ? "Start building a new outfit. " : `You have ${currOutfit.closet_item.length} closet items in your outfit so far. `}
-                <a href='/'>Add items in closet.</a></div>
+                <div className='my-draft-message'>
+                <Typography
+                marginTop={1}
+                marginBottom={2}
+                align="center">
+                {Object.keys(currOutfit).length === 0 ? "Start building a new outfit. " : null }
+                {Object.keys(currOutfit).length === 0 ?
+                <a href='/' style={{color: "#b19cd9"}}>Add items to closet</a> :
+                <a href='/' style={{color: "#b19cd9"}}>Add more items to closet</a> }
+                </Typography>
+                </div>
 
                 {/* Only display if outfit has been started */}
                 {Object.keys(currOutfit).length === 0 ? "" :
