@@ -99,8 +99,8 @@ export const TopNavbar = ({setAuth, token}) => {
                 align='center'
                 variant="h6" 
                 component="div"
-                fontFamily="helvetica-bold"
                 fontSize={27}
+                fontWeight="bold"
                 color='#9cc4d9'
                 sx={{ flexGrow: 1, marginRight: 2}}
                 >
