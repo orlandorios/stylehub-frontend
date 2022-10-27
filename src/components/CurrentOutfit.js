@@ -15,6 +15,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import { Typography } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+
+
 
 
 export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, token }) => {
@@ -217,51 +220,67 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
 
                 {/* Only display if outfit has been started */}
                 {Object.keys(currOutfit).length === 0 ? "" :
-                  <>
-                  <div>
-                      <DisplayOutfit token={token} outfit={currOutfit} location='editOutfit' setCurrOutfit={setCurrOutfit} />
-                  </div>
+                <>
+                <Grid2
+                    justifyContent="center"
+                    container
+                    >
+                <div>
+                    <DisplayOutfit token={token} outfit={currOutfit} location='editOutfit' setCurrOutfit={setCurrOutfit} />
+                </div>
+                </Grid2>
 
-                  <div className='my-draft-buttons'>
-                      <span onClick={
-                          () => {
-                          handleSubmit()
-                      }
-                      }>
-                          <SaveButton />
-                      </span>
-                      <span className='my-draft-delete' onClick={(e) => {
-                      handleClickOpen()
-                      e.preventDefault()
-                      }}>
-                      <Button type="button" variant="contained" aria-label="delete outfit">
-                          Delete
-                      </Button>
-                      </span>
-                      <Dialog
-                      open={open}
-                      onClose={handleClose}
-                      aria-labelledby="alert-dialog-title"
-                      aria-describedby="alert-dialog-description"
-                  >
-                      <DialogContent>
-                      <DialogContentText id="alert-dialog-description">
-                      Are you sure you want to delete?
-                      </DialogContentText>
-                      </DialogContent>
-                      <DialogActions>
-                          <div onClick={handleClose}>
-                      <Button type="button" onClick={(e) => e.preventDefault()} >Cancel</Button></div>
-                      <Button type="button" onClick={() => {
-                          handleDeleteOutfit()
-                          handleClose()
-                          }} autoFocus>
-                          Delete
-                      </Button>
-                      </DialogActions>
-                      </Dialog>
-                  </div>
-                  </>
+
+                <Grid2
+                container
+                justifyContent="center">
+                <div className='my-draft-buttons'>
+                    <span onClick={
+                        () => {
+                        handleSubmit()
+                    }
+                    }>
+                        <SaveButton />
+                    </span>
+                    <span className='my-draft-delete' onClick={(e) => {
+                    handleClickOpen()
+                    e.preventDefault()
+                    }}>
+
+                    <Button 
+                    sx={{backgroundColor: "#b19cd9"}}
+                    type="button" 
+                    variant="contained" 
+                    aria-label="delete outfit">
+                        Delete
+                    </Button>
+                    </span>
+                    <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                    Are you sure you want to delete?
+                    </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <div onClick={handleClose}>
+                    <Button type="button" onClick={(e) => e.preventDefault()} >Cancel</Button></div>
+                    <Button type="button" onClick={() => {
+                        handleDeleteOutfit()
+                        handleClose()
+                        }} autoFocus>
+                        Delete
+                    </Button>
+                    </DialogActions>
+                    </Dialog>
+                </div>
+                </Grid2>
+                
+                </>
                 }
             </div>
         )
