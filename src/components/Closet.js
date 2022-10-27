@@ -1,15 +1,5 @@
 import { ShowItems } from './ShowItems'
 import { useEffect, useState } from 'react'
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormLabel from '@mui/material/FormLabel';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Select from '@mui/material/Select';
-import Radio from '@mui/material/Radio';
-import { pink } from '@mui/material/colors';
-import RadioGroup from '@mui/material/RadioGroup';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import axios from 'axios'
@@ -20,8 +10,6 @@ import { SearchBar } from './SearchBar';
 export const Closet = ({currOutfit, setCurrOutfit, setLoading, token}) => {
     const [items, setItems] = useState([])
     const [selectedCat, setSelectedCat] = useState("");
-    const [selectedSubCat, setSelectedSubCat] = useState('');
-    const [selectedColor, setSelectedColor] = useState('');
     const [url, setUrl] = useState('https://stylehub.herokuapp.com/mycloset/')
     const allUrl = 'https://stylehub.herokuapp.com/mycloset/'
     const topsUrl = 'https://stylehub.herokuapp.com/mycloset-tops/'
@@ -99,11 +87,11 @@ return (
     <div className="closet-container">
     <Button variant="contained" style={{marginBottom: '5px'}} onClick={handleAllChange} value='all' size="small">All Clothing Items</Button>
 <div className='buttons-box'>
-    <ButtonGroup variant="contained" aria-label="outlined primary button group">
-        <Button onClick={handleTopsChange} value="tops" color="secondary" size="small">Tops</Button>
-        <Button onClick={handleBottomsChange} value="bottoms" color="secondary" size="small">Bottoms</Button>
-        <Button onClick={handleOuterChange} value="outerwear" color="secondary" size="small">Outerwear</Button>
-        <Button onClick={handleShoesChange} value="shoes" color="secondary" size="small">Shoes</Button>
+    <ButtonGroup variant="outlined" color="#b19cd9" aria-label="outlined primary button group">
+        <Button className="cat-button" onClick={handleTopsChange} value="tops" color="secondary" size="small">Tops</Button>
+        <Button className="cat-button" onClick={handleBottomsChange} value="bottoms" color="secondary" size="small">Bottoms</Button>
+        <Button className="cat-button" onClick={handleOuterChange} value="outerwear" color="secondary" size="small">Outerwear</Button>
+        <Button className="cat-button" onClick={handleShoesChange} value="shoes" color="secondary" size="small">Shoes</Button>
     </ButtonGroup>
 
     <SearchBar setItems={setItems} token={ token }/>

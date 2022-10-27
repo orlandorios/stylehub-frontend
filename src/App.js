@@ -1,9 +1,5 @@
-
-import logo from './logo.svg';
-
 import './reactTags.css'
 import './App.css';
-
 import { TopNavbar } from './components/TopNavbar';
 import { BottomNavbar } from './components/BottomNavbar';
 import { Routes, Route, Switch } from 'react-router';
