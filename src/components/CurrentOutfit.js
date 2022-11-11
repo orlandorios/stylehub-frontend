@@ -26,109 +26,109 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
     if (storedName === null) {
         storedName = ""
     }
-
+    
     const [name, setName] = useState(currOutfit?.title || "")
     const debouncedName = useDebounce(name, 500)
-
+    
     const [open, setOpen] = React.useState(false);
-
+    
     const handleClickOpen = () => {
         setOpen(true);
     };
-
+    
     const handleClose = () => {
         setOpen(false);
     };
-
+    
     // 500ms after user stops typing Outfit Name input, API call will save name
     useEffect(() => {
         if (debouncedName) {
             updateName(debouncedName, currOutfit, token)
         }
     }, [debouncedName])
-
+    
     // Clicking save will move outfit out of draft (changing current outfit to empty) and navigate user to View Outfit page
     const handleSubmit = () => {
         axios
-            .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
-            {
-                draft: false,
-            },{
-                headers: {
-                    Authorization: `Token ${token}`,
-                },
-            })
-            .then((res) => {
-                setCurrOutfit({})
-            })
-            .catch((err) => console.error(err))
+        .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
+        {
+            draft: false,
+        },{
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        })
+        .then((res) => {
+            setCurrOutfit({})
+        })
+        .catch((err) => console.error(err))
     }
-
+    
     // Clicking delete will delete outfit and change current outfit to empty
     const handleDeleteOutfit = () => {
         axios
-            .delete(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
-            {
-                headers: {
-                    Authorization: `Token ${token}`,
-                },
-            })
-            .then((res) => {
-                setCurrOutfit({})
-            })
-            .catch((err) => console.error(err))
+        .delete(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}`,
+        {
+            headers: {
+                Authorization: `Token ${token}`,
+            },
+        })
+        .then((res) => {
+            setCurrOutfit({})
+        })
+        .catch((err) => console.error(err))
     }
-
+    
     // Tag code
     // Tag documentation found here: https://www.npmjs.com/package/react-tag-input
-
+    
     // pull tag info from currOutfit so they display in form
     let currOutfitTagsObj=[]
     if (Object.keys(currOutfit).length !== 0) {
         let currOutfitTags = currOutfit.tag
         currOutfitTagsObj = currOutfitTags.map((x) => ({id: x, text: x}))
     }
-
+    
     const [tags, setTags] = React.useState(currOutfitTagsObj)
-
+    
     const possibleTags = ['spring', 'summer', 'fall', 'winter']
     const suggestions = possibleTags.map(possibleTag => {
-    return {
-        id: possibleTag,
-        text: possibleTag
-    };
+        return {
+            id: possibleTag,
+            text: possibleTag
+        };
     });
-
+    
     const KeyCodes = {
         comma: 188,
         enter: 13
     };
-
+    
     const delimiters = [KeyCodes.comma, KeyCodes.enter];
-
+    
     const handleDelete = i => {
         setTags(tags.filter((tag, index) => index !== i));
     };
-
+    
     const handleAddition = tag => {
         setTags([...tags, tag]);
     };
-
+    
     const handleDrag = (tag, currPos, newPos) => {
         const newTags = tags.slice();
-
+        
         newTags.splice(currPos, 1);
         newTags.splice(newPos, 0, tag);
-
+        
         // re-render
         setTags(newTags);
     };
-
+    
     const handleTagClick = index => {
         console.log('The tag at index ' + index + ' was clicked');
     };
-
-
+    
+    
     // Save tags after user updates
     useEffect(() => {
         // Setting up conditional so code doesn't run when there's no current outfit
@@ -154,8 +154,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
             .catch((err) => console.error(err))
         }
     }, [tags])
-
-
+    
     // Loading symbol will display until currOutfit API call returns (in App.js)
     if (loading) {
         return(
@@ -163,8 +162,10 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
                 <CircularProgress />
             </Box>
         )
+    
     } else {
-        return(
+    
+    return(
             <div className="outfit-container">
 
                 {/* Only display if outfit has been started */}
@@ -180,7 +181,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
                     onChange = {(e) => setName(e.target.value)}
                     required
                 ></input>
-                <label htmlFor='name'>Outfit Name: </label>
+                <label htmlFor='name' className='active'>Outfit Name </label>
                 </div>
                 </div>
 
@@ -299,6 +300,7 @@ function updateName(nameInput, currOutfit, token) {
             },
         })
         .then((res) => {
+            currOutfit.title = nameInput
         })
         .catch((err) => console.error(err))
 }
