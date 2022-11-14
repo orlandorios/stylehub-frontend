@@ -43,7 +43,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
     // 500ms after user stops typing Outfit Name input, API call will save name
     useEffect(() => {
         if (debouncedName) {
-            updateName(debouncedName, currOutfit, token)
+            updateName(debouncedName, currOutfit, setCurrOutfit, token)
         }
     }, [debouncedName])
     
@@ -289,7 +289,7 @@ export const CurrentOutfit = ({ currOutfit, setCurrOutfit, loading, setLoading, 
 }
 
 // API call for outfit name
-function updateName(nameInput, currOutfit, token) {
+function updateName(nameInput, currOutfit, setCurrOutfit, token) {
     axios
         .patch(`https://stylehub.herokuapp.com/outfit/${currOutfit.id}/`,
         {
@@ -300,7 +300,9 @@ function updateName(nameInput, currOutfit, token) {
             },
         })
         .then((res) => {
-            currOutfit.title = nameInput
+            let outfitUpdate = currOutfit
+            outfitUpdate.title = nameInput
+            setCurrOutfit(outfitUpdate)
         })
         .catch((err) => console.error(err))
 }
