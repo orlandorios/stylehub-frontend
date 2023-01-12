@@ -7,6 +7,7 @@ Contributors: Christopher Mosley, Heather Smith, Orlando Rios, Nathan Zeager and
 [Presentation video](https://us02web.zoom.us/rec/share/-NWKYRJVaC2JB3FCjAX6DlqNA0JANF8dJ9l2nd39CwmRocVPfb5Vqz4LdDO7ys3C.U4EUeznAC7X9-KKM) for StyleHub can be found at [here!](https://us02web.zoom.us/rec/share/-NWKYRJVaC2JB3FCjAX6DlqNA0JANF8dJ9l2nd39CwmRocVPfb5Vqz4LdDO7ys3C.U4EUeznAC7X9-KKM)
 
 Passcode for video presentation: 8Gtd#jS!
+
 Team StyleHub presentation starts at the 3:30 mark!
 
 ## Available Scripts
