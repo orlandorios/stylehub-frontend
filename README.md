@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Contributors: Christopher Mosley, Heather Smith, Orlando Rios, Nathan Zeager and Aziza Littlejohn.
 
-Presentation video for StyleHub can be found at [this link] (https://us02web.zoom.us/rec/share/-NWKYRJVaC2JB3FCjAX6DlqNA0JANF8dJ9l2nd39CwmRocVPfb5Vqz4LdDO7ys3C.U4EUeznAC7X9-KKM).
+Presentation video for StyleHub can be found at [this link](https://us02web.zoom.us/rec/share/-NWKYRJVaC2JB3FCjAX6DlqNA0JANF8dJ9l2nd39CwmRocVPfb5Vqz4LdDO7ys3C.U4EUeznAC7X9-KKM).
 Passcode for video presentation: 8Gtd#jS!
 Team StyleHub presentation starts at the 3:30 mark!
 
