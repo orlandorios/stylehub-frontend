@@ -8,7 +8,7 @@ Contributors: Christopher Mosley, Heather Smith, Orlando Rios, Nathan Zeager and
 
 Passcode for video presentation: 8Gtd#jS!
 
-Team StyleHub presentation starts at the 3:30 mark!
+Team StyleHub presentation starts at the 3:30 mark.
 
 ## Available Scripts
 
